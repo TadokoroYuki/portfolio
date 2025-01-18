@@ -1,0 +1,102 @@
+/* 全体のリセット */
+body, h1, h2, p, ul, li {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Poppins', sans-serif;
+    line-height: 1.8;
+    background-color: #f0f0f5;
+    color: #333;
+    text-align: center;
+    overflow-x: hidden;
+}
+
+header, footer {
+    background: linear-gradient(135deg, #6e8efb, #a777e3);
+    color: white;
+    padding: 20px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    width: 100%;
+    position: relative;
+    left: 0;
+    right: 0;
+}
+
+nav ul {
+    list-style: none;
+    padding: 0;
+}
+
+nav ul li {
+    display: inline;
+    margin: 0 15px;
+}
+
+nav ul li a {
+    color: white;
+    text-decoration: none;
+    font-size: 18px;
+    transition: color 0.3s ease-in-out;
+}
+
+nav ul li a:hover {
+    color: #ffd700;
+}
+
+section {
+    padding: 60px;
+    background: white;
+    margin: 30px auto;
+    width: 80%;
+    max-width: 900px;
+    border-radius: 15px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+    transition: transform 0.3s ease-in-out;
+}
+
+section:hover {
+    transform: translateY(-5px);
+}
+
+h2 {
+    color: #6e8efb;
+    margin-bottom: 20px;
+    font-weight: 600;
+}
+
+.work-item {
+    background: linear-gradient(135deg, #f6d365, #fda085);
+    padding: 20px;
+    margin: 10px;
+    display: inline-block;
+    border-radius: 10px;
+    color: white;
+    font-weight: bold;
+    transition: transform 0.3s ease-in-out;
+}
+
+.work-item:hover {
+    transform: scale(1.05);
+}
+
+.centered-list {
+    display: inline-block;
+    text-align: left;
+    margin: 0 auto;
+    padding-left: 20px;
+}
+
+footer {
+    background: #333;
+    color: white;
+    padding: 20px;
+    margin-top: 20px;
+    box-shadow: 0 -4px 8px rgba(0, 0, 0, 0.2);
+    width: 100%;
+    position: relative;
+    left: 0;
+    right: 0;
+}
