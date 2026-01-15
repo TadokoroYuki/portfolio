@@ -1,4 +1,5 @@
 import HeroSection from './components/HeroSection';
+import SkillsSection from './components/SkillsSection';
 
 export default function Home() {
   return (
@@ -20,17 +21,7 @@ export default function Home() {
       </section>
 
       {/* Skills Section */}
-      <section
-        id="skills"
-        className="min-h-screen flex items-center justify-center px-4 sm:px-6 lg:px-8"
-      >
-        <div className="text-center">
-          <h2 className="text-3xl sm:text-4xl font-bold mb-4">Skills</h2>
-          <p className="text-lg text-gray-600 dark:text-gray-400">
-            Skills section coming soon...
-          </p>
-        </div>
-      </section>
+      <SkillsSection />
 
       {/* Projects Section */}
       <section
