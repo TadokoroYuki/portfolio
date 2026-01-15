@@ -1,9 +1,17 @@
 import type { Metadata } from "next";
 import "./globals.css";
+import SkipLink from "./components/SkipLink";
 
 export const metadata: Metadata = {
-  title: "Portfolio",
-  description: "My personal portfolio website",
+  title: "Portfolio | Yuki Tadokoro",
+  description: "Full Stack Developer specializing in Next.js and Go. Portfolio showcasing web development projects and skills.",
+  keywords: ["portfolio", "web developer", "Next.js", "Go", "TypeScript", "full stack"],
+  authors: [{ name: "Yuki Tadokoro" }],
+  openGraph: {
+    title: "Portfolio | Yuki Tadokoro",
+    description: "Full Stack Developer specializing in Next.js and Go",
+    type: "website",
+  },
 };
 
 export default function RootLayout({
@@ -13,7 +21,10 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="ja">
-      <body>{children}</body>
+      <body>
+        <SkipLink />
+        {children}
+      </body>
     </html>
   );
 }
