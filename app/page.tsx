@@ -1,20 +1,10 @@
+import HeroSection from './components/HeroSection';
+
 export default function Home() {
   return (
     <main className="min-h-screen">
       {/* Hero Section */}
-      <section
-        id="home"
-        className="min-h-screen flex items-center justify-center px-4 sm:px-6 lg:px-8"
-      >
-        <div className="text-center">
-          <h1 className="text-4xl sm:text-5xl md:text-6xl font-bold mb-4">
-            Welcome to My Portfolio
-          </h1>
-          <p className="text-xl text-gray-600 dark:text-gray-400">
-            Under Construction
-          </p>
-        </div>
-      </section>
+      <HeroSection />
 
       {/* About Section */}
       <section
