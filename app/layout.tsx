@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import "./globals.css";
 import SkipLink from "./components/SkipLink";
+import Navigation from "./components/Navigation";
 
 export const metadata: Metadata = {
   title: "Portfolio | Yuki Tadokoro",
@@ -23,6 +24,7 @@ export default function RootLayout({
     <html lang="ja">
       <body>
         <SkipLink />
+        <Navigation />
         {children}
       </body>
     </html>

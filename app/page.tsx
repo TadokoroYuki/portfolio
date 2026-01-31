@@ -1,14 +1,26 @@
+import HeroSection from './components/HeroSection';
+import AboutSection from './components/AboutSection';
+import SkillsSection from './components/SkillsSection';
+import ProjectsSection from './components/ProjectsSection';
+import ContactSection from './components/ContactSection';
+
 export default function Home() {
   return (
-    <main id="main-content" className="flex min-h-screen flex-col items-center justify-center p-24">
-      <div className="text-center">
-        <h1 className="text-4xl font-bold mb-4">
-          Welcome to My Portfolio
-        </h1>
-        <p className="text-xl text-gray-600 dark:text-gray-400">
-          Under Construction
-        </p>
-      </div>
+    <main id="main-content" className="min-h-screen">
+      {/* Hero Section */}
+      <HeroSection />
+
+      {/* About Section */}
+      <AboutSection />
+
+      {/* Skills Section */}
+      <SkillsSection />
+
+      {/* Projects Section */}
+      <ProjectsSection />
+
+      {/* Contact Section */}
+      <ContactSection />
     </main>
   );
 }
