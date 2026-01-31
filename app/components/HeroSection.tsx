@@ -1,9 +1,11 @@
 'use client';
 
 import { useEffect, useState } from 'react';
+import Image from 'next/image';
 
 export default function HeroSection() {
   const [mounted, setMounted] = useState(false);
+  const [imageError, setImageError] = useState(false);
 
   useEffect(() => {
     setMounted(true);
@@ -19,13 +21,27 @@ export default function HeroSection() {
           mounted ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'
         }`}
       >
-        {/* Profile Image Placeholder */}
+        {/* Profile Image */}
         <div className="mb-8 flex justify-center">
-          <div className="w-32 h-32 sm:w-40 sm:h-40 rounded-full bg-gradient-to-br from-blue-400 to-purple-600 flex items-center justify-center shadow-xl">
-            <span className="text-4xl sm:text-5xl font-bold text-white">
-              YT
-            </span>
-          </div>
+          {imageError ? (
+            <div className="w-32 h-32 sm:w-40 sm:h-40 rounded-full bg-gradient-to-br from-blue-400 to-purple-600 flex items-center justify-center shadow-xl">
+              <span className="text-4xl sm:text-5xl font-bold text-white">
+                YT
+              </span>
+            </div>
+          ) : (
+            <div className="w-32 h-32 sm:w-40 sm:h-40 rounded-full overflow-hidden shadow-xl ring-4 ring-white dark:ring-gray-800">
+              <Image
+                src="/profile.jpg"
+                alt="Yuki Tadokoro"
+                width={160}
+                height={160}
+                className="w-full h-full object-cover"
+                priority
+                onError={() => setImageError(true)}
+              />
+            </div>
+          )}
         </div>
 
         {/* Main Heading */}
@@ -65,6 +81,26 @@ export default function HeroSection() {
           >
             お問い合わせ
           </button>
+          <a
+            href="/resume.pdf"
+            download
+            className="w-full sm:w-auto px-8 py-3 border-2 border-blue-600 dark:border-blue-400 text-blue-600 dark:text-blue-400 rounded-lg font-medium hover:bg-blue-600 hover:text-white dark:hover:bg-blue-400 dark:hover:text-gray-900 transition-colors flex items-center justify-center gap-2"
+          >
+            <svg
+              className="w-5 h-5"
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke="currentColor"
+            >
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                strokeWidth={2}
+                d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"
+              />
+            </svg>
+            履歴書をダウンロード
+          </a>
         </div>
 
         {/* Scroll Indicator */}
