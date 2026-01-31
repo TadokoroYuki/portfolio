@@ -22,25 +22,9 @@ export default function ProjectsSection() {
     {
       title: 'Portfolio Website',
       description:
-        'Next.js と TypeScript で構築したポートフォリオサイト。レスポンシブデザインとダークモードに対応。',
-      technologies: ['Next.js', 'TypeScript', 'Tailwind CSS'],
-      githubUrl: 'https://github.com/TadokoroYuki/portfolio',
-      demoUrl: 'https://your-portfolio.vercel.app',
-    },
-    {
-      title: 'Sample Project 1',
-      description:
-        'サンプルプロジェクトの説明。この部分には実際のプロジェクトの詳細を記載します。',
-      technologies: ['React', 'Node.js', 'MongoDB'],
-      githubUrl: 'https://github.com/yourusername/project1',
-    },
-    {
-      title: 'Sample Project 2',
-      description:
-        'Go を使ったバックエンドプロジェクト。RESTful API の実装例。',
-      technologies: ['Go', 'PostgreSQL', 'Docker'],
-      githubUrl: 'https://github.com/yourusername/project2',
-      demoUrl: 'https://demo.example.com',
+        'モダンな技術スタックで構築したポートフォリオサイト。App Router によるファイルベースルーティング、レスポンシブデザイン、ダークモード対応、アクセシビリティ対応（WCAG 2.1 準拠）、SEO 最適化を実装。パフォーマンスと UX を重視した設計。',
+      technologies: ['Next.js 15', 'TypeScript', 'Tailwind CSS', 'Vercel'],
+      githubUrl: 'https://github.com/TadokoroYuki/portofolio',
     },
   ];
 
@@ -66,7 +50,7 @@ export default function ProjectsSection() {
           </div>
 
           {/* Projects Grid */}
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+          <div className="grid grid-cols-1 gap-8 max-w-2xl mx-auto">
             {projects.map((project, index) => (
               <div
                 key={project.title}

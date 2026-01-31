@@ -20,13 +20,19 @@ export default function AboutSection() {
     {
       year: '2024 - Present',
       title: 'Full Stack Developer',
-      description: 'Next.js と Go を使った Web 開発に従事',
+      description: 'Next.js と Go を使った Web アプリケーション開発。フロントエンドからバックエンド、インフラまで幅広く担当。',
+      type: 'work',
+    },
+    {
+      year: '2024',
+      title: 'ポートフォリオサイト構築',
+      description: 'Next.js 15、TypeScript、Tailwind CSS を使用。アクセシビリティと SEO を重視した設計を実践。',
       type: 'work',
     },
     {
       year: '2023',
-      title: 'Web Development Journey',
-      description: 'モダンな Web 技術の学習を開始',
+      title: 'Web 開発の学習開始',
+      description: 'React、Next.js、TypeScript などモダンなフロントエンド技術の習得。Go によるバックエンド開発も並行して学習。',
       type: 'education',
     },
   ];
@@ -60,17 +66,17 @@ export default function AboutSection() {
               </h3>
               <div className="space-y-4 text-gray-700 dark:text-gray-300 leading-relaxed">
                 <p>
-                  こんにちは！私は Web
-                  開発に情熱を持つフルスタックデベロッパーです。
+                  こんにちは！私は Web 開発に情熱を持つフルスタックデベロッパーです。
+                  ユーザーにとって価値のあるプロダクトを作ることを最も大切にしています。
                 </p>
                 <p>
-                  Next.js や React
-                  を使ったモダンなフロントエンド開発と、Go
-                  を使ったバックエンド開発を得意としています。ユーザーにとって価値のあるプロダクトを作ることを大切にしています。
+                  <strong>フロントエンド</strong>では Next.js、React、TypeScript を使ったモダンな開発を得意としています。
+                  アクセシビリティ（WCAG 2.1 準拠）やパフォーマンス最適化にも注力しています。
+                  <strong>バックエンド</strong>では Go を使った API 開発の経験があります。
                 </p>
                 <p>
-                  常に新しい技術を学び、より良いコードを書くことを心がけています。チーム開発や OSS
-                  への貢献にも興味があります。
+                  常に新しい技術をキャッチアップし、ベストプラクティスに沿ったコードを書くことを心がけています。
+                  チーム開発や OSS への貢献にも積極的に取り組んでいきたいと考えています。
                 </p>
               </div>
             </div>
