@@ -1,6 +1,6 @@
 'use client';
 
-import { useEffect, useState } from 'react';
+import { motion, useReducedMotion, type Variants } from 'framer-motion';
 
 interface Skill {
   name: string;
@@ -13,11 +13,7 @@ interface SkillCategory {
 }
 
 export default function SkillsSection() {
-  const [mounted, setMounted] = useState(false);
-
-  useEffect(() => {
-    setMounted(true);
-  }, []);
+  const prefersReducedMotion = useReducedMotion();
 
   const skillCategories: SkillCategory[] = [
     {
@@ -58,45 +54,72 @@ export default function SkillsSection() {
     },
   ];
 
+  const containerVariants: Variants = {
+    hidden: { opacity: 0 },
+    visible: {
+      opacity: 1,
+      transition: {
+        staggerChildren: prefersReducedMotion ? 0 : 0.1,
+      },
+    },
+  };
+
+  const itemVariants: Variants = {
+    hidden: { opacity: 0, y: prefersReducedMotion ? 0 : 30 },
+    visible: {
+      opacity: 1,
+      y: 0,
+      transition: {
+        duration: prefersReducedMotion ? 0.01 : 0.5,
+        ease: 'easeOut' as const,
+      },
+    },
+  };
+
   return (
     <section
       id="skills"
       className="min-h-screen flex items-center justify-center px-4 sm:px-6 lg:px-8 py-20"
     >
       <div className="max-w-6xl mx-auto w-full">
-        <div
-          className={`transition-all duration-1000 ${
-            mounted ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'
-          }`}
+        <motion.div
+          variants={containerVariants}
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true, margin: '-100px' }}
         >
           {/* Section Header */}
-          <div className="text-center mb-16">
+          <motion.div className="text-center mb-16" variants={itemVariants}>
             <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold mb-4">Skills</h2>
             <p className="text-lg text-gray-600 dark:text-gray-400 max-w-2xl mx-auto">
               技術スタックと開発経験
             </p>
-          </div>
+          </motion.div>
 
           {/* Skills Grid */}
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-            {skillCategories.map((category, categoryIndex) => (
-              <div
+            {skillCategories.map((category) => (
+              <motion.div
                 key={category.category}
-                className={`bg-white dark:bg-gray-800 rounded-lg p-6 shadow-lg hover:shadow-xl transition-all duration-300 ${
-                  mounted ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'
-                }`}
-                style={{
-                  transitionDelay: `${categoryIndex * 100}ms`,
-                }}
+                className="bg-white dark:bg-gray-800 rounded-lg p-6 shadow-lg"
+                variants={itemVariants}
+                whileHover={prefersReducedMotion ? {} : { scale: 1.02, y: -4 }}
+                transition={{ duration: 0.2 }}
               >
                 <h3 className="text-xl font-bold mb-4 text-gray-900 dark:text-white">
                   {category.category}
                 </h3>
                 <div className="space-y-3">
                   {category.skills.map((skill) => (
-                    <div
+                    <motion.div
                       key={skill.name}
-                      className="flex items-center justify-between p-3 rounded-md bg-gray-50 dark:bg-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 transition-colors"
+                      className="flex items-center justify-between p-3 rounded-md bg-gray-50 dark:bg-gray-700"
+                      whileHover={
+                        prefersReducedMotion
+                          ? {}
+                          : { backgroundColor: 'rgba(59, 130, 246, 0.1)', x: 4 }
+                      }
+                      transition={{ duration: 0.15 }}
                     >
                       <span className="font-medium text-gray-800 dark:text-gray-200">
                         {skill.name}
@@ -106,13 +129,13 @@ export default function SkillsSection() {
                           {skill.level}
                         </span>
                       )}
-                    </div>
+                    </motion.div>
                   ))}
                 </div>
-              </div>
+              </motion.div>
             ))}
           </div>
-        </div>
+        </motion.div>
       </div>
     </section>
   );
