@@ -95,17 +95,22 @@ export default function AboutSection() {
               <h3 className="text-2xl font-bold mb-4 text-gray-900 dark:text-white">自己紹介</h3>
               <div className="space-y-4 text-gray-700 dark:text-gray-300 leading-relaxed">
                 <p>
-                  こんにちは！私は Web 開発に情熱を持つ<TextHighlight>フルスタックデベロッパー</TextHighlight>です。
+                  こんにちは！私は Web 開発に情熱を持つ
+                  <TextHighlight>フルスタックデベロッパー</TextHighlight>です。
                   ユーザーにとって価値のあるプロダクトを作ることを最も大切にしています。
                 </p>
                 <p>
-                  <TextHighlight variant="background">フロントエンド</TextHighlight>では <TextHighlight>Next.js</TextHighlight>、<TextHighlight>React</TextHighlight>、<TextHighlight>TypeScript</TextHighlight> を使ったモダンな開発を得意としています。
+                  <TextHighlight variant="background">フロントエンド</TextHighlight>では{' '}
+                  <TextHighlight>Next.js</TextHighlight>、<TextHighlight>React</TextHighlight>、
+                  <TextHighlight>TypeScript</TextHighlight> を使ったモダンな開発を得意としています。
                   アクセシビリティ（WCAG 2.1 準拠）やパフォーマンス最適化にも注力しています。
-                  <TextHighlight variant="background">バックエンド</TextHighlight>では <TextHighlight>Go</TextHighlight> を使った API 開発の経験があります。
+                  <TextHighlight variant="background">バックエンド</TextHighlight>では{' '}
+                  <TextHighlight>Go</TextHighlight> を使った API 開発の経験があります。
                 </p>
                 <p>
                   常に新しい技術をキャッチアップし、ベストプラクティスに沿ったコードを書くことを心がけています。
-                  チーム開発や <TextHighlight>OSS への貢献</TextHighlight>にも積極的に取り組んでいきたいと考えています。
+                  チーム開発や <TextHighlight>OSS への貢献</TextHighlight>
+                  にも積極的に取り組んでいきたいと考えています。
                 </p>
               </div>
             </div>

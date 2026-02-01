@@ -14,10 +14,7 @@ export default function ThemeToggle() {
 
   if (!mounted) {
     return (
-      <button
-        className="p-2 rounded-lg bg-gray-100 dark:bg-gray-800"
-        aria-label="テーマ切替"
-      >
+      <button className="p-2 rounded-lg bg-gray-100 dark:bg-gray-800" aria-label="テーマ切替">
         <div className="w-5 h-5" />
       </button>
     );
