@@ -14,8 +14,18 @@ export default function HeroSection() {
   return (
     <section
       id="home"
-      className="min-h-screen flex items-center justify-center px-4 sm:px-6 lg:px-8 pt-16"
+      className="relative min-h-screen flex items-center justify-center px-4 sm:px-6 lg:px-8 pt-16 overflow-hidden"
     >
+      {/* Animated Background Gradients */}
+      <div className="absolute inset-0 -z-10 overflow-hidden">
+        {/* Primary gradient orb */}
+        <div className="animate-float-gradient absolute -top-40 -right-40 w-80 h-80 sm:w-[500px] sm:h-[500px] rounded-full bg-gradient-to-br from-blue-400/30 to-purple-500/30 dark:from-blue-600/20 dark:to-purple-700/20 blur-3xl" />
+        {/* Secondary gradient orb */}
+        <div className="animate-float-gradient-reverse absolute -bottom-40 -left-40 w-80 h-80 sm:w-[500px] sm:h-[500px] rounded-full bg-gradient-to-tr from-cyan-400/30 to-blue-500/30 dark:from-cyan-600/20 dark:to-blue-700/20 blur-3xl" />
+        {/* Accent gradient orb */}
+        <div className="animate-float-gradient absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-64 h-64 sm:w-96 sm:h-96 rounded-full bg-gradient-to-r from-purple-400/20 to-pink-400/20 dark:from-purple-600/10 dark:to-pink-600/10 blur-3xl" />
+      </div>
+
       <div
         className={`text-center max-w-4xl mx-auto transition-all duration-1000 ${
           mounted ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'
@@ -25,9 +35,7 @@ export default function HeroSection() {
         <div className="mb-8 flex justify-center">
           {imageError ? (
             <div className="w-32 h-32 sm:w-40 sm:h-40 rounded-full bg-gradient-to-br from-blue-400 to-purple-600 flex items-center justify-center shadow-xl">
-              <span className="text-4xl sm:text-5xl font-bold text-white">
-                YT
-              </span>
+              <span className="text-4xl sm:text-5xl font-bold text-white">YT</span>
             </div>
           ) : (
             <div className="w-32 h-32 sm:w-40 sm:h-40 rounded-full overflow-hidden shadow-xl ring-4 ring-white dark:ring-gray-800">
@@ -86,12 +94,7 @@ export default function HeroSection() {
             download
             className="w-full sm:w-auto px-8 py-3 border-2 border-blue-600 dark:border-blue-400 text-blue-600 dark:text-blue-400 rounded-lg font-medium hover:bg-blue-600 hover:text-white dark:hover:bg-blue-400 dark:hover:text-gray-900 transition-colors flex items-center justify-center gap-2"
           >
-            <svg
-              className="w-5 h-5"
-              fill="none"
-              viewBox="0 0 24 24"
-              stroke="currentColor"
-            >
+            <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
               <path
                 strokeLinecap="round"
                 strokeLinejoin="round"

@@ -55,6 +55,47 @@ body {
   outline-offset: 2px;
 }
 
+/* Floating gradient animation for hero background */
+@keyframes float-gradient {
+  0%,
+  100% {
+    transform: translate(0, 0) scale(1);
+  }
+  25% {
+    transform: translate(10%, 10%) scale(1.1);
+  }
+  50% {
+    transform: translate(-5%, 20%) scale(0.95);
+  }
+  75% {
+    transform: translate(-10%, 5%) scale(1.05);
+  }
+}
+
+@keyframes float-gradient-reverse {
+  0%,
+  100% {
+    transform: translate(0, 0) scale(1);
+  }
+  25% {
+    transform: translate(-10%, -10%) scale(0.95);
+  }
+  50% {
+    transform: translate(5%, -15%) scale(1.1);
+  }
+  75% {
+    transform: translate(10%, -5%) scale(1);
+  }
+}
+
+.animate-float-gradient {
+  animation: float-gradient 20s ease-in-out infinite;
+}
+
+.animate-float-gradient-reverse {
+  animation: float-gradient-reverse 25s ease-in-out infinite;
+}
+
 /* Reduce motion for users who prefer it */
 @media (prefers-reduced-motion: reduce) {
   *,
