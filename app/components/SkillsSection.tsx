@@ -71,9 +71,7 @@ export default function SkillsSection() {
         >
           {/* Section Header */}
           <div className="text-center mb-16">
-            <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold mb-4">
-              Skills
-            </h2>
+            <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold mb-4">Skills</h2>
             <p className="text-lg text-gray-600 dark:text-gray-400 max-w-2xl mx-auto">
               技術スタックと開発経験
             </p>
@@ -85,9 +83,7 @@ export default function SkillsSection() {
               <div
                 key={category.category}
                 className={`bg-white dark:bg-gray-800 rounded-lg p-6 shadow-lg hover:shadow-xl transition-all duration-300 ${
-                  mounted
-                    ? 'opacity-100 translate-y-0'
-                    : 'opacity-0 translate-y-10'
+                  mounted ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'
                 }`}
                 style={{
                   transitionDelay: `${categoryIndex * 100}ms`,
