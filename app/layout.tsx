@@ -3,6 +3,7 @@ import { Noto_Sans_JP } from "next/font/google";
 import "./globals.css";
 import SkipLink from "./components/SkipLink";
 import Navigation from "./components/Navigation";
+import ToastProvider from "./components/ToastProvider";
 
 const notoSansJP = Noto_Sans_JP({
   subsets: ["latin"],
@@ -67,6 +68,7 @@ export default function RootLayout({
         <SkipLink />
         <Navigation />
         {children}
+        <ToastProvider />
       </body>
     </html>
   );
