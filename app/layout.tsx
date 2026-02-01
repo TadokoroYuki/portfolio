@@ -1,50 +1,62 @@
-import type { Metadata } from "next";
-import { Noto_Sans_JP } from "next/font/google";
-import "./globals.css";
-import SkipLink from "./components/SkipLink";
-import Navigation from "./components/Navigation";
+import type { Metadata } from 'next';
+import { Noto_Sans_JP } from 'next/font/google';
+import './globals.css';
+import SkipLink from './components/SkipLink';
+import Navigation from './components/Navigation';
+import ScrollToTopButton from './components/ScrollToTopButton';
+import ThemeProvider from './components/ThemeProvider';
 
 const notoSansJP = Noto_Sans_JP({
-  subsets: ["latin"],
-  weight: ["400", "500", "700"],
-  display: "swap",
-  variable: "--font-noto-sans-jp",
+  subsets: ['latin'],
+  weight: ['400', '500', '700'],
+  display: 'swap',
+  variable: '--font-noto-sans-jp',
 });
 
-const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://your-portfolio.vercel.app";
+const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://your-portfolio.vercel.app';
 
 export const metadata: Metadata = {
-  title: "Portfolio | Yuki Tadokoro",
-  description: "Next.js と Go を使った Web 開発に情熱を持つフルスタックデベロッパー。モダンな技術で価値あるプロダクトを作ることを目指しています。",
-  keywords: ["portfolio", "web developer", "Next.js", "Go", "TypeScript", "full stack", "フロントエンド", "バックエンド"],
-  authors: [{ name: "Yuki Tadokoro" }],
-  creator: "Yuki Tadokoro",
+  title: 'Portfolio | Yuki Tadokoro',
+  description:
+    'Next.js と Go を使った Web 開発に情熱を持つフルスタックデベロッパー。モダンな技術で価値あるプロダクトを作ることを目指しています。',
+  keywords: [
+    'portfolio',
+    'web developer',
+    'Next.js',
+    'Go',
+    'TypeScript',
+    'full stack',
+    'フロントエンド',
+    'バックエンド',
+  ],
+  authors: [{ name: 'Yuki Tadokoro' }],
+  creator: 'Yuki Tadokoro',
   metadataBase: new URL(siteUrl),
   icons: {
-    icon: "/favicon.ico",
-    apple: "/favicon.ico",
+    icon: '/favicon.ico',
+    apple: '/favicon.ico',
   },
   openGraph: {
-    title: "Portfolio | Yuki Tadokoro",
-    description: "Next.js と Go を使った Web 開発に情熱を持つフルスタックデベロッパー",
+    title: 'Portfolio | Yuki Tadokoro',
+    description: 'Next.js と Go を使った Web 開発に情熱を持つフルスタックデベロッパー',
     url: siteUrl,
-    siteName: "Yuki Tadokoro Portfolio",
+    siteName: 'Yuki Tadokoro Portfolio',
     images: [
       {
-        url: "/og-image.png",
+        url: '/og-image.png',
         width: 1200,
         height: 630,
-        alt: "Yuki Tadokoro - Full Stack Developer",
+        alt: 'Yuki Tadokoro - Full Stack Developer',
       },
     ],
-    locale: "ja_JP",
-    type: "website",
+    locale: 'ja_JP',
+    type: 'website',
   },
   twitter: {
-    card: "summary_large_image",
-    title: "Portfolio | Yuki Tadokoro",
-    description: "Next.js と Go を使った Web 開発に情熱を持つフルスタックデベロッパー",
-    images: ["/og-image.png"],
+    card: 'summary_large_image',
+    title: 'Portfolio | Yuki Tadokoro',
+    description: 'Next.js と Go を使った Web 開発に情熱を持つフルスタックデベロッパー',
+    images: ['/og-image.png'],
   },
   robots: {
     index: true,
@@ -62,11 +74,14 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="ja" className={notoSansJP.variable}>
+    <html lang="ja" className={notoSansJP.variable} suppressHydrationWarning>
       <body className="font-sans">
-        <SkipLink />
-        <Navigation />
-        {children}
+        <ThemeProvider>
+          <SkipLink />
+          <Navigation />
+          {children}
+          <ScrollToTopButton />
+        </ThemeProvider>
       </body>
     </html>
   );
