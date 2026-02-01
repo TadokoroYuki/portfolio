@@ -1,0 +1,16 @@
+/** @type {import('next-sitemap').IConfig} */
+module.exports = {
+  siteUrl: process.env.SITE_URL || 'https://your-portfolio.vercel.app',
+  generateRobotsTxt: true,
+  sitemapSize: 7000,
+  changefreq: 'monthly',
+  priority: 0.7,
+  robotsTxtOptions: {
+    policies: [
+      {
+        userAgent: '*',
+        allow: '/',
+      },
+    ],
+  },
+};
