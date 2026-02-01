@@ -1,6 +1,6 @@
 'use client';
 
-import { useEffect, useState } from 'react';
+import { useInView } from '../hooks/useInView';
 
 interface ContactLink {
   name: string;
@@ -10,11 +10,7 @@ interface ContactLink {
 }
 
 export default function ContactSection() {
-  const [mounted, setMounted] = useState(false);
-
-  useEffect(() => {
-    setMounted(true);
-  }, []);
+  const { ref, isInView } = useInView<HTMLElement>({ threshold: 0.1 });
 
   const contactLinks: ContactLink[] = [
     {
@@ -30,12 +26,7 @@ export default function ContactSection() {
     {
       name: 'Email',
       icon: (
-        <svg
-          className="w-8 h-8"
-          fill="none"
-          viewBox="0 0 24 24"
-          stroke="currentColor"
-        >
+        <svg className="w-8 h-8" fill="none" viewBox="0 0 24 24" stroke="currentColor">
           <path
             strokeLinecap="round"
             strokeLinejoin="round"
@@ -51,20 +42,19 @@ export default function ContactSection() {
 
   return (
     <section
+      ref={ref}
       id="contact"
       className="min-h-screen flex items-center justify-center px-4 sm:px-6 lg:px-8 py-20"
     >
       <div className="max-w-4xl mx-auto w-full">
         <div
           className={`transition-all duration-1000 ${
-            mounted ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'
+            isInView ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'
           }`}
         >
           {/* Section Header */}
           <div className="text-center mb-16">
-            <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold mb-4">
-              Contact
-            </h2>
+            <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold mb-4">Contact</h2>
             <p className="text-lg text-gray-600 dark:text-gray-400 max-w-2xl mx-auto">
               お気軽にご連絡ください
             </p>
@@ -79,9 +69,7 @@ export default function ContactSection() {
                 target={link.name !== 'Email' ? '_blank' : undefined}
                 rel={link.name !== 'Email' ? 'noopener noreferrer' : undefined}
                 className={`group bg-white dark:bg-gray-800 rounded-lg p-6 shadow-lg hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1 ${
-                  mounted
-                    ? 'opacity-100 translate-y-0'
-                    : 'opacity-0 translate-y-10'
+                  isInView ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'
                 }`}
                 style={{
                   transitionDelay: `${index * 100}ms`,

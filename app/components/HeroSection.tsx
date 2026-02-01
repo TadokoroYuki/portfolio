@@ -1,33 +1,29 @@
 'use client';
 
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import Image from 'next/image';
+import { useInView } from '../hooks/useInView';
 
 export default function HeroSection() {
-  const [mounted, setMounted] = useState(false);
+  const { ref, isInView } = useInView<HTMLElement>({ threshold: 0.1 });
   const [imageError, setImageError] = useState(false);
-
-  useEffect(() => {
-    setMounted(true);
-  }, []);
 
   return (
     <section
+      ref={ref}
       id="home"
       className="min-h-screen flex items-center justify-center px-4 sm:px-6 lg:px-8 pt-16"
     >
       <div
         className={`text-center max-w-4xl mx-auto transition-all duration-1000 ${
-          mounted ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'
+          isInView ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'
         }`}
       >
         {/* Profile Image */}
         <div className="mb-8 flex justify-center">
           {imageError ? (
             <div className="w-32 h-32 sm:w-40 sm:h-40 rounded-full bg-gradient-to-br from-blue-400 to-purple-600 flex items-center justify-center shadow-xl">
-              <span className="text-4xl sm:text-5xl font-bold text-white">
-                YT
-              </span>
+              <span className="text-4xl sm:text-5xl font-bold text-white">YT</span>
             </div>
           ) : (
             <div className="w-32 h-32 sm:w-40 sm:h-40 rounded-full overflow-hidden shadow-xl ring-4 ring-white dark:ring-gray-800">
@@ -86,12 +82,7 @@ export default function HeroSection() {
             download
             className="w-full sm:w-auto px-8 py-3 border-2 border-blue-600 dark:border-blue-400 text-blue-600 dark:text-blue-400 rounded-lg font-medium hover:bg-blue-600 hover:text-white dark:hover:bg-blue-400 dark:hover:text-gray-900 transition-colors flex items-center justify-center gap-2"
           >
-            <svg
-              className="w-5 h-5"
-              fill="none"
-              viewBox="0 0 24 24"
-              stroke="currentColor"
-            >
+            <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
               <path
                 strokeLinecap="round"
                 strokeLinejoin="round"
