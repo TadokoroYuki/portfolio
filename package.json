@@ -9,7 +9,10 @@
     "start": "next start",
     "lint": "next lint",
     "format": "prettier --write .",
-    "format:check": "prettier --check ."
+    "format:check": "prettier --check .",
+    "test:e2e": "playwright test",
+    "test:e2e:ui": "playwright test --ui",
+    "test:e2e:report": "playwright show-report"
   },
   "dependencies": {
     "framer-motion": "^12.29.2",
@@ -22,6 +25,7 @@
     "react-type-animation": "^3.2.0"
   },
   "devDependencies": {
+    "@playwright/test": "^1.58.1",
     "@types/node": "^22",
     "@types/react": "^19",
     "@types/react-dom": "^19",
