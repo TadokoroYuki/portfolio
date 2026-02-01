@@ -1,6 +1,7 @@
 'use client';
 
 import { useEffect, useState } from 'react';
+import TextHighlight from './TextHighlight';
 
 interface TimelineItem {
   year: string;
@@ -20,22 +21,19 @@ export default function AboutSection() {
     {
       year: '2024 - Present',
       title: 'Full Stack Developer',
-      description:
-        'Next.js と Go を使った Web アプリケーション開発。フロントエンドからバックエンド、インフラまで幅広く担当。',
+      description: 'Next.js と Go を使った Web アプリケーション開発。フロントエンドからバックエンド、インフラまで幅広く担当。',
       type: 'work',
     },
     {
       year: '2024',
       title: 'ポートフォリオサイト構築',
-      description:
-        'Next.js 15、TypeScript、Tailwind CSS を使用。アクセシビリティと SEO を重視した設計を実践。',
+      description: 'Next.js 15、TypeScript、Tailwind CSS を使用。アクセシビリティと SEO を重視した設計を実践。',
       type: 'work',
     },
     {
       year: '2023',
       title: 'Web 開発の学習開始',
-      description:
-        'React、Next.js、TypeScript などモダンなフロントエンド技術の習得。Go によるバックエンド開発も並行して学習。',
+      description: 'React、Next.js、TypeScript などモダンなフロントエンド技術の習得。Go によるバックエンド開発も並行して学習。',
       type: 'education',
     },
   ];
@@ -53,28 +51,33 @@ export default function AboutSection() {
         >
           {/* Section Header */}
           <div className="text-center mb-16">
-            <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold mb-4">About Me</h2>
-            <p className="text-lg text-gray-600 dark:text-gray-400 max-w-2xl mx-auto">私について</p>
+            <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold mb-4">
+              About Me
+            </h2>
+            <p className="text-lg text-gray-600 dark:text-gray-400 max-w-2xl mx-auto">
+              私について
+            </p>
           </div>
 
           {/* Introduction */}
           <div className="mb-16">
             <div className="bg-white dark:bg-gray-800 rounded-lg p-8 shadow-lg">
-              <h3 className="text-2xl font-bold mb-4 text-gray-900 dark:text-white">自己紹介</h3>
+              <h3 className="text-2xl font-bold mb-4 text-gray-900 dark:text-white">
+                自己紹介
+              </h3>
               <div className="space-y-4 text-gray-700 dark:text-gray-300 leading-relaxed">
                 <p>
-                  こんにちは！私は Web 開発に情熱を持つフルスタックデベロッパーです。
+                  こんにちは！私は Web 開発に情熱を持つ<TextHighlight>フルスタックデベロッパー</TextHighlight>です。
                   ユーザーにとって価値のあるプロダクトを作ることを最も大切にしています。
                 </p>
                 <p>
-                  <strong>フロントエンド</strong>では Next.js、React、TypeScript
-                  を使ったモダンな開発を得意としています。 アクセシビリティ（WCAG 2.1
-                  準拠）やパフォーマンス最適化にも注力しています。
-                  <strong>バックエンド</strong>では Go を使った API 開発の経験があります。
+                  <TextHighlight variant="background">フロントエンド</TextHighlight>では <TextHighlight>Next.js</TextHighlight>、<TextHighlight>React</TextHighlight>、<TextHighlight>TypeScript</TextHighlight> を使ったモダンな開発を得意としています。
+                  アクセシビリティ（WCAG 2.1 準拠）やパフォーマンス最適化にも注力しています。
+                  <TextHighlight variant="background">バックエンド</TextHighlight>では <TextHighlight>Go</TextHighlight> を使った API 開発の経験があります。
                 </p>
                 <p>
                   常に新しい技術をキャッチアップし、ベストプラクティスに沿ったコードを書くことを心がけています。
-                  チーム開発や OSS への貢献にも積極的に取り組んでいきたいと考えています。
+                  チーム開発や <TextHighlight>OSS への貢献</TextHighlight>にも積極的に取り組んでいきたいと考えています。
                 </p>
               </div>
             </div>
@@ -95,7 +98,9 @@ export default function AboutSection() {
                   <div
                     key={index}
                     className={`relative pl-0 sm:pl-20 transition-all duration-500 ${
-                      mounted ? 'opacity-100 translate-x-0' : 'opacity-0 -translate-x-10'
+                      mounted
+                        ? 'opacity-100 translate-x-0'
+                        : 'opacity-0 -translate-x-10'
                     }`}
                     style={{
                       transitionDelay: `${(index + 1) * 150}ms`,
@@ -123,7 +128,9 @@ export default function AboutSection() {
                       <h4 className="text-lg font-bold text-gray-900 dark:text-white mb-2">
                         {item.title}
                       </h4>
-                      <p className="text-gray-600 dark:text-gray-400">{item.description}</p>
+                      <p className="text-gray-600 dark:text-gray-400">
+                        {item.description}
+                      </p>
                     </div>
                   </div>
                 ))}
@@ -148,13 +155,17 @@ export default function AboutSection() {
                 <div
                   key={index}
                   className={`bg-white dark:bg-gray-800 rounded-lg p-4 text-center shadow-md hover:shadow-lg transition-all duration-300 hover:-translate-y-1 ${
-                    mounted ? 'opacity-100 scale-100' : 'opacity-0 scale-95'
+                    mounted
+                      ? 'opacity-100 scale-100'
+                      : 'opacity-0 scale-95'
                   }`}
                   style={{
                     transitionDelay: `${(index + 3) * 100}ms`,
                   }}
                 >
-                  <span className="text-gray-700 dark:text-gray-300 font-medium">{interest}</span>
+                  <span className="text-gray-700 dark:text-gray-300 font-medium">
+                    {interest}
+                  </span>
                 </div>
               ))}
             </div>
