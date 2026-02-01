@@ -3,6 +3,7 @@ import { Noto_Sans_JP } from 'next/font/google';
 import './globals.css';
 import SkipLink from './components/SkipLink';
 import Navigation from './components/Navigation';
+import ScrollToTopButton from './components/ScrollToTopButton';
 import ToastProvider from './components/ToastProvider';
 import ThemeProvider from './components/ThemeProvider';
 
@@ -80,6 +81,7 @@ export default function RootLayout({
           <SkipLink />
           <Navigation />
           {children}
+          <ScrollToTopButton />
           <ToastProvider />
         </ThemeProvider>
       </body>

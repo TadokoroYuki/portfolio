@@ -2,7 +2,7 @@
 
 import { useTheme } from 'next-themes';
 import { useEffect, useState } from 'react';
-import { HiSun, HiMoon } from 'react-icons/hi';
+import { FiSun, FiMoon } from 'react-icons/fi';
 
 export default function ThemeToggle() {
   const [mounted, setMounted] = useState(false);
@@ -14,8 +14,11 @@ export default function ThemeToggle() {
 
   if (!mounted) {
     return (
-      <button className="p-2 rounded-lg bg-gray-100 dark:bg-gray-800" aria-label="テーマ切替">
-        <div className="w-5 h-5" />
+      <button
+        className="p-2 rounded-md text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors"
+        aria-label="テーマ切り替え"
+      >
+        <div className="h-5 w-5" />
       </button>
     );
   }
@@ -25,14 +28,10 @@ export default function ThemeToggle() {
   return (
     <button
       onClick={() => setTheme(isDark ? 'light' : 'dark')}
-      className="p-2 rounded-lg bg-gray-100 dark:bg-gray-800 hover:bg-gray-200 dark:hover:bg-gray-700 transition-colors"
-      aria-label={isDark ? 'ライトモードに切替' : 'ダークモードに切替'}
+      className="p-2 rounded-md text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors"
+      aria-label={isDark ? 'ライトモードに切り替え' : 'ダークモードに切り替え'}
     >
-      {isDark ? (
-        <HiSun className="w-5 h-5 text-yellow-500" />
-      ) : (
-        <HiMoon className="w-5 h-5 text-gray-700" />
-      )}
+      {isDark ? <FiSun className="h-5 w-5" /> : <FiMoon className="h-5 w-5" />}
     </button>
   );
 }
