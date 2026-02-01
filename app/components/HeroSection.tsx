@@ -35,8 +35,18 @@ export default function HeroSection() {
   return (
     <section
       id="home"
-      className="min-h-screen flex items-center justify-center px-4 sm:px-6 lg:px-8 pt-16"
+      className="relative min-h-screen flex items-center justify-center px-4 sm:px-6 lg:px-8 pt-16 overflow-hidden"
     >
+      {/* Animated Background Gradients */}
+      <div className="absolute inset-0 -z-10 overflow-hidden">
+        {/* Primary gradient orb */}
+        <div className="animate-float-gradient absolute -top-40 -right-40 w-80 h-80 sm:w-[500px] sm:h-[500px] rounded-full bg-gradient-to-br from-blue-400/30 to-purple-500/30 dark:from-blue-600/20 dark:to-purple-700/20 blur-3xl" />
+        {/* Secondary gradient orb */}
+        <div className="animate-float-gradient-reverse absolute -bottom-40 -left-40 w-80 h-80 sm:w-[500px] sm:h-[500px] rounded-full bg-gradient-to-tr from-cyan-400/30 to-blue-500/30 dark:from-cyan-600/20 dark:to-blue-700/20 blur-3xl" />
+        {/* Accent gradient orb */}
+        <div className="animate-float-gradient absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-64 h-64 sm:w-96 sm:h-96 rounded-full bg-gradient-to-r from-purple-400/20 to-pink-400/20 dark:from-purple-600/10 dark:to-pink-600/10 blur-3xl" />
+      </div>
+
       <motion.div
         className="text-center max-w-4xl mx-auto"
         variants={containerVariants}
