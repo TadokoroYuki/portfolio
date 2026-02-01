@@ -3,6 +3,7 @@
 import { useState } from 'react';
 import Image from 'next/image';
 import { useInView } from '../hooks/useInView';
+import { TypeAnimation } from 'react-type-animation';
 
 export default function HeroSection() {
   const { ref, isInView } = useInView<HTMLElement>({ threshold: 0.1 });
@@ -45,10 +46,25 @@ export default function HeroSection() {
           Yuki Tadokoro
         </h1>
 
-        {/* Subtitle */}
-        <p className="text-xl sm:text-2xl md:text-3xl text-gray-700 dark:text-gray-300 mb-8 font-light">
-          Full Stack Developer
-        </p>
+        {/* Subtitle with Type Animation */}
+        <div className="text-xl sm:text-2xl md:text-3xl text-gray-700 dark:text-gray-300 mb-8 font-light h-10">
+          <TypeAnimation
+            sequence={[
+              'Full Stack Developer',
+              2000,
+              'Next.js Engineer',
+              2000,
+              'Go Backend Developer',
+              2000,
+              'Web Developer',
+              2000,
+            ]}
+            wrapper="span"
+            speed={50}
+            repeat={Infinity}
+            className="inline-block"
+          />
+        </div>
 
         {/* Description */}
         <p className="text-base sm:text-lg md:text-xl text-gray-600 dark:text-gray-400 mb-12 max-w-2xl mx-auto leading-relaxed">
