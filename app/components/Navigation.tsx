@@ -1,6 +1,7 @@
 'use client';
 
 import { useState, useEffect } from 'react';
+import ThemeToggle from './ThemeToggle';
 
 export default function Navigation() {
   const [isScrolled, setIsScrolled] = useState(false);
@@ -48,7 +49,7 @@ export default function Navigation() {
           </button>
 
           {/* Desktop Menu */}
-          <div className="hidden md:flex space-x-8">
+          <div className="hidden md:flex items-center space-x-8">
             {navItems.map((item) => (
               <button
                 key={item.id}
@@ -58,6 +59,7 @@ export default function Navigation() {
                 {item.label}
               </button>
             ))}
+            <ThemeToggle />
           </div>
 
           {/* Mobile Menu Button */}
@@ -102,6 +104,9 @@ export default function Navigation() {
                 {item.label}
               </button>
             ))}
+            <div className="px-3 py-2">
+              <ThemeToggle />
+            </div>
           </div>
         </div>
       )}

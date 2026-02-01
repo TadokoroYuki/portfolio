@@ -3,6 +3,7 @@
 import { useState } from 'react';
 import Image from 'next/image';
 import { motion, useReducedMotion, type Variants } from 'framer-motion';
+import { TypeAnimation } from 'react-type-animation';
 
 export default function HeroSection() {
   const [imageError, setImageError] = useState(false);
@@ -71,13 +72,28 @@ export default function HeroSection() {
           Yuki Tadokoro
         </motion.h1>
 
-        {/* Subtitle */}
-        <motion.p
-          className="text-xl sm:text-2xl md:text-3xl text-gray-700 dark:text-gray-300 mb-8 font-light"
+        {/* Subtitle with Type Animation */}
+        <motion.div
+          className="text-xl sm:text-2xl md:text-3xl text-gray-700 dark:text-gray-300 mb-8 font-light h-10"
           variants={itemVariants}
         >
-          Full Stack Developer
-        </motion.p>
+          <TypeAnimation
+            sequence={[
+              'Full Stack Developer',
+              2000,
+              'Next.js Engineer',
+              2000,
+              'Go Backend Developer',
+              2000,
+              'Web Developer',
+              2000,
+            ]}
+            wrapper="span"
+            speed={50}
+            repeat={Infinity}
+            className="inline-block"
+          />
+        </motion.div>
 
         {/* Description */}
         <motion.p

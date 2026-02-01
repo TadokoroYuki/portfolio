@@ -3,6 +3,8 @@ import { Noto_Sans_JP } from "next/font/google";
 import "./globals.css";
 import SkipLink from "./components/SkipLink";
 import Navigation from "./components/Navigation";
+import ToastProvider from "./components/ToastProvider";
+import ThemeProvider from "./components/ThemeProvider";
 
 const notoSansJP = Noto_Sans_JP({
   subsets: ["latin"],
@@ -62,11 +64,14 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="ja" className={notoSansJP.variable}>
+    <html lang="ja" className={notoSansJP.variable} suppressHydrationWarning>
       <body className="font-sans">
-        <SkipLink />
-        <Navigation />
-        {children}
+        <ThemeProvider>
+          <SkipLink />
+          <Navigation />
+          {children}
+          <ToastProvider />
+        </ThemeProvider>
       </body>
     </html>
   );
