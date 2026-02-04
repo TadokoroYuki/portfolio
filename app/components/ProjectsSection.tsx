@@ -1,5 +1,6 @@
 'use client';
 
+import Image from 'next/image';
 import { motion, useReducedMotion, type Variants } from 'framer-motion';
 import { FaGithub } from 'react-icons/fa';
 import { HiOutlineExternalLink, HiOutlinePhotograph } from 'react-icons/hi';
@@ -60,13 +61,26 @@ export default function ProjectsSection() {
                 whileHover={prefersReducedMotion ? {} : { scale: 1.02, y: -8 }}
                 transition={{ duration: 0.3 }}
               >
-                {/* Project Image Placeholder */}
+                {/* Project Image */}
                 <motion.div
-                  className="h-48 bg-gradient-to-br from-blue-500 to-purple-600 flex items-center justify-center"
+                  className="relative h-48 bg-gradient-to-br from-blue-500 to-purple-600 flex items-center justify-center overflow-hidden"
                   whileHover={prefersReducedMotion ? {} : { scale: 1.05 }}
                   transition={{ duration: 0.3 }}
                 >
-                  <HiOutlinePhotograph className="w-16 h-16 text-white opacity-50" />
+                  {project.image ? (
+                    <Image
+                      src={project.image}
+                      alt={project.title}
+                      fill
+                      sizes="(max-width: 768px) 100vw, 672px"
+                      className="object-cover"
+                      loading="lazy"
+                      placeholder="blur"
+                      blurDataURL="data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNjcyIiBoZWlnaHQ9IjE5MiIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48cmVjdCB3aWR0aD0iMTAwJSIgaGVpZ2h0PSIxMDAlIiBmaWxsPSIjZTVlN2ViIi8+PC9zdmc+"
+                    />
+                  ) : (
+                    <HiOutlinePhotograph className="w-16 h-16 text-white opacity-50" />
+                  )}
                 </motion.div>
 
                 {/* Project Content */}

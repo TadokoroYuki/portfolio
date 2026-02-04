@@ -70,8 +70,11 @@ export default function HeroSection() {
                 alt={heroData.name}
                 width={160}
                 height={160}
+                sizes="(max-width: 640px) 128px, 160px"
                 className="w-full h-full object-cover"
                 priority
+                placeholder="blur"
+                blurDataURL="data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMTYwIiBoZWlnaHQ9IjE2MCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48cmVjdCB3aWR0aD0iMTAwJSIgaGVpZ2h0PSIxMDAlIiBmaWxsPSIjZTVlN2ViIi8+PC9zdmc+"
                 onError={() => setImageError(true)}
               />
             </div>
