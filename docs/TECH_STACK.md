@@ -3,10 +3,11 @@
 ## 概要
 このドキュメントは、ポートフォリオサイトの新機能開発における技術選定の根拠と詳細を記載します。
 
-## 参照ドキュメント
-- [要件定義書](./REQUIREMENTS.md)
-- [アーキテクチャ設計](./ARCHITECTURE.md)
-- [UI/UXデザイン仕様書](./DESIGN_SPEC.md)
+## 関連ドキュメント
+- [REQUIREMENTS.md](./REQUIREMENTS.md) - 要件定義（何を作るか）
+- [ARCHITECTURE.md](./ARCHITECTURE.md) - アーキテクチャ設計（どう作るか）
+- [DESIGN_SPEC.md](./DESIGN_SPEC.md) - UI/UXデザイン仕様（どう見せるか）
+- [REFERENCE.md](./REFERENCE.md) - 参考ポートフォリオ（ベストプラクティス）
 
 ---
 

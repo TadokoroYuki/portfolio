@@ -3,11 +3,12 @@
 ## 概要
 このドキュメントは、ポートフォリオサイトの新機能開発におけるUI/UXデザインの仕様を定義します。
 
-## 参照ドキュメント
-- [要件定義書](./REQUIREMENTS.md)
-- [リファレンスリスト](./REFERENCE.md)
-- [アーキテクチャ設計](./ARCHITECTURE.md)
-- [コンポーネント設計](./COMPONENTS.md)
+## 関連ドキュメント
+- [REQUIREMENTS.md](./REQUIREMENTS.md) - 要件定義（何を作るか）
+- [ARCHITECTURE.md](./ARCHITECTURE.md) - アーキテクチャ設計（どう作るか）
+- [TECH_STACK.md](./TECH_STACK.md) - 技術選定詳細（何で作るか）
+- [COMPONENTS.md](./COMPONENTS.md) - コンポーネント設計（各パーツの詳細）
+- [REFERENCE.md](./REFERENCE.md) - 参考ポートフォリオ（デザインインスピレーション）
 
 ---
 
