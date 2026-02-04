@@ -51,12 +51,14 @@ export default function ContactSection() {
 
           {/* Contact Links Grid */}
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 max-w-2xl mx-auto">
-            {contactLinks.map((link) => (
+            {contactLinks.map((link) => {
+              const isExternal = !link.url.startsWith('mailto:');
+              return (
               <motion.a
                 key={link.name}
                 href={link.url}
-                target={link.name !== 'Email' ? '_blank' : undefined}
-                rel={link.name !== 'Email' ? 'noopener noreferrer' : undefined}
+                target={isExternal ? '_blank' : undefined}
+                rel={isExternal ? 'noopener noreferrer' : undefined}
                 className="group bg-white dark:bg-gray-800 rounded-lg p-6 shadow-lg"
                 variants={itemVariants}
                 whileHover={prefersReducedMotion ? {} : { scale: 1.03, y: -4 }}
@@ -95,7 +97,8 @@ export default function ContactSection() {
                   </motion.div>
                 </div>
               </motion.a>
-            ))}
+              );
+            })}
           </div>
 
           {/* Additional Message */}

@@ -9,8 +9,8 @@ export default function ToastProvider() {
       toastOptions={{
         duration: 4000,
         style: {
-          background: '#333',
-          color: '#fff',
+          background: 'var(--toast-background, #333)',
+          color: 'var(--toast-foreground, #fff)',
         },
         success: {
           style: {
