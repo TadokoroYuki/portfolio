@@ -68,6 +68,15 @@ portofolio/
 │   │   ├── SkillsSection.tsx     # スキルセクション
 │   │   ├── ProjectsSection.tsx   # プロジェクトセクション
 │   │   └── ContactSection.tsx    # コンタクトセクション
+│   ├── data/                     # データレイヤー (実装済み)
+│   │   ├── index.ts              # 統合エクスポート
+│   │   ├── types.ts              # 型定義
+│   │   ├── hero.ts               # Heroセクションデータ
+│   │   ├── skills.ts             # スキルデータ
+│   │   ├── projects.ts           # プロジェクトデータ
+│   │   ├── timeline.ts           # タイムラインデータ
+│   │   ├── interests.ts          # 興味分野データ
+│   │   └── contact.tsx           # コンタクト情報 (JSXアイコン含む)
 │   ├── hooks/                    # カスタムフック
 │   │   └── useInView.ts          # Intersection Observer フック
 │   ├── layout.tsx                # ルートレイアウト
@@ -75,12 +84,14 @@ portofolio/
 │   └── globals.css               # グローバルスタイル
 ├── docs/                         # ドキュメント
 │   ├── ARCHITECTURE.md           # アーキテクチャ (本ドキュメント)
-│   ├── COMPONENTS.md             # コンポーネント API
-│   ├── CONTRIBUTING.md           # 貢献ガイド
+│   ├── COMPONENTS.md             # コンポーネント API リファレンス
+│   ├── DESIGN_SPEC.md            # デザイン仕様
+│   ├── REQUIREMENTS.md           # 要件定義
+│   ├── TECH_STACK.md             # 技術スタック詳細
+│   ├── REFERENCE.md              # 参考資料
 │   ├── ACCESSIBILITY_CHECKLIST.md
 │   ├── DEPLOYMENT_GUIDE.md
-│   ├── PERFORMANCE_SEO_GUIDE.md
-│   └── TODO_MANUAL.md
+│   └── PERFORMANCE_SEO_GUIDE.md
 ├── public/                       # 静的アセット
 │   ├── favicon.ico
 │   ├── profile.jpg
@@ -178,44 +189,66 @@ Framer Motion の `whileInView` を使用したスクロール連動アニメー
 
 ## 5. データフロー
 
-### 現状
-データはコンポーネント内にハードコードされています。
+### 現状（実装済み）
+すべてのデータは `app/data/` ディレクトリに分離され、一元管理されています。
 
-```tsx
-// SkillsSection.tsx
-const skillCategories: SkillCategory[] = [
-  {
-    category: 'Frontend',
-    skills: [
-      { name: 'Next.js', level: 'Advanced' },
-      // ...
-    ],
-  },
-  // ...
-];
+### ディレクトリ構造
+
+```
+app/data/
+├── index.ts         # 統合エクスポート
+├── types.ts         # 型定義
+├── hero.ts          # Heroセクションデータ
+├── skills.ts        # スキルデータ
+├── projects.ts      # プロジェクトデータ
+├── timeline.ts      # タイムラインデータ
+├── interests.ts     # 興味分野データ
+└── contact.tsx      # コンタクト情報（JSXアイコン含む）
 ```
 
 ### データの種類
-| データ | 場所 | 内容 |
-|--------|------|------|
-| スキルデータ | `SkillsSection.tsx` | 技術スタック、習熟度 |
-| タイムラインデータ | `AboutSection.tsx` | 経歴情報 |
-| プロジェクトデータ | `ProjectsSection.tsx` | プロジェクト情報、リンク |
-| コンタクトデータ | `ContactSection.tsx` | SNS、Email リンク |
-| ナビアイテム | `Navigation.tsx` | ナビゲーションリンク |
+| データ | ファイル | 内容 |
+|--------|---------|------|
+| Heroデータ | `app/data/hero.ts` | プロフィール情報、タイプアニメーション文字列 |
+| スキルデータ | `app/data/skills.ts` | 技術スタック、習熟度、カテゴリ分類 |
+| プロジェクトデータ | `app/data/projects.ts` | プロジェクト情報、リンク、技術タグ |
+| タイムラインデータ | `app/data/timeline.ts` | 経歴情報、時系列イベント |
+| 興味分野データ | `app/data/interests.ts` | 興味・関心分野リスト |
+| コンタクトデータ | `app/data/contact.tsx` | SNS、Email リンク（JSXアイコン） |
+| 型定義 | `app/data/types.ts` | 全データの TypeScript 型定義 |
+
+### 使用例
+
+```tsx
+// コンポーネントからのインポート
+import { skillCategories, type SkillCategory } from '@/app/data';
+
+export default function SkillsSection() {
+  return (
+    <div>
+      {skillCategories.map((category) => (
+        <div key={category.category}>
+          <h3>{category.category}</h3>
+          {category.skills.map((skill) => (
+            <span key={skill.name}>{skill.name}</span>
+          ))}
+        </div>
+      ))}
+    </div>
+  );
+}
+```
+
+### データレイヤーの利点
+
+- **分離と再利用性**: コンポーネントとデータが分離され、保守性が向上
+- **一元管理**: `index.ts` による統合エクスポートで管理が容易
+- **型安全性**: TypeScript による厳格な型定義で開発時のエラーを防止
+- **将来の拡張性**: CMS 連携やデータフェッチングへの移行が容易
 
 ### 将来計画
-データレイヤーの分離を検討:
-
-```
-data/
-├── skills.ts       # スキルデータ
-├── projects.ts     # プロジェクトデータ
-├── timeline.ts     # 経歴データ
-└── contact.ts      # コンタクト情報
-```
-
-または、CMS (Contentful, Sanity 等) との連携。
+- CMS (Contentful, Sanity 等) との連携
+- データフェッチングライブラリ（React Query）の導入検討
 
 > 📘 **データフェッチングの詳細**
 > React Query等のデータ管理ライブラリの検討については [TECH_STACK.md](./TECH_STACK.md) のデータフェッチングセクションを参照。
@@ -443,14 +476,21 @@ npm run postbuild  # サイトマップ生成
 
 ## 11. 将来のロードマップ
 
+### 実装済み ✅
+- [x] データレイヤーの分離 (`app/data/` ディレクトリ)
+- [x] ダークモード対応
+- [x] レスポンシブデザイン
+- [x] アクセシビリティ対応（WCAG 2.1 AA）
+- [x] SEO最適化（sitemap, robots.txt）
+- [x] パフォーマンス最適化（next/image, next/font）
+
 ### 短期 (1-3ヶ月)
 
 **テスト・品質改善**
-- [x] E2Eテストの追加 (Playwright) ← 実装済み
 - [ ] ユニットテストの追加 (Jest + React Testing Library)
+- [ ] E2Eテストの追加 (Playwright)
 
 **データ・コンテンツ**
-- [ ] データレイヤーの分離 (`data/` ディレクトリ)
 - [ ] プロジェクトデータの拡充（複数プロジェクト）
 - [ ] スキルレベル可視化の改善（プログレスバー、経験年数）
 
@@ -547,18 +587,13 @@ npm run postbuild  # サイトマップ生成
 ## 12. デザインシステム
 
 ### カラーシステム
-本プロジェクトはシンプルなカラーシステムを採用しています。
 
-**現在のカラーパレット:**
+> 📘 **詳細は [DESIGN_SPEC.md](./DESIGN_SPEC.md#カラーシステム) を参照**
+
+**現在採用しているテーマ:**
 - ライトモード: 白背景 (#ffffff) + ほぼ黒テキスト (#171717)
 - ダークモード: ほぼ黒背景 (#0a0a0a) + 明るいグレーテキスト (#ededed)
 - フォーカスカラー: Blue-500 (#3b82f6)
-
-**将来の拡張案:**
-- プライマリカラー: Indigo-500 (#6366f1)
-- セカンダリカラー: Violet-500 (#8b5cf6)
-- アクセントカラー: Pink-500 (#ec4899)
-- グラデーション: 青→紫→ピンク（コズミック/スペーステーマ）
 
 ### タイポグラフィ
 - **フォント**: Noto Sans JP（日本語・英語対応）
@@ -612,35 +647,18 @@ npm run postbuild  # サイトマップ生成
 
 ### 現在の技術的負債
 
-#### 1. データ管理
-**問題点:**
-- データがコンポーネント内にハードコード
-- 保守性・拡張性が低い
-
-**解決策:**
-- データレイヤーの分離（`data/` ディレクトリ）
-- TypeScriptインターフェースによる型定義
-- 将来的にCMS連携を検討
-
-```
-data/
-├── skills.ts       # スキルデータ
-├── projects.ts     # プロジェクトデータ
-├── timeline.ts     # 経歴データ
-└── contact.ts      # コンタクト情報
-```
-
-#### 2. テストカバレッジ
+#### 1. テストカバレッジ
 **問題点:**
 - ユニットテストが未実装
-- E2Eテストは導入済みだが、カバレッジ不十分
+- E2Eテストが未実装
 
 **解決策:**
 - Jest + React Testing Libraryの導入
+- Playwrightの導入
 - コンポーネント単位のテスト追加
 - テストカバレッジ目標: 80%以上
 
-#### 3. プロジェクト数
+#### 2. プロジェクト数
 **問題点:**
 - 現在1プロジェクトのみ表示
 - ポートフォリオとして不十分
@@ -650,7 +668,7 @@ data/
 - プロジェクトのカテゴリ分類（Frontend、Backend、Full Stack）
 - 各プロジェクトの詳細情報拡充
 
-#### 4. メタデータ・SEO
+#### 3. メタデータ・SEO
 **問題点:**
 - 構造化データ（JSON-LD）が未実装
 - リッチリザルト表示の機会損失
@@ -662,7 +680,7 @@ data/
   - CreativeWork（プロジェクト）
 - OpenGraph、Twitter Cardの最適化
 
-#### 5. スキルレベルの可視化
+#### 4. スキルレベルの可視化
 **問題点:**
 - スキルレベルが視覚的に表現されていない
 - 習熟度が不明瞭
@@ -683,7 +701,6 @@ data/
 - [COMPONENTS.md](./COMPONENTS.md) - コンポーネント API リファレンス
 
 ### 開発ガイド
-- [CONTRIBUTING.md](./CONTRIBUTING.md) - 貢献ガイド
 - [ACCESSIBILITY_CHECKLIST.md](./ACCESSIBILITY_CHECKLIST.md) - アクセシビリティチェックリスト
 - [DEPLOYMENT_GUIDE.md](./DEPLOYMENT_GUIDE.md) - デプロイメントガイド
 - [PERFORMANCE_SEO_GUIDE.md](./PERFORMANCE_SEO_GUIDE.md) - パフォーマンス・SEO ガイド

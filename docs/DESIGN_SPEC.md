@@ -131,7 +131,10 @@
 ## タイポグラフィ
 
 ### フォントファミリー
-- メイン: システムフォント（Inter, sans-serif）
+- メイン: Noto Sans JP（日本語対応）
+- ウェイト: 400 (Regular), 500 (Medium), 700 (Bold)
+- フォールバック: sans-serif
+- 最適化: font-display: swap
 - コード: monospace
 
 ### 文字サイズ
