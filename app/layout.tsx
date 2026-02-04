@@ -6,6 +6,7 @@ import Navigation from './components/Navigation';
 import ScrollToTopButton from './components/ScrollToTopButton';
 import ToastProvider from './components/ToastProvider';
 import ThemeProvider from './components/ThemeProvider';
+import CustomCursor from './components/CustomCursor';
 
 const notoSansJP = Noto_Sans_JP({
   subsets: ['latin'],
@@ -83,6 +84,7 @@ export default function RootLayout({
           {children}
           <ScrollToTopButton />
           <ToastProvider />
+          <CustomCursor />
         </ThemeProvider>
       </body>
     </html>
