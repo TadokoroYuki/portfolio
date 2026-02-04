@@ -4,10 +4,14 @@ import { useState } from 'react';
 import Image from 'next/image';
 import { motion, useReducedMotion, type Variants } from 'framer-motion';
 import { TypeAnimation } from 'react-type-animation';
+import { heroData } from '@/app/data';
 
 export default function HeroSection() {
   const [imageError, setImageError] = useState(false);
   const prefersReducedMotion = useReducedMotion();
+
+  // Generate TypeAnimation sequence from heroData
+  const typeSequence = heroData.titles.flatMap((title) => [title, 2000]);
 
   const containerVariants: Variants = {
     hidden: { opacity: 0 },
@@ -62,8 +66,8 @@ export default function HeroSection() {
           ) : (
             <div className="w-32 h-32 sm:w-40 sm:h-40 rounded-full overflow-hidden shadow-xl ring-4 ring-white dark:ring-gray-800">
               <Image
-                src="/profile.jpg"
-                alt="Yuki Tadokoro"
+                src={heroData.profileImage}
+                alt={heroData.name}
                 width={160}
                 height={160}
                 className="w-full h-full object-cover"
@@ -79,7 +83,7 @@ export default function HeroSection() {
           className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold mb-6 bg-gradient-to-r from-gray-900 to-gray-600 dark:from-white dark:to-gray-400 bg-clip-text text-transparent"
           variants={itemVariants}
         >
-          Yuki Tadokoro
+          {heroData.name}
         </motion.h1>
 
         {/* Subtitle with Type Animation */}
@@ -88,16 +92,7 @@ export default function HeroSection() {
           variants={itemVariants}
         >
           <TypeAnimation
-            sequence={[
-              'Full Stack Developer',
-              2000,
-              'Next.js Engineer',
-              2000,
-              'Go Backend Developer',
-              2000,
-              'Web Developer',
-              2000,
-            ]}
+            sequence={typeSequence}
             wrapper="span"
             speed={50}
             repeat={Infinity}
@@ -110,9 +105,9 @@ export default function HeroSection() {
           className="text-base sm:text-lg md:text-xl text-gray-600 dark:text-gray-400 mb-12 max-w-2xl mx-auto leading-relaxed"
           variants={itemVariants}
         >
-          Next.js と Go を使った Web 開発に情熱を持っています。
+          {heroData.description[0]}
           <br className="hidden sm:block" />
-          モダンな技術で価値あるプロダクトを作ることを目指しています。
+          {heroData.description[1]}
         </motion.p>
 
         {/* CTA Buttons */}

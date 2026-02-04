@@ -1,33 +1,11 @@
 'use client';
 
 import { motion, useReducedMotion, type Variants } from 'framer-motion';
-import { FaGithub } from 'react-icons/fa';
-import { HiOutlineMail, HiArrowRight } from 'react-icons/hi';
-
-interface ContactLink {
-  name: string;
-  icon: React.ReactNode;
-  url: string;
-  label: string;
-}
+import { HiArrowRight } from 'react-icons/hi';
+import { contactLinks } from '@/app/data';
 
 export default function ContactSection() {
   const prefersReducedMotion = useReducedMotion();
-
-  const contactLinks: ContactLink[] = [
-    {
-      name: 'GitHub',
-      icon: <FaGithub className="w-8 h-8" />,
-      url: 'https://github.com/TadokoroYuki',
-      label: '@TadokoroYuki',
-    },
-    {
-      name: 'Email',
-      icon: <HiOutlineMail className="w-8 h-8" />,
-      url: 'mailto:tdkryk@icloud.com',
-      label: 'tdkryk@icloud.com',
-    },
-  ];
 
   const containerVariants: Variants = {
     hidden: { opacity: 0 },
