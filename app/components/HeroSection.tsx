@@ -5,6 +5,7 @@ import Image from 'next/image';
 import { motion, useReducedMotion, type Variants } from 'framer-motion';
 import { TypeAnimation } from 'react-type-animation';
 import { heroData } from '@/app/data';
+import ParticleBackground from './ParticleBackground';
 
 export default function HeroSection() {
   const [imageError, setImageError] = useState(false);
@@ -43,6 +44,13 @@ export default function HeroSection() {
     >
       {/* Animated Background Gradients */}
       <div className="absolute inset-0 -z-10 overflow-hidden">
+        {/* Particle Animation */}
+        <ParticleBackground
+          particleCount={40}
+          connectionDistance={120}
+          particleColor="rgba(59, 130, 246, 0.4)"
+          lineColor="rgba(59, 130, 246, 0.1)"
+        />
         {/* Primary gradient orb */}
         <div className="animate-float-gradient absolute -top-40 -right-40 w-80 h-80 sm:w-[500px] sm:h-[500px] rounded-full bg-gradient-to-br from-blue-400/30 to-purple-500/30 dark:from-blue-600/20 dark:to-purple-700/20 blur-3xl" />
         {/* Secondary gradient orb */}
