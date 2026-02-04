@@ -3,28 +3,10 @@
 import { motion, useReducedMotion, type Variants } from 'framer-motion';
 import { FaGithub } from 'react-icons/fa';
 import { HiOutlineExternalLink, HiOutlinePhotograph } from 'react-icons/hi';
-
-interface Project {
-  title: string;
-  description: string;
-  technologies: string[];
-  githubUrl?: string;
-  demoUrl?: string;
-  image?: string;
-}
+import { projects } from '@/app/data';
 
 export default function ProjectsSection() {
   const prefersReducedMotion = useReducedMotion();
-
-  const projects: Project[] = [
-    {
-      title: 'Portfolio Website',
-      description:
-        'モダンな技術スタックで構築したポートフォリオサイト。App Router によるファイルベースルーティング、レスポンシブデザイン、ダークモード対応、アクセシビリティ対応（WCAG 2.1 準拠）、SEO 最適化を実装。パフォーマンスと UX を重視した設計。',
-      technologies: ['Next.js 15', 'TypeScript', 'Tailwind CSS', 'Vercel'],
-      githubUrl: 'https://github.com/TadokoroYuki/portofolio',
-    },
-  ];
 
   const containerVariants: Variants = {
     hidden: { opacity: 0 },
