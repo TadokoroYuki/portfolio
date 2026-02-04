@@ -974,119 +974,97 @@ export function ThreeScene() {
 
 多くの参考ポートフォリオでカスタムカーソルが実装されています。以下は実装方法の選択肢です。
 
-### Option 1: 自前実装 (推奨)
+### Option 1: Framer Motion（現在採用）
+
+**選定理由**
+- 既にプロジェクトで使用しているライブラリ
+- `useSpring` による滑らかなスプリングアニメーション
+- `useReducedMotion` による自動アクセシビリティ対応
+- React との親和性が高い
 
 **実装例**
 ```typescript
-// hooks/useCustomCursor.ts
-import { useEffect } from 'react'
+// components/CustomCursor.tsx
+'use client';
 
-export function useCustomCursor() {
-  useEffect(() => {
-    const cursor = document.querySelector('.custom-cursor') as HTMLElement
-    const cursorFollower = document.querySelector('.custom-cursor-follower') as HTMLElement
+import { useEffect, useState, useCallback } from 'react';
+import { motion, useReducedMotion, useSpring } from 'framer-motion';
 
-    if (!cursor || !cursorFollower) return
+export default function CustomCursor() {
+  const prefersReducedMotion = useReducedMotion();
+  const [isTouchDevice, setIsTouchDevice] = useState(true);
+  const [cursorState, setCursorState] = useState({
+    x: -100,
+    y: -100,
+    isPointer: false,
+    isHidden: true,
+  });
 
-    const moveCursor = (e: MouseEvent) => {
-      cursor.style.transform = `translate(${e.clientX}px, ${e.clientY}px)`
+  // Smooth spring animation for outer ring
+  const springConfig = { damping: 25, stiffness: 300, mass: 0.5 };
+  const cursorX = useSpring(cursorState.x, springConfig);
+  const cursorY = useSpring(cursorState.y, springConfig);
 
-      // Follower with slight delay
-      setTimeout(() => {
-        cursorFollower.style.transform = `translate(${e.clientX}px, ${e.clientY}px)`
-      }, 100)
-    }
-
-    const handleLinkHover = () => {
-      cursor.classList.add('cursor-hover')
-      cursorFollower.classList.add('cursor-hover')
-    }
-
-    const handleLinkLeave = () => {
-      cursor.classList.remove('cursor-hover')
-      cursorFollower.classList.remove('cursor-hover')
-    }
-
-    document.addEventListener('mousemove', moveCursor)
-
-    const links = document.querySelectorAll('a, button')
-    links.forEach(link => {
-      link.addEventListener('mouseenter', handleLinkHover)
-      link.addEventListener('mouseleave', handleLinkLeave)
-    })
-
-    return () => {
-      document.removeEventListener('mousemove', moveCursor)
-      links.forEach(link => {
-        link.removeEventListener('mouseenter', handleLinkHover)
-        link.removeEventListener('mouseleave', handleLinkLeave)
-      })
-    }
-  }, [])
-}
-```
-
-**CSS例**
-```css
-/* globals.css */
-.custom-cursor {
-  position: fixed;
-  width: 10px;
-  height: 10px;
-  border-radius: 50%;
-  background-color: #3b82f6;
-  pointer-events: none;
-  z-index: 9999;
-  transition: transform 0.1s ease;
-  mix-blend-mode: difference;
-}
-
-.custom-cursor-follower {
-  position: fixed;
-  width: 40px;
-  height: 40px;
-  border: 2px solid #3b82f6;
-  border-radius: 50%;
-  pointer-events: none;
-  z-index: 9998;
-  transition: transform 0.15s ease;
-  opacity: 0.5;
-}
-
-.cursor-hover {
-  transform: scale(1.5);
-}
-
-/* Hide on mobile */
-@media (max-width: 768px) {
-  .custom-cursor,
-  .custom-cursor-follower {
-    display: none;
+  // Don't render on touch devices or with reduced motion
+  if (isTouchDevice || prefersReducedMotion) {
+    return null;
   }
+
+  return (
+    <>
+      {/* Inner dot - follows mouse exactly */}
+      <motion.div
+        className="fixed top-0 left-0 pointer-events-none z-[9999] mix-blend-difference"
+        style={{ x: cursorState.x, y: cursorState.y }}
+        animate={{
+          scale: cursorState.isPointer ? 0.5 : 1,
+          opacity: cursorState.isHidden ? 0 : 1,
+        }}
+      >
+        <div className="w-2 h-2 -translate-x-1/2 -translate-y-1/2 rounded-full bg-white" />
+      </motion.div>
+
+      {/* Outer ring - follows with spring delay */}
+      <motion.div
+        className="fixed top-0 left-0 pointer-events-none z-[9998] mix-blend-difference"
+        style={{ x: cursorX, y: cursorY }}
+        animate={{
+          scale: cursorState.isPointer ? 1.5 : 1,
+          opacity: cursorState.isHidden ? 0 : 1,
+        }}
+      >
+        <div className="w-8 h-8 -translate-x-1/2 -translate-y-1/2 rounded-full border-2 border-white" />
+      </motion.div>
+    </>
+  );
 }
 ```
 
 **メリット**
-- シンプルで軽量
-- 完全な制御が可能
-- 依存なし
+- 滑らかなスプリングアニメーション（`useSpring`）
+- タッチデバイス・Reduced Motion 対応が組み込み
+- 既存依存のみで追加インストール不要
 
 **デメリット**
-- 全て自分で実装する必要がある
+- Framer Motionへの依存（既に採用済みなので問題なし）
 
-### Option 2: ライブラリ使用
+### Option 2: 自前実装（CSS + JavaScript）
 
-**react-custom-cursor**
-```bash
-npm install react-custom-cursor
-```
+**メリット**
+- 依存なし
+- 軽量
 
-**cursor-effects**
-```bash
-npm install cursor-effects
-```
+**デメリット**
+- スプリングアニメーションの実装が複雑
+- アクセシビリティ対応を手動で実装する必要がある
 
-**結論**: 自前実装を推奨（シンプルで軽量、カスタマイズ性が高い）
+### Option 3: ライブラリ使用
+
+**react-custom-cursor / cursor-effects**
+
+**推奨度**: Low（Framer Motionで十分実現可能）
+
+**結論**: Framer Motion を採用（既存依存、滑らかなアニメーション、アクセシビリティ対応）
 
 **参考ポートフォリオ:**
 - aarabii/v4

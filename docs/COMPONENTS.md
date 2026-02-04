@@ -41,11 +41,11 @@ app/data/
 
 ```typescript
 // app/data/types.ts
-export type SkillLevel = 'Beginner' | 'Intermediate' | 'Advanced' | 'Expert';
+export type SkillLevel = 'Beginner' | 'Intermediate' | 'Advanced';
 
 export interface Skill {
   name: string;
-  level: SkillLevel;
+  level?: SkillLevel;
 }
 
 export interface SkillCategory {
@@ -62,23 +62,24 @@ export interface Project {
 }
 
 export interface TimelineItem {
-  year: number;
+  year: string;
   title: string;
-  organization: string;
   description: string;
+  type: 'education' | 'work';
 }
 
 export interface ContactLink {
   name: string;
-  url: string;
   icon: React.ReactNode;
+  url: string;
+  label: string;
 }
 
 export interface HeroData {
   name: string;
-  title: string;
-  typewriterStrings: string[];
-  description: string;
+  titles: string[];
+  description: string[];
+  profileImage: string;
 }
 ```
 
@@ -543,6 +544,28 @@ export function ToastProvider() {
 
 ---
 
+### CustomCursor
+
+**ファイル**: `app/components/CustomCursor.tsx`
+
+**用途**: カスタムカーソル（デスクトップのみ）
+
+**特徴**:
+- Framer Motion による滑らかなアニメーション
+- タッチデバイス検出・自動無効化
+- Reduced Motion 対応（無効化）
+- インタラクティブ要素上でのホバーエフェクト
+
+**実装詳細**:
+- `useSpring` によるスプリングアニメーション（遅延追従するリング）
+- `mix-blend-mode: difference` によるコントラスト確保
+- インタラクティブ要素（`a`, `button`, `[role="button"]`等）の自動検出
+- `pointer: coarse` メディアクエリによるタッチデバイス検出
+
+**Props**: なし
+
+---
+
 ## カスタムフック
 
 ### useInView
@@ -561,7 +584,7 @@ interface UseInViewOptions {
 
 export function useInView<T extends HTMLElement>(
   options?: UseInViewOptions
-): [React.RefObject<T>, boolean];
+): { ref: React.RefObject<T>; isInView: boolean };
 ```
 
 **特徴**:
@@ -574,7 +597,7 @@ export function useInView<T extends HTMLElement>(
 import { useInView } from '@/app/hooks/useInView';
 
 export function AnimatedSection() {
-  const [ref, isInView] = useInView<HTMLDivElement>({
+  const { ref, isInView } = useInView<HTMLDivElement>({
     threshold: 0.1,
     rootMargin: '-100px',
     triggerOnce: true,
@@ -619,7 +642,7 @@ export function useInView<T extends HTMLElement>({
     return () => observer.disconnect();
   }, [threshold, rootMargin, triggerOnce]);
 
-  return [ref, isInView];
+  return { ref, isInView };
 }
 ```
 

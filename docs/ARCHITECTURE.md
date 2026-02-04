@@ -63,6 +63,8 @@ portofolio/
 │   │   ├── ScrollToTopButton.tsx # ページトップへ戻るボタン
 │   │   ├── TextHighlight.tsx     # テキストハイライトコンポーネント
 │   │   ├── ToastProvider.tsx     # トースト通知プロバイダー
+│   │   ├── CustomCursor.tsx      # カスタムカーソル
+│   │   ├── ParticleBackground.tsx # 背景パーティクル
 │   │   ├── HeroSection.tsx       # ヒーローセクション
 │   │   ├── AboutSection.tsx      # 自己紹介セクション
 │   │   ├── SkillsSection.tsx     # スキルセクション
@@ -143,6 +145,8 @@ portofolio/
 | `ScrollToTopButton` | ページトップへ戻るボタン |
 | `TextHighlight` | テキストハイライト装飾 |
 | `ToastProvider` | トースト通知の設定 |
+| `CustomCursor` | カスタムカーソル（デスクトップのみ） |
+| `ParticleBackground` | 背景パーティクルアニメーション |
 
 ### 共通パターン
 
