@@ -113,6 +113,7 @@ export default function ProjectsSection() {
                         href={project.githubUrl}
                         target="_blank"
                         rel="noopener noreferrer"
+                        aria-label={`${project.title}のソースコード（GitHub）`}
                         className="flex items-center gap-2 text-gray-700 dark:text-gray-300 hover:text-blue-600 dark:hover:text-blue-400 transition-colors"
                         whileHover={prefersReducedMotion ? {} : { x: 4 }}
                         transition={{ duration: 0.15 }}
@@ -126,6 +127,7 @@ export default function ProjectsSection() {
                         href={project.demoUrl}
                         target="_blank"
                         rel="noopener noreferrer"
+                        aria-label={`${project.title}のデモを見る`}
                         className="flex items-center gap-2 text-gray-700 dark:text-gray-300 hover:text-blue-600 dark:hover:text-blue-400 transition-colors"
                         whileHover={prefersReducedMotion ? {} : { x: 4 }}
                         transition={{ duration: 0.15 }}
