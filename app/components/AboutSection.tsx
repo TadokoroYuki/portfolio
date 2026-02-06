@@ -75,7 +75,7 @@ export default function AboutSection() {
                   <TextHighlight>TypeScript</TextHighlight> を使ったモダンな開発を得意としています。
                   アクセシビリティ（WCAG 2.1 準拠）やパフォーマンス最適化にも注力しています。
                   <TextHighlight variant="background">バックエンド</TextHighlight>では{' '}
-                  <TextHighlight>Go</TextHighlight> を使った API 開発の経験があります。
+                  <TextHighlight>Ruby on Rails</TextHighlight> を使った API 開発の経験があります。
                 </p>
                 <p>
                   常に新しい技術をキャッチアップし、ベストプラクティスに沿ったコードを書くことを心がけています。
