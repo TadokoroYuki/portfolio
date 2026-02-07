@@ -117,3 +117,33 @@ body {
     cursor: none !important;
   }
 }
+
+/* Smooth scroll behavior (#142) */
+html {
+  scroll-behavior: smooth;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+}
+
+/* Touch optimization (#134, #141) */
+a,
+button,
+[role="button"],
+input,
+textarea,
+select {
+  touch-action: manipulation;
+  -webkit-tap-highlight-color: rgba(59, 130, 246, 0.2);
+}
+
+/* Safe area insets for notched devices (#135) */
+body {
+  padding-top: env(safe-area-inset-top);
+  padding-right: env(safe-area-inset-right);
+  padding-bottom: env(safe-area-inset-bottom);
+  padding-left: env(safe-area-inset-left);
+}
