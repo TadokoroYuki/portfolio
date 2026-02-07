@@ -93,7 +93,7 @@ export default function Navigation() {
 
       {/* Mobile Menu */}
       {isMobileMenuOpen && (
-        <div className="md:hidden bg-white dark:bg-gray-900 border-t border-gray-200 dark:border-gray-800">
+        <div className="md:hidden bg-white dark:bg-gray-900 border-t border-gray-200 dark:border-gray-800 overscroll-contain">
           <div className="px-2 pt-2 pb-3 space-y-1">
             {navItems.map((item) => (
               <a
