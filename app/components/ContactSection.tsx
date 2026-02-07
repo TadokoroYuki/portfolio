@@ -1,33 +1,44 @@
 'use client';
 
+import { useMemo } from 'react';
 import { motion, useReducedMotion, type Variants } from 'framer-motion';
 import { HiArrowRight } from 'react-icons/hi';
 import { contactLinks } from '@/app/data';
 
+const getContainerVariants = (prefersReducedMotion: boolean | null): Variants => ({
+  hidden: { opacity: 0 },
+  visible: {
+    opacity: 1,
+    transition: {
+      staggerChildren: prefersReducedMotion ? 0 : 0.1,
+    },
+  },
+});
+
+const getItemVariants = (prefersReducedMotion: boolean | null): Variants => ({
+  hidden: { opacity: 0, y: prefersReducedMotion ? 0 : 30 },
+  visible: {
+    opacity: 1,
+    y: 0,
+    transition: {
+      duration: prefersReducedMotion ? 0.01 : 0.5,
+      ease: 'easeOut' as const,
+    },
+  },
+});
+
 export default function ContactSection() {
   const prefersReducedMotion = useReducedMotion();
 
-  const containerVariants: Variants = {
-    hidden: { opacity: 0 },
-    visible: {
-      opacity: 1,
-      transition: {
-        staggerChildren: prefersReducedMotion ? 0 : 0.1,
-      },
-    },
-  };
+  const containerVariants = useMemo(
+    () => getContainerVariants(prefersReducedMotion),
+    [prefersReducedMotion]
+  );
 
-  const itemVariants: Variants = {
-    hidden: { opacity: 0, y: prefersReducedMotion ? 0 : 30 },
-    visible: {
-      opacity: 1,
-      y: 0,
-      transition: {
-        duration: prefersReducedMotion ? 0.01 : 0.5,
-        ease: 'easeOut' as const,
-      },
-    },
-  };
+  const itemVariants = useMemo(
+    () => getItemVariants(prefersReducedMotion),
+    [prefersReducedMotion]
+  );
 
   return (
     <section
