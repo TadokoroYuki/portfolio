@@ -1,6 +1,6 @@
 'use client';
 
-import { useState } from 'react';
+import { useState, useMemo } from 'react';
 import Image from 'next/image';
 import dynamic from 'next/dynamic';
 import { motion, useReducedMotion, type Variants } from 'framer-motion';
@@ -44,6 +44,29 @@ const ScrollIndicatorIcon = (
   </svg>
 );
 
+const getContainerVariants = (prefersReducedMotion: boolean | null): Variants => ({
+  hidden: { opacity: 0 },
+  visible: {
+    opacity: 1,
+    transition: {
+      staggerChildren: prefersReducedMotion ? 0 : 0.15,
+      delayChildren: prefersReducedMotion ? 0 : 0.2,
+    },
+  },
+});
+
+const getItemVariants = (prefersReducedMotion: boolean | null): Variants => ({
+  hidden: { opacity: 0, y: prefersReducedMotion ? 0 : 20 },
+  visible: {
+    opacity: 1,
+    y: 0,
+    transition: {
+      duration: prefersReducedMotion ? 0.01 : 0.6,
+      ease: 'easeOut' as const,
+    },
+  },
+});
+
 export default function HeroSection() {
   const [imageError, setImageError] = useState(false);
   const prefersReducedMotion = useReducedMotion();
@@ -51,28 +74,12 @@ export default function HeroSection() {
   // Generate TypeAnimation sequence from heroData
   const typeSequence = heroData.titles.flatMap((title) => [title, 2000]);
 
-  const containerVariants: Variants = {
-    hidden: { opacity: 0 },
-    visible: {
-      opacity: 1,
-      transition: {
-        staggerChildren: prefersReducedMotion ? 0 : 0.15,
-        delayChildren: prefersReducedMotion ? 0 : 0.2,
-      },
-    },
-  };
+  const containerVariants = useMemo(
+    () => getContainerVariants(prefersReducedMotion),
+    [prefersReducedMotion]
+  );
 
-  const itemVariants: Variants = {
-    hidden: { opacity: 0, y: prefersReducedMotion ? 0 : 20 },
-    visible: {
-      opacity: 1,
-      y: 0,
-      transition: {
-        duration: prefersReducedMotion ? 0.01 : 0.6,
-        ease: 'easeOut' as const,
-      },
-    },
-  };
+  const itemVariants = useMemo(() => getItemVariants(prefersReducedMotion), [prefersReducedMotion]);
 
   return (
     <section
