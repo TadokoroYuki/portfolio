@@ -2,10 +2,18 @@
 
 import { useState } from 'react';
 import Image from 'next/image';
+import dynamic from 'next/dynamic';
 import { motion, useReducedMotion, type Variants } from 'framer-motion';
-import { TypeAnimation } from 'react-type-animation';
 import { heroData } from '@/app/data';
 import ParticleBackground from './ParticleBackground';
+
+const TypeAnimation = dynamic(
+  () => import('react-type-animation').then((mod) => mod.TypeAnimation),
+  {
+    ssr: false,
+    loading: () => <span className="inline-block">{heroData.titles[0]}</span>,
+  }
+);
 
 export default function HeroSection() {
   const [imageError, setImageError] = useState(false);
