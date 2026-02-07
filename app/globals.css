@@ -132,7 +132,7 @@ html {
 /* Touch optimization (#134, #141) */
 a,
 button,
-[role="button"],
+[role='button'],
 input,
 textarea,
 select {
