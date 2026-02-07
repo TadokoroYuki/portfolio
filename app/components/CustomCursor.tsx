@@ -1,11 +1,9 @@
 'use client';
 
-import { useEffect, useState, useCallback } from 'react';
+import { useEffect, useState, useCallback, useRef } from 'react';
 import { motion, useReducedMotion, useSpring } from 'framer-motion';
 
-interface CursorState {
-  x: number;
-  y: number;
+interface CursorUIState {
   isPointer: boolean;
   isHidden: boolean;
 }
@@ -13,17 +11,20 @@ interface CursorState {
 export default function CustomCursor() {
   const prefersReducedMotion = useReducedMotion();
   const [isTouchDevice, setIsTouchDevice] = useState(true);
-  const [cursorState, setCursorState] = useState<CursorState>({
-    x: -100,
-    y: -100,
+
+  // Position is managed via ref to avoid re-renders on every mouse move
+  const cursorPositionRef = useRef({ x: -100, y: -100 });
+
+  // Only UI state triggers re-renders
+  const [uiState, setUiState] = useState<CursorUIState>({
     isPointer: false,
     isHidden: true,
   });
 
   // Smooth spring animation for outer ring
   const springConfig = { damping: 25, stiffness: 300, mass: 0.5 };
-  const cursorX = useSpring(cursorState.x, springConfig);
-  const cursorY = useSpring(cursorState.y, springConfig);
+  const cursorX = useSpring(-100, springConfig);
+  const cursorY = useSpring(-100, springConfig);
 
   // Detect touch device
   useEffect(() => {
@@ -77,30 +78,31 @@ export default function CustomCursor() {
   // Mouse move handler
   const handleMouseMove = useCallback(
     (e: MouseEvent) => {
-      const isPointer = isInteractiveElement(e.target as Element);
-
-      setCursorState((prev) => ({
-        ...prev,
-        x: e.clientX,
-        y: e.clientY,
-        isPointer,
-        isHidden: false,
-      }));
-
+      // Update position ref (no re-render)
+      cursorPositionRef.current = { x: e.clientX, y: e.clientY };
       cursorX.set(e.clientX);
       cursorY.set(e.clientY);
+
+      // Only update state if UI state changes
+      const isPointer = isInteractiveElement(e.target as Element);
+      setUiState((prev) => {
+        if (prev.isPointer === isPointer && !prev.isHidden) {
+          return prev; // Return same reference to avoid re-render
+        }
+        return { isPointer, isHidden: false };
+      });
     },
     [isInteractiveElement, cursorX, cursorY]
   );
 
   // Mouse leave handler
   const handleMouseLeave = useCallback(() => {
-    setCursorState((prev) => ({ ...prev, isHidden: true }));
+    setUiState((prev) => ({ ...prev, isHidden: true }));
   }, []);
 
   // Mouse enter handler
   const handleMouseEnter = useCallback(() => {
-    setCursorState((prev) => ({ ...prev, isHidden: false }));
+    setUiState((prev) => ({ ...prev, isHidden: false }));
   }, []);
 
   // Set up event listeners
@@ -129,16 +131,16 @@ export default function CustomCursor() {
 
   return (
     <>
-      {/* Inner dot - follows mouse exactly */}
+      {/* Inner dot - follows mouse exactly via spring */}
       <motion.div
         className="fixed top-0 left-0 pointer-events-none z-[9999] mix-blend-difference"
         style={{
-          x: cursorState.x,
-          y: cursorState.y,
+          x: cursorX,
+          y: cursorY,
         }}
         animate={{
-          scale: cursorState.isPointer ? 0.5 : 1,
-          opacity: cursorState.isHidden ? 0 : 1,
+          scale: uiState.isPointer ? 0.5 : 1,
+          opacity: uiState.isHidden ? 0 : 1,
         }}
         transition={{ duration: 0.15 }}
       >
@@ -153,8 +155,8 @@ export default function CustomCursor() {
           y: cursorY,
         }}
         animate={{
-          scale: cursorState.isPointer ? 1.5 : 1,
-          opacity: cursorState.isHidden ? 0 : 1,
+          scale: uiState.isPointer ? 1.5 : 1,
+          opacity: uiState.isHidden ? 0 : 1,
         }}
         transition={{ duration: 0.15 }}
       >
