@@ -119,7 +119,7 @@ export default function AboutSection() {
                       transition={{ duration: 0.2 }}
                     >
                       <div className="flex items-start justify-between mb-2">
-                        <span className="text-sm font-semibold text-blue-600 dark:text-blue-400">
+                        <span className="text-sm font-semibold text-blue-600 dark:text-blue-400 tabular-nums">
                           {item.year}
                         </span>
                         <span

@@ -77,7 +77,7 @@ export default function SkillsSection() {
                         {skill.name}
                       </span>
                       {skill.level ? (
-                        <span className="text-sm px-3 py-1 rounded-full bg-blue-100 dark:bg-blue-900 text-blue-800 dark:text-blue-200">
+                        <span className="text-sm px-3 py-1 rounded-full bg-blue-100 dark:bg-blue-900 text-blue-800 dark:text-blue-200 tabular-nums">
                           {skill.level}
                         </span>
                       ) : null}
