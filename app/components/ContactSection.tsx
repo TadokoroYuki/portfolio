@@ -43,7 +43,9 @@ export default function ContactSection() {
         >
           {/* Section Header */}
           <motion.div className="text-center mb-16" variants={itemVariants}>
-            <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold mb-4">Contact</h2>
+            <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold mb-4 text-balance">
+              Contact
+            </h2>
             <p className="text-lg text-gray-600 dark:text-gray-400 max-w-2xl mx-auto">
               お気軽にご連絡ください
             </p>
