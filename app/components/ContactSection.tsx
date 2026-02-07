@@ -35,10 +35,7 @@ export default function ContactSection() {
     [prefersReducedMotion]
   );
 
-  const itemVariants = useMemo(
-    () => getItemVariants(prefersReducedMotion),
-    [prefersReducedMotion]
-  );
+  const itemVariants = useMemo(() => getItemVariants(prefersReducedMotion), [prefersReducedMotion]);
 
   return (
     <section

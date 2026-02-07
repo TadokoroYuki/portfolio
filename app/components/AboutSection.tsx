@@ -47,10 +47,7 @@ export default function AboutSection() {
     [prefersReducedMotion]
   );
 
-  const itemVariants = useMemo(
-    () => getItemVariants(prefersReducedMotion),
-    [prefersReducedMotion]
-  );
+  const itemVariants = useMemo(() => getItemVariants(prefersReducedMotion), [prefersReducedMotion]);
 
   const slideInVariants = useMemo(
     () => getSlideInVariants(prefersReducedMotion),

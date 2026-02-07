@@ -37,10 +37,7 @@ export default function ProjectsSection() {
     [prefersReducedMotion]
   );
 
-  const itemVariants = useMemo(
-    () => getItemVariants(prefersReducedMotion),
-    [prefersReducedMotion]
-  );
+  const itemVariants = useMemo(() => getItemVariants(prefersReducedMotion), [prefersReducedMotion]);
 
   return (
     <section

@@ -79,10 +79,7 @@ export default function HeroSection() {
     [prefersReducedMotion]
   );
 
-  const itemVariants = useMemo(
-    () => getItemVariants(prefersReducedMotion),
-    [prefersReducedMotion]
-  );
+  const itemVariants = useMemo(() => getItemVariants(prefersReducedMotion), [prefersReducedMotion]);
 
   return (
     <section

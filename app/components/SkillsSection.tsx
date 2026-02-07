@@ -34,10 +34,7 @@ export default function SkillsSection() {
     [prefersReducedMotion]
   );
 
-  const itemVariants = useMemo(
-    () => getItemVariants(prefersReducedMotion),
-    [prefersReducedMotion]
-  );
+  const itemVariants = useMemo(() => getItemVariants(prefersReducedMotion), [prefersReducedMotion]);
 
   return (
     <section
