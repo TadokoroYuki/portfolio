@@ -1,16 +1,12 @@
 import type { Metadata } from 'next';
 import { Noto_Sans_JP } from 'next/font/google';
-import dynamic from 'next/dynamic';
 import './globals.css';
 import SkipLink from './components/SkipLink';
 import Navigation from './components/Navigation';
 import ScrollToTopButton from './components/ScrollToTopButton';
 import ToastProvider from './components/ToastProvider';
 import ThemeProvider from './components/ThemeProvider';
-
-const CustomCursor = dynamic(() => import('./components/CustomCursor'), {
-  ssr: false,
-});
+import ClientOnlyCustomCursor from './components/ClientOnlyCustomCursor';
 
 const notoSansJP = Noto_Sans_JP({
   subsets: ['latin'],
@@ -88,7 +84,7 @@ export default function RootLayout({
           {children}
           <ScrollToTopButton />
           <ToastProvider />
-          <CustomCursor />
+          <ClientOnlyCustomCursor />
         </ThemeProvider>
       </body>
     </html>
