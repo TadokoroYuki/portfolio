@@ -5,7 +5,10 @@ import Image from 'next/image';
 import dynamic from 'next/dynamic';
 import { motion, useReducedMotion, type Variants } from 'framer-motion';
 import { heroData } from '@/app/data';
-import ParticleBackground from './ParticleBackground';
+
+const ParticleBackground = dynamic(() => import('./ParticleBackground'), {
+  ssr: false,
+});
 
 const TypeAnimation = dynamic(
   () => import('react-type-animation').then((mod) => mod.TypeAnimation),
