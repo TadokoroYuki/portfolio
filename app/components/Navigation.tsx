@@ -1,11 +1,26 @@
 'use client';
 
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useMemo } from 'react';
 import ThemeToggle from './ThemeToggle';
+import { useActiveSection } from '@/app/hooks/useActiveSection';
 
 export default function Navigation() {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+
+  const navItems = useMemo(
+    () => [
+      { id: 'home', label: 'Home' },
+      { id: 'about', label: 'About' },
+      { id: 'skills', label: 'Skills' },
+      { id: 'projects', label: 'Projects' },
+      { id: 'contact', label: 'Contact' },
+    ],
+    []
+  );
+
+  const sectionIds = useMemo(() => navItems.map((item) => item.id), [navItems]);
+  const activeSection = useActiveSection(sectionIds);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -16,17 +31,22 @@ export default function Navigation() {
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
+  // Scroll to hash position on initial load
+  useEffect(() => {
+    const hash = window.location.hash.slice(1);
+    if (hash) {
+      // Small delay to ensure DOM is ready
+      const timer = setTimeout(() => {
+        const element = document.getElementById(hash);
+        element?.scrollIntoView({ behavior: 'smooth' });
+      }, 100);
+      return () => clearTimeout(timer);
+    }
+  }, []);
+
   const handleMobileMenuClick = () => {
     setIsMobileMenuOpen(false);
   };
-
-  const navItems = [
-    { id: 'home', label: 'Home' },
-    { id: 'about', label: 'About' },
-    { id: 'skills', label: 'Skills' },
-    { id: 'projects', label: 'Projects' },
-    { id: 'contact', label: 'Contact' },
-  ];
 
   return (
     <nav
@@ -52,7 +72,11 @@ export default function Navigation() {
               <a
                 key={item.id}
                 href={`#${item.id}`}
-                className="text-gray-700 dark:text-gray-300 hover:text-gray-900 dark:hover:text-white transition-colors font-medium"
+                className={`transition-colors font-medium ${
+                  activeSection === item.id
+                    ? 'text-blue-600 dark:text-blue-400'
+                    : 'text-gray-700 dark:text-gray-300 hover:text-gray-900 dark:hover:text-white'
+                }`}
               >
                 {item.label}
               </a>
@@ -101,7 +125,11 @@ export default function Navigation() {
                 key={item.id}
                 href={`#${item.id}`}
                 onClick={handleMobileMenuClick}
-                className="block w-full text-left px-3 py-2 rounded-md text-base font-medium text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-800 hover:text-gray-900 dark:hover:text-white transition-colors"
+                className={`block w-full text-left px-3 py-2 rounded-md text-base font-medium transition-colors ${
+                  activeSection === item.id
+                    ? 'text-blue-600 dark:text-blue-400 bg-blue-50 dark:bg-blue-900/20'
+                    : 'text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-800 hover:text-gray-900 dark:hover:text-white'
+                }`}
               >
                 {item.label}
               </a>
