@@ -95,7 +95,10 @@ export default function ContactSection() {
                             }
                       }
                     >
-                      <HiArrowRight className="w-5 h-5 text-gray-400 group-hover:text-blue-600 dark:group-hover:text-blue-400 transition-colors" aria-hidden="true" />
+                      <HiArrowRight
+                        className="w-5 h-5 text-gray-400 group-hover:text-blue-600 dark:group-hover:text-blue-400 transition-colors"
+                        aria-hidden="true"
+                      />
                     </motion.div>
                   </div>
                 </motion.a>
