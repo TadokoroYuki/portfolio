@@ -4,13 +4,7 @@ import { useState, useEffect } from 'react';
 import { motion, AnimatePresence, useReducedMotion } from 'framer-motion';
 
 const ArrowUpIcon = (
-  <svg
-    className="w-6 h-6"
-    fill="none"
-    viewBox="0 0 24 24"
-    stroke="currentColor"
-    aria-hidden="true"
-  >
+  <svg className="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
     <path
       strokeLinecap="round"
       strokeLinejoin="round"
