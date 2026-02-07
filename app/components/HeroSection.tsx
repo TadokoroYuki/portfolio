@@ -18,6 +18,32 @@ const TypeAnimation = dynamic(
   }
 );
 
+const DownloadIcon = (
+  <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
+    <path
+      strokeLinecap="round"
+      strokeLinejoin="round"
+      strokeWidth={2}
+      d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"
+    />
+  </svg>
+);
+
+const ScrollIndicatorIcon = (
+  <svg
+    className="w-6 h-6 mx-auto text-gray-400"
+    fill="none"
+    strokeLinecap="round"
+    strokeLinejoin="round"
+    strokeWidth="2"
+    viewBox="0 0 24 24"
+    stroke="currentColor"
+    aria-hidden="true"
+  >
+    <path d="M19 14l-7 7m0 0l-7-7m7 7V3"></path>
+  </svg>
+);
+
 export default function HeroSection() {
   const [imageError, setImageError] = useState(false);
   const prefersReducedMotion = useReducedMotion();
@@ -166,14 +192,7 @@ export default function HeroSection() {
             whileHover={prefersReducedMotion ? {} : { scale: 1.02 }}
             whileTap={prefersReducedMotion ? {} : { scale: 0.98 }}
           >
-            <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                strokeWidth={2}
-                d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"
-              />
-            </svg>
+            {DownloadIcon}
             履歴書をダウンロード
           </motion.a>
         </motion.div>
@@ -193,17 +212,7 @@ export default function HeroSection() {
                 }
           }
         >
-          <svg
-            className="w-6 h-6 mx-auto text-gray-400"
-            fill="none"
-            strokeLinecap="round"
-            strokeLinejoin="round"
-            strokeWidth="2"
-            viewBox="0 0 24 24"
-            stroke="currentColor"
-          >
-            <path d="M19 14l-7 7m0 0l-7-7m7 7V3"></path>
-          </svg>
+          {ScrollIndicatorIcon}
         </motion.div>
       </motion.div>
     </section>
