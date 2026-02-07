@@ -7,6 +7,7 @@
   --foreground: #171717;
   --toast-background: #333;
   --toast-foreground: #fff;
+  color-scheme: light dark;
 }
 
 @media (prefers-color-scheme: dark) {
@@ -16,6 +17,15 @@
     --toast-background: #1f2937;
     --toast-foreground: #f3f4f6;
   }
+}
+
+/* Theme-specific color-scheme */
+html.light {
+  color-scheme: light;
+}
+
+html.dark {
+  color-scheme: dark;
 }
 
 body {
