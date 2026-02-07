@@ -2,10 +2,14 @@
 
 import { useState } from 'react';
 import Image from 'next/image';
+import dynamic from 'next/dynamic';
 import { motion, useReducedMotion, type Variants } from 'framer-motion';
 import { TypeAnimation } from 'react-type-animation';
 import { heroData } from '@/app/data';
-import ParticleBackground from './ParticleBackground';
+
+const ParticleBackground = dynamic(() => import('./ParticleBackground'), {
+  ssr: false,
+});
 
 export default function HeroSection() {
   const [imageError, setImageError] = useState(false);
