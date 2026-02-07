@@ -108,7 +108,7 @@ export default function ProjectsSection() {
 
                   {/* Links */}
                   <div className="flex gap-4">
-                    {project.githubUrl && (
+                    {project.githubUrl ? (
                       <motion.a
                         href={project.githubUrl}
                         target="_blank"
@@ -118,11 +118,11 @@ export default function ProjectsSection() {
                         whileHover={prefersReducedMotion ? {} : { x: 4 }}
                         transition={{ duration: 0.15 }}
                       >
-                        <FaGithub className="w-5 h-5" />
+                        <FaGithub className="w-5 h-5" aria-hidden="true" />
                         <span className="text-sm font-medium">Code</span>
                       </motion.a>
-                    )}
-                    {project.demoUrl && (
+                    ) : null}
+                    {project.demoUrl ? (
                       <motion.a
                         href={project.demoUrl}
                         target="_blank"
@@ -132,10 +132,10 @@ export default function ProjectsSection() {
                         whileHover={prefersReducedMotion ? {} : { x: 4 }}
                         transition={{ duration: 0.15 }}
                       >
-                        <HiOutlineExternalLink className="w-5 h-5" />
+                        <HiOutlineExternalLink className="w-5 h-5" aria-hidden="true" />
                         <span className="text-sm font-medium">Demo</span>
                       </motion.a>
-                    )}
+                    ) : null}
                   </div>
                 </div>
               </motion.div>

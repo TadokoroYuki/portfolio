@@ -76,11 +76,11 @@ export default function SkillsSection() {
                       <span className="font-medium text-gray-800 dark:text-gray-200">
                         {skill.name}
                       </span>
-                      {skill.level && (
+                      {skill.level ? (
                         <span className="text-sm px-3 py-1 rounded-full bg-blue-100 dark:bg-blue-900 text-blue-800 dark:text-blue-200">
                           {skill.level}
                         </span>
-                      )}
+                      ) : null}
                     </motion.div>
                   ))}
                 </div>
