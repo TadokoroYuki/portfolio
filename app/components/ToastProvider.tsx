@@ -12,6 +12,11 @@ export default function ToastProvider() {
           background: 'var(--toast-background, #333)',
           color: 'var(--toast-foreground, #fff)',
         },
+        // Accessibility settings for screen readers
+        ariaProps: {
+          role: 'status',
+          'aria-live': 'polite',
+        },
         success: {
           style: {
             background: '#10b981',
@@ -28,6 +33,11 @@ export default function ToastProvider() {
           iconTheme: {
             primary: '#fff',
             secondary: '#ef4444',
+          },
+          // Error messages should interrupt immediately
+          ariaProps: {
+            role: 'alert',
+            'aria-live': 'assertive',
           },
         },
       }}
