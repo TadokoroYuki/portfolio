@@ -25,9 +25,13 @@ export default function ScrollToTopButton() {
         <motion.button
           onClick={scrollToTop}
           aria-label="ページトップへ戻る"
-          className="fixed bottom-8 right-8 p-3 bg-gray-900 dark:bg-white
+          className="fixed p-3 bg-gray-900 dark:bg-white
                      text-white dark:text-gray-900 rounded-full shadow-lg
                      hover:shadow-xl transition-shadow z-50"
+          style={{
+            bottom: 'calc(2rem + env(safe-area-inset-bottom))',
+            right: 'calc(2rem + env(safe-area-inset-right))',
+          }}
           initial={{ opacity: 0, scale: 0.8 }}
           animate={{ opacity: 1, scale: 1 }}
           exit={{ opacity: 0, scale: 0.8 }}

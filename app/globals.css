@@ -2,6 +2,11 @@
 @tailwind components;
 @tailwind utilities;
 
+/* Issue #142: スムーススクロールのグローバル設定 */
+html {
+  scroll-behavior: smooth;
+}
+
 :root {
   --background: #ffffff;
   --foreground: #171717;
@@ -21,6 +26,24 @@
 body {
   color: var(--foreground);
   background: var(--background);
+  /* Issue #135: セーフエリア対応 */
+  padding-top: env(safe-area-inset-top);
+  padding-right: env(safe-area-inset-right);
+  padding-bottom: env(safe-area-inset-bottom);
+  padding-left: env(safe-area-inset-left);
+}
+
+/* Issue #141: タップハイライト色の設定 */
+button,
+a,
+[role='button'] {
+  -webkit-tap-highlight-color: transparent;
+}
+
+button:active,
+a:active,
+[role='button']:active {
+  opacity: 0.8;
 }
 
 @layer utilities {
@@ -102,6 +125,11 @@ body {
 
 /* Reduce motion for users who prefer it */
 @media (prefers-reduced-motion: reduce) {
+  /* Issue #142: reduced motion時はスムーススクロールを無効化 */
+  html {
+    scroll-behavior: auto;
+  }
+
   *,
   *::before,
   *::after {

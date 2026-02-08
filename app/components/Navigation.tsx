@@ -16,6 +16,18 @@ export default function Navigation() {
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
+  // Issue #136: モバイルメニュー開閉時のbody scroll制御
+  useEffect(() => {
+    if (isMobileMenuOpen) {
+      document.body.style.overflow = 'hidden';
+    } else {
+      document.body.style.overflow = '';
+    }
+    return () => {
+      document.body.style.overflow = '';
+    };
+  }, [isMobileMenuOpen]);
+
   const scrollToSection = (sectionId: string) => {
     const element = document.getElementById(sectionId);
     if (element) {
@@ -98,8 +110,8 @@ export default function Navigation() {
 
       {/* Mobile Menu */}
       {isMobileMenuOpen && (
-        <div className="md:hidden bg-white dark:bg-gray-900 border-t border-gray-200 dark:border-gray-800">
-          <div className="px-2 pt-2 pb-3 space-y-1">
+        <div className="md:hidden bg-white dark:bg-gray-900 border-t border-gray-200 dark:border-gray-800 max-h-[80vh] overflow-y-auto overscroll-contain">
+          <div className="px-2 pt-2 pb-3 space-y-1 pb-[env(safe-area-inset-bottom)]">
             {navItems.map((item) => (
               <button
                 key={item.id}

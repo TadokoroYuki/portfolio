@@ -1,4 +1,4 @@
-import type { Metadata } from 'next';
+import type { Metadata, Viewport } from 'next';
 import { Noto_Sans_JP } from 'next/font/google';
 import './globals.css';
 import SkipLink from './components/SkipLink';
@@ -16,6 +16,12 @@ const notoSansJP = Noto_Sans_JP({
 });
 
 const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://your-portfolio.vercel.app';
+
+export const viewport: Viewport = {
+  width: 'device-width',
+  initialScale: 1,
+  viewportFit: 'cover',
+};
 
 export const metadata: Metadata = {
   title: 'Portfolio | Yuki Tadokoro',
