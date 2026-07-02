@@ -3,8 +3,16 @@
 import { useTheme } from 'next-themes';
 import { useEffect, useState } from 'react';
 import { FiSun, FiMoon } from 'react-icons/fi';
+import type { NavDict } from '@/app/i18n/types';
 
-export default function ThemeToggle() {
+interface ThemeToggleProps {
+  labels: NavDict['themeToggle'];
+}
+
+const buttonClassName =
+  'rounded-md p-2 text-steel transition-colors hover:bg-rail/50 hover:text-ink dark:text-steel-dark dark:hover:bg-board-dark dark:hover:text-ink-dark';
+
+export default function ThemeToggle({ labels }: ThemeToggleProps) {
   const [mounted, setMounted] = useState(false);
   const { setTheme, resolvedTheme } = useTheme();
 
@@ -14,10 +22,7 @@ export default function ThemeToggle() {
 
   if (!mounted) {
     return (
-      <button
-        className="p-2 rounded-md text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors"
-        aria-label="テーマ切り替え"
-      >
+      <button className={buttonClassName} aria-label={labels.label}>
         <div className="h-5 w-5" />
       </button>
     );
@@ -28,8 +33,8 @@ export default function ThemeToggle() {
   return (
     <button
       onClick={() => setTheme(isDark ? 'light' : 'dark')}
-      className="p-2 rounded-md text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors"
-      aria-label={isDark ? 'ライトモードに切り替え' : 'ダークモードに切り替え'}
+      className={buttonClassName}
+      aria-label={isDark ? labels.toLight : labels.toDark}
     >
       {isDark ? <FiSun className="h-5 w-5" /> : <FiMoon className="h-5 w-5" />}
     </button>

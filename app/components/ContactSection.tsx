@@ -1,128 +1,55 @@
-'use client';
+import { FaGithub } from 'react-icons/fa';
+import { HiOutlineMail } from 'react-icons/hi';
+import StationSign from './StationSign';
+import type { ContactDict } from '@/app/i18n/types';
 
-import { useMemo } from 'react';
-import { motion, useReducedMotion, type Variants } from 'framer-motion';
-import { HiArrowRight } from 'react-icons/hi';
-import { contactLinks } from '@/app/data';
+/** Icons are kept out of the dictionary so it stays serializable. */
+const contactIcons: Record<string, React.ReactNode> = {
+  GitHub: <FaGithub className="h-5 w-5" aria-hidden="true" />,
+  Email: <HiOutlineMail className="h-5 w-5" aria-hidden="true" />,
+};
 
-const getContainerVariants = (prefersReducedMotion: boolean | null): Variants => ({
-  hidden: { opacity: 0 },
-  visible: {
-    opacity: 1,
-    transition: {
-      staggerChildren: prefersReducedMotion ? 0 : 0.1,
-    },
-  },
-});
+interface ContactSectionProps {
+  dict: ContactDict;
+}
 
-const getItemVariants = (prefersReducedMotion: boolean | null): Variants => ({
-  hidden: { opacity: 0, y: prefersReducedMotion ? 0 : 30 },
-  visible: {
-    opacity: 1,
-    y: 0,
-    transition: {
-      duration: prefersReducedMotion ? 0.01 : 0.5,
-      ease: 'easeOut' as const,
-    },
-  },
-});
-
-export default function ContactSection() {
-  const prefersReducedMotion = useReducedMotion();
-
-  const containerVariants = useMemo(
-    () => getContainerVariants(prefersReducedMotion),
-    [prefersReducedMotion]
-  );
-
-  const itemVariants = useMemo(() => getItemVariants(prefersReducedMotion), [prefersReducedMotion]);
-
+export default function ContactSection({ dict }: ContactSectionProps) {
   return (
-    <section
-      id="contact"
-      className="min-h-screen flex items-center justify-center px-4 sm:px-6 lg:px-8 py-20"
-    >
-      <div className="max-w-4xl mx-auto w-full">
-        <motion.div
-          variants={containerVariants}
-          initial="hidden"
-          whileInView="visible"
-          viewport={{ once: true, margin: '-100px' }}
-        >
-          {/* Section Header */}
-          <motion.div className="text-center mb-16" variants={itemVariants}>
-            <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold mb-4 text-balance">
-              Contact
-            </h2>
-            <p className="text-lg text-gray-600 dark:text-gray-400 max-w-2xl mx-auto">
-              お気軽にご連絡ください
-            </p>
-          </motion.div>
+    <section id="contact" className="px-4 py-24 sm:px-6 sm:py-32 lg:px-8">
+      <div className="mx-auto w-full max-w-4xl">
+        {/* Last stop — no "next" arrow */}
+        <StationSign
+          code="YT-04"
+          title={dict.sign.title}
+          subtitle={dict.sign.subtitle}
+          prev={{ href: '#projects', label: 'projects' }}
+        />
 
-          {/* Contact Links Grid */}
-          <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 max-w-2xl mx-auto">
-            {contactLinks.map((link) => {
+        <div className="mt-16 text-center">
+          <p className="leading-relaxed text-steel dark:text-steel-dark">
+            {dict.message[0]}
+            <br className="hidden sm:block" />
+            {dict.message[1]}
+          </p>
+
+          <div className="mt-10 flex flex-col items-center justify-center gap-6 sm:flex-row sm:gap-10">
+            {dict.links.map((link) => {
               const isExternal = !link.url.startsWith('mailto:');
               return (
-                <motion.a
+                <a
                   key={link.name}
                   href={link.url}
                   target={isExternal ? '_blank' : undefined}
                   rel={isExternal ? 'noopener noreferrer' : undefined}
-                  className="group bg-white dark:bg-gray-800 rounded-lg p-6 shadow-lg"
-                  variants={itemVariants}
-                  whileHover={prefersReducedMotion ? {} : { scale: 1.03, y: -4 }}
-                  transition={{ duration: 0.2 }}
+                  className="inline-flex items-center gap-2 font-mono text-sm text-ink underline decoration-sobu decoration-2 underline-offset-4 transition-colors hover:decoration-4 dark:text-ink-dark"
                 >
-                  <div className="flex items-center space-x-4">
-                    <motion.div
-                      className="flex-shrink-0 text-gray-700 dark:text-gray-300 group-hover:text-blue-600 dark:group-hover:text-blue-400 transition-colors"
-                      whileHover={prefersReducedMotion ? {} : { rotate: [0, -10, 10, 0] }}
-                      transition={{ duration: 0.3 }}
-                    >
-                      {link.icon}
-                    </motion.div>
-                    <div className="flex-1 min-w-0">
-                      <p className="text-sm font-medium text-gray-500 dark:text-gray-400">
-                        {link.name}
-                      </p>
-                      <p className="text-base font-semibold text-gray-900 dark:text-white truncate group-hover:text-blue-600 dark:group-hover:text-blue-400 transition-colors">
-                        {link.label}
-                      </p>
-                    </div>
-                    <motion.div
-                      className="flex-shrink-0"
-                      animate={prefersReducedMotion ? {} : { x: [0, 4, 0] }}
-                      transition={
-                        prefersReducedMotion
-                          ? {}
-                          : {
-                              duration: 1.5,
-                              repeat: Infinity,
-                              ease: 'easeInOut' as const,
-                            }
-                      }
-                    >
-                      <HiArrowRight
-                        className="w-5 h-5 text-gray-400 group-hover:text-blue-600 dark:group-hover:text-blue-400 transition-colors"
-                        aria-hidden="true"
-                      />
-                    </motion.div>
-                  </div>
-                </motion.a>
+                  {contactIcons[link.name]}
+                  {link.label}
+                </a>
               );
             })}
           </div>
-
-          {/* Additional Message */}
-          <motion.div className="mt-12 text-center" variants={itemVariants}>
-            <p className="text-gray-600 dark:text-gray-400">
-              プロジェクトのご相談やお仕事のご依頼など、
-              <br className="hidden sm:block" />
-              お気軽にお問い合わせください。
-            </p>
-          </motion.div>
-        </motion.div>
+        </div>
       </div>
     </section>
   );

@@ -1,12 +1,16 @@
 'use client';
 
-export default function SkipLink() {
+interface SkipLinkProps {
+  label: string;
+}
+
+export default function SkipLink({ label }: SkipLinkProps) {
   return (
     <a
       href="#main-content"
-      className="sr-only focus:not-sr-only focus:absolute focus:top-4 focus:left-4 focus:z-50 focus:px-4 focus:py-2 focus:bg-blue-600 focus:text-white focus:rounded-md focus:shadow-lg"
+      className="sr-only focus:not-sr-only focus:absolute focus:left-4 focus:top-4 focus:z-50 focus:rounded-md focus:bg-sobu focus:px-4 focus:py-2 focus:font-medium focus:text-ink focus:shadow-lg"
     >
-      メインコンテンツへスキップ
+      {label}
     </a>
   );
 }
