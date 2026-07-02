@@ -1,11 +1,71 @@
 'use client';
 
-import { useState } from 'react';
+import { useState, useMemo } from 'react';
 import Image from 'next/image';
+import dynamic from 'next/dynamic';
 import { motion, useReducedMotion, type Variants } from 'framer-motion';
-import { TypeAnimation } from 'react-type-animation';
 import { heroData } from '@/app/data';
-import ParticleBackground from './ParticleBackground';
+
+const ParticleBackground = dynamic(() => import('./ParticleBackground'), {
+  ssr: false,
+});
+
+const TypeAnimation = dynamic(
+  () => import('react-type-animation').then((mod) => mod.TypeAnimation),
+  {
+    ssr: false,
+    loading: () => <span className="inline-block">{heroData.titles[0]}</span>,
+  }
+);
+
+const DownloadIcon = (
+  <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
+    <path
+      strokeLinecap="round"
+      strokeLinejoin="round"
+      strokeWidth={2}
+      d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"
+    />
+  </svg>
+);
+
+const ScrollIndicatorIcon = (
+  <svg
+    className="w-6 h-6 mx-auto text-gray-400"
+    fill="none"
+    strokeLinecap="round"
+    strokeLinejoin="round"
+    strokeWidth="2"
+    viewBox="0 0 24 24"
+    stroke="currentColor"
+    aria-hidden="true"
+  >
+    <path d="M19 14l-7 7m0 0l-7-7m7 7V3"></path>
+  </svg>
+);
+
+const getContainerVariants = (prefersReducedMotion: boolean | null): Variants => ({
+  hidden: { opacity: 0 },
+  visible: {
+    opacity: 1,
+    transition: {
+      staggerChildren: prefersReducedMotion ? 0 : 0.15,
+      delayChildren: prefersReducedMotion ? 0 : 0.2,
+    },
+  },
+});
+
+const getItemVariants = (prefersReducedMotion: boolean | null): Variants => ({
+  hidden: { opacity: 0, y: prefersReducedMotion ? 0 : 20 },
+  visible: {
+    opacity: 1,
+    y: 0,
+    transition: {
+      duration: prefersReducedMotion ? 0.01 : 0.6,
+      ease: 'easeOut' as const,
+    },
+  },
+});
 
 export default function HeroSection() {
   const [imageError, setImageError] = useState(false);
@@ -14,28 +74,12 @@ export default function HeroSection() {
   // Generate TypeAnimation sequence from heroData
   const typeSequence = heroData.titles.flatMap((title) => [title, 2000]);
 
-  const containerVariants: Variants = {
-    hidden: { opacity: 0 },
-    visible: {
-      opacity: 1,
-      transition: {
-        staggerChildren: prefersReducedMotion ? 0 : 0.15,
-        delayChildren: prefersReducedMotion ? 0 : 0.2,
-      },
-    },
-  };
+  const containerVariants = useMemo(
+    () => getContainerVariants(prefersReducedMotion),
+    [prefersReducedMotion]
+  );
 
-  const itemVariants: Variants = {
-    hidden: { opacity: 0, y: prefersReducedMotion ? 0 : 20 },
-    visible: {
-      opacity: 1,
-      y: 0,
-      transition: {
-        duration: prefersReducedMotion ? 0.01 : 0.6,
-        ease: 'easeOut' as const,
-      },
-    },
-  };
+  const itemVariants = useMemo(() => getItemVariants(prefersReducedMotion), [prefersReducedMotion]);
 
   return (
     <section
@@ -91,7 +135,7 @@ export default function HeroSection() {
 
         {/* Main Heading */}
         <motion.h1
-          className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold mb-6 bg-gradient-to-r from-gray-900 to-gray-600 dark:from-white dark:to-gray-400 bg-clip-text text-transparent"
+          className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold mb-6 bg-gradient-to-r from-gray-900 to-gray-600 dark:from-white dark:to-gray-400 bg-clip-text text-transparent text-balance"
           variants={itemVariants}
         >
           {heroData.name}
@@ -155,14 +199,7 @@ export default function HeroSection() {
             whileHover={prefersReducedMotion ? {} : { scale: 1.02 }}
             whileTap={prefersReducedMotion ? {} : { scale: 0.98 }}
           >
-            <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                strokeWidth={2}
-                d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"
-              />
-            </svg>
+            {DownloadIcon}
             履歴書をダウンロード
           </motion.a>
         </motion.div>
@@ -182,17 +219,7 @@ export default function HeroSection() {
                 }
           }
         >
-          <svg
-            className="w-6 h-6 mx-auto text-gray-400"
-            fill="none"
-            strokeLinecap="round"
-            strokeLinejoin="round"
-            strokeWidth="2"
-            viewBox="0 0 24 24"
-            stroke="currentColor"
-          >
-            <path d="M19 14l-7 7m0 0l-7-7m7 7V3"></path>
-          </svg>
+          {ScrollIndicatorIcon}
         </motion.div>
       </motion.div>
     </section>

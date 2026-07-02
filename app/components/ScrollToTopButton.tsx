@@ -3,6 +3,17 @@
 import { useState, useEffect } from 'react';
 import { motion, AnimatePresence, useReducedMotion } from 'framer-motion';
 
+const ArrowUpIcon = (
+  <svg className="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
+    <path
+      strokeLinecap="round"
+      strokeLinejoin="round"
+      strokeWidth={2}
+      d="M5 10l7-7m0 0l7 7m-7-7v18"
+    />
+  </svg>
+);
+
 export default function ScrollToTopButton() {
   const [isVisible, setIsVisible] = useState(false);
   const prefersReducedMotion = useReducedMotion();
@@ -11,7 +22,7 @@ export default function ScrollToTopButton() {
     const toggleVisibility = () => {
       setIsVisible(window.scrollY > 300);
     };
-    window.addEventListener('scroll', toggleVisibility);
+    window.addEventListener('scroll', toggleVisibility, { passive: true });
     return () => window.removeEventListener('scroll', toggleVisibility);
   }, []);
 
@@ -34,20 +45,7 @@ export default function ScrollToTopButton() {
           whileHover={prefersReducedMotion ? {} : { scale: 1.1 }}
           whileTap={prefersReducedMotion ? {} : { scale: 0.9 }}
         >
-          <svg
-            className="w-6 h-6"
-            fill="none"
-            viewBox="0 0 24 24"
-            stroke="currentColor"
-            aria-hidden="true"
-          >
-            <path
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              strokeWidth={2}
-              d="M5 10l7-7m0 0l7 7m-7-7v18"
-            />
-          </svg>
+          {ArrowUpIcon}
         </motion.button>
       )}
     </AnimatePresence>

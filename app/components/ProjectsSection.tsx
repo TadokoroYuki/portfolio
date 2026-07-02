@@ -1,35 +1,43 @@
 'use client';
 
+import { useMemo } from 'react';
 import Image from 'next/image';
 import { motion, useReducedMotion, type Variants } from 'framer-motion';
 import { FaGithub } from 'react-icons/fa';
 import { HiOutlineExternalLink, HiOutlinePhotograph } from 'react-icons/hi';
 import { projects } from '@/app/data';
 
+const getContainerVariants = (prefersReducedMotion: boolean | null): Variants => ({
+  hidden: { opacity: 0 },
+  visible: {
+    opacity: 1,
+    transition: {
+      staggerChildren: prefersReducedMotion ? 0 : 0.15,
+    },
+  },
+});
+
+const getItemVariants = (prefersReducedMotion: boolean | null): Variants => ({
+  hidden: { opacity: 0, y: prefersReducedMotion ? 0 : 30 },
+  visible: {
+    opacity: 1,
+    y: 0,
+    transition: {
+      duration: prefersReducedMotion ? 0.01 : 0.5,
+      ease: 'easeOut' as const,
+    },
+  },
+});
+
 export default function ProjectsSection() {
   const prefersReducedMotion = useReducedMotion();
 
-  const containerVariants: Variants = {
-    hidden: { opacity: 0 },
-    visible: {
-      opacity: 1,
-      transition: {
-        staggerChildren: prefersReducedMotion ? 0 : 0.15,
-      },
-    },
-  };
+  const containerVariants = useMemo(
+    () => getContainerVariants(prefersReducedMotion),
+    [prefersReducedMotion]
+  );
 
-  const itemVariants: Variants = {
-    hidden: { opacity: 0, y: prefersReducedMotion ? 0 : 30 },
-    visible: {
-      opacity: 1,
-      y: 0,
-      transition: {
-        duration: prefersReducedMotion ? 0.01 : 0.5,
-        ease: 'easeOut' as const,
-      },
-    },
-  };
+  const itemVariants = useMemo(() => getItemVariants(prefersReducedMotion), [prefersReducedMotion]);
 
   return (
     <section
@@ -45,7 +53,9 @@ export default function ProjectsSection() {
         >
           {/* Section Header */}
           <motion.div className="text-center mb-16" variants={itemVariants}>
-            <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold mb-4">Projects</h2>
+            <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold mb-4 text-balance">
+              Projects
+            </h2>
             <p className="text-lg text-gray-600 dark:text-gray-400 max-w-2xl mx-auto">
               これまで作成したプロジェクトや作品
             </p>
@@ -108,7 +118,7 @@ export default function ProjectsSection() {
 
                   {/* Links */}
                   <div className="flex gap-4">
-                    {project.githubUrl && (
+                    {project.githubUrl ? (
                       <motion.a
                         href={project.githubUrl}
                         target="_blank"
@@ -118,11 +128,11 @@ export default function ProjectsSection() {
                         whileHover={prefersReducedMotion ? {} : { x: 4 }}
                         transition={{ duration: 0.15 }}
                       >
-                        <FaGithub className="w-5 h-5" />
+                        <FaGithub className="w-5 h-5" aria-hidden="true" />
                         <span className="text-sm font-medium">Code</span>
                       </motion.a>
-                    )}
-                    {project.demoUrl && (
+                    ) : null}
+                    {project.demoUrl ? (
                       <motion.a
                         href={project.demoUrl}
                         target="_blank"
@@ -132,10 +142,10 @@ export default function ProjectsSection() {
                         whileHover={prefersReducedMotion ? {} : { x: 4 }}
                         transition={{ duration: 0.15 }}
                       >
-                        <HiOutlineExternalLink className="w-5 h-5" />
+                        <HiOutlineExternalLink className="w-5 h-5" aria-hidden="true" />
                         <span className="text-sm font-medium">Demo</span>
                       </motion.a>
-                    )}
+                    ) : null}
                   </div>
                 </div>
               </motion.div>

@@ -1,33 +1,41 @@
 'use client';
 
+import { useMemo } from 'react';
 import { motion, useReducedMotion, type Variants } from 'framer-motion';
 import { HiArrowRight } from 'react-icons/hi';
 import { contactLinks } from '@/app/data';
 
+const getContainerVariants = (prefersReducedMotion: boolean | null): Variants => ({
+  hidden: { opacity: 0 },
+  visible: {
+    opacity: 1,
+    transition: {
+      staggerChildren: prefersReducedMotion ? 0 : 0.1,
+    },
+  },
+});
+
+const getItemVariants = (prefersReducedMotion: boolean | null): Variants => ({
+  hidden: { opacity: 0, y: prefersReducedMotion ? 0 : 30 },
+  visible: {
+    opacity: 1,
+    y: 0,
+    transition: {
+      duration: prefersReducedMotion ? 0.01 : 0.5,
+      ease: 'easeOut' as const,
+    },
+  },
+});
+
 export default function ContactSection() {
   const prefersReducedMotion = useReducedMotion();
 
-  const containerVariants: Variants = {
-    hidden: { opacity: 0 },
-    visible: {
-      opacity: 1,
-      transition: {
-        staggerChildren: prefersReducedMotion ? 0 : 0.1,
-      },
-    },
-  };
+  const containerVariants = useMemo(
+    () => getContainerVariants(prefersReducedMotion),
+    [prefersReducedMotion]
+  );
 
-  const itemVariants: Variants = {
-    hidden: { opacity: 0, y: prefersReducedMotion ? 0 : 30 },
-    visible: {
-      opacity: 1,
-      y: 0,
-      transition: {
-        duration: prefersReducedMotion ? 0.01 : 0.5,
-        ease: 'easeOut' as const,
-      },
-    },
-  };
+  const itemVariants = useMemo(() => getItemVariants(prefersReducedMotion), [prefersReducedMotion]);
 
   return (
     <section
@@ -43,7 +51,9 @@ export default function ContactSection() {
         >
           {/* Section Header */}
           <motion.div className="text-center mb-16" variants={itemVariants}>
-            <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold mb-4">Contact</h2>
+            <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold mb-4 text-balance">
+              Contact
+            </h2>
             <p className="text-lg text-gray-600 dark:text-gray-400 max-w-2xl mx-auto">
               お気軽にご連絡ください
             </p>
@@ -93,7 +103,10 @@ export default function ContactSection() {
                             }
                       }
                     >
-                      <HiArrowRight className="w-5 h-5 text-gray-400 group-hover:text-blue-600 dark:group-hover:text-blue-400 transition-colors" />
+                      <HiArrowRight
+                        className="w-5 h-5 text-gray-400 group-hover:text-blue-600 dark:group-hover:text-blue-400 transition-colors"
+                        aria-hidden="true"
+                      />
                     </motion.div>
                   </div>
                 </motion.a>

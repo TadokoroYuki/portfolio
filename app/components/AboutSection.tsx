@@ -1,45 +1,58 @@
 'use client';
 
+import { useMemo } from 'react';
 import { motion, useReducedMotion, type Variants } from 'framer-motion';
 import TextHighlight from './TextHighlight';
 import { timelineItems, interests } from '@/app/data';
 
+const getContainerVariants = (prefersReducedMotion: boolean | null): Variants => ({
+  hidden: { opacity: 0 },
+  visible: {
+    opacity: 1,
+    transition: {
+      staggerChildren: prefersReducedMotion ? 0 : 0.1,
+    },
+  },
+});
+
+const getItemVariants = (prefersReducedMotion: boolean | null): Variants => ({
+  hidden: { opacity: 0, y: prefersReducedMotion ? 0 : 30 },
+  visible: {
+    opacity: 1,
+    y: 0,
+    transition: {
+      duration: prefersReducedMotion ? 0.01 : 0.5,
+      ease: 'easeOut' as const,
+    },
+  },
+});
+
+const getSlideInVariants = (prefersReducedMotion: boolean | null): Variants => ({
+  hidden: { opacity: 0, x: prefersReducedMotion ? 0 : -30 },
+  visible: {
+    opacity: 1,
+    x: 0,
+    transition: {
+      duration: prefersReducedMotion ? 0.01 : 0.5,
+      ease: 'easeOut' as const,
+    },
+  },
+});
+
 export default function AboutSection() {
   const prefersReducedMotion = useReducedMotion();
 
-  const containerVariants: Variants = {
-    hidden: { opacity: 0 },
-    visible: {
-      opacity: 1,
-      transition: {
-        staggerChildren: prefersReducedMotion ? 0 : 0.1,
-      },
-    },
-  };
+  const containerVariants = useMemo(
+    () => getContainerVariants(prefersReducedMotion),
+    [prefersReducedMotion]
+  );
 
-  const itemVariants: Variants = {
-    hidden: { opacity: 0, y: prefersReducedMotion ? 0 : 30 },
-    visible: {
-      opacity: 1,
-      y: 0,
-      transition: {
-        duration: prefersReducedMotion ? 0.01 : 0.5,
-        ease: 'easeOut' as const,
-      },
-    },
-  };
+  const itemVariants = useMemo(() => getItemVariants(prefersReducedMotion), [prefersReducedMotion]);
 
-  const slideInVariants: Variants = {
-    hidden: { opacity: 0, x: prefersReducedMotion ? 0 : -30 },
-    visible: {
-      opacity: 1,
-      x: 0,
-      transition: {
-        duration: prefersReducedMotion ? 0.01 : 0.5,
-        ease: 'easeOut' as const,
-      },
-    },
-  };
+  const slideInVariants = useMemo(
+    () => getSlideInVariants(prefersReducedMotion),
+    [prefersReducedMotion]
+  );
 
   return (
     <section
@@ -55,7 +68,9 @@ export default function AboutSection() {
         >
           {/* Section Header */}
           <motion.div className="text-center mb-16" variants={itemVariants}>
-            <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold mb-4">About Me</h2>
+            <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold mb-4 text-balance">
+              About Me
+            </h2>
             <p className="text-lg text-gray-600 dark:text-gray-400 max-w-2xl mx-auto">私について</p>
           </motion.div>
 
@@ -122,7 +137,7 @@ export default function AboutSection() {
                       transition={{ duration: 0.2 }}
                     >
                       <div className="flex items-start justify-between mb-2">
-                        <span className="text-sm font-semibold text-blue-600 dark:text-blue-400">
+                        <span className="text-sm font-semibold text-blue-600 dark:text-blue-400 tabular-nums">
                           {item.year}
                         </span>
                         <span

@@ -6,7 +6,7 @@ import Navigation from './components/Navigation';
 import ScrollToTopButton from './components/ScrollToTopButton';
 import ToastProvider from './components/ToastProvider';
 import ThemeProvider from './components/ThemeProvider';
-import CustomCursor from './components/CustomCursor';
+import ClientOnlyCustomCursor from './components/ClientOnlyCustomCursor';
 
 const notoSansJP = Noto_Sans_JP({
   subsets: ['latin'],
@@ -57,6 +57,10 @@ export const metadata: Metadata = {
       follow: true,
     },
   },
+  themeColor: [
+    { media: '(prefers-color-scheme: light)', color: '#ffffff' },
+    { media: '(prefers-color-scheme: dark)', color: '#0a0a0a' },
+  ],
 };
 
 export default function RootLayout({
@@ -73,7 +77,7 @@ export default function RootLayout({
           {children}
           <ScrollToTopButton />
           <ToastProvider />
-          <CustomCursor />
+          <ClientOnlyCustomCursor />
         </ThemeProvider>
       </body>
     </html>

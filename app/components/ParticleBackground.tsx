@@ -104,64 +104,10 @@ export default function ParticleBackground({
     [connectionDistance, particleColor, lineColor]
   );
 
-  // Setup and cleanup
-  useEffect(() => {
-    if (prefersReducedMotion) return;
-
-    const canvas = canvasRef.current;
-    if (!canvas) return;
-
-    const ctx = canvas.getContext('2d');
-    if (!ctx) return;
-
-    const handleResize = () => {
-      const dpr = window.devicePixelRatio || 1;
-      const rect = canvas.getBoundingClientRect();
-      canvas.width = rect.width * dpr;
-      canvas.height = rect.height * dpr;
-      ctx.scale(dpr, dpr);
-      canvas.style.width = `${rect.width}px`;
-      canvas.style.height = `${rect.height}px`;
-      initParticles(rect.width, rect.height);
-    };
-
-    handleResize();
-    window.addEventListener('resize', handleResize);
-
-    // Start animation
-    animate(ctx, canvas.getBoundingClientRect().width, canvas.getBoundingClientRect().height);
-
-    return () => {
-      window.removeEventListener('resize', handleResize);
-      if (animationRef.current) {
-        cancelAnimationFrame(animationRef.current);
-      }
-    };
-  }, [prefersReducedMotion, initParticles, animate]);
-
-  // Static fallback for reduced motion
-  useEffect(() => {
-    if (!prefersReducedMotion) return;
-
-    const canvas = canvasRef.current;
-    if (!canvas) return;
-
-    const ctx = canvas.getContext('2d');
-    if (!ctx) return;
-
-    const handleResize = () => {
-      const dpr = window.devicePixelRatio || 1;
-      const rect = canvas.getBoundingClientRect();
-      canvas.width = rect.width * dpr;
-      canvas.height = rect.height * dpr;
-      ctx.scale(dpr, dpr);
-      canvas.style.width = `${rect.width}px`;
-      canvas.style.height = `${rect.height}px`;
-
-      // Draw static particles
-      initParticles(rect.width, rect.height);
+  // Draw static particles (for reduced motion)
+  const drawStaticParticles = useCallback(
+    (ctx: CanvasRenderingContext2D) => {
       const particles = particlesRef.current;
-
       particles.forEach((particle) => {
         ctx.beginPath();
         ctx.arc(particle.x, particle.y, particle.radius, 0, Math.PI * 2);
@@ -169,15 +115,49 @@ export default function ParticleBackground({
         ctx.globalAlpha = particle.opacity;
         ctx.fill();
       });
+    },
+    [particleColor]
+  );
+
+  // Unified setup and cleanup
+  useEffect(() => {
+    const canvas = canvasRef.current;
+    if (!canvas) return;
+
+    const ctx = canvas.getContext('2d');
+    if (!ctx) return;
+
+    const handleResize = () => {
+      const dpr = window.devicePixelRatio || 1;
+      const rect = canvas.getBoundingClientRect();
+      canvas.width = rect.width * dpr;
+      canvas.height = rect.height * dpr;
+      ctx.scale(dpr, dpr);
+      canvas.style.width = `${rect.width}px`;
+      canvas.style.height = `${rect.height}px`;
+      initParticles(rect.width, rect.height);
+
+      // Draw static particles for reduced motion
+      if (prefersReducedMotion) {
+        drawStaticParticles(ctx);
+      }
     };
 
     handleResize();
     window.addEventListener('resize', handleResize);
 
+    // Start animation only if not reduced motion
+    if (!prefersReducedMotion) {
+      animate(ctx, canvas.getBoundingClientRect().width, canvas.getBoundingClientRect().height);
+    }
+
     return () => {
       window.removeEventListener('resize', handleResize);
+      if (animationRef.current) {
+        cancelAnimationFrame(animationRef.current);
+      }
     };
-  }, [prefersReducedMotion, initParticles, particleColor]);
+  }, [prefersReducedMotion, initParticles, animate, drawStaticParticles]);
 
   return (
     <canvas
