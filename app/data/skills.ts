@@ -8,33 +8,33 @@ export const skillCategories: SkillCategory[] = [
       { name: 'React', level: 'Advanced' },
       { name: 'TypeScript', level: 'Advanced' },
       { name: 'Tailwind CSS', level: 'Intermediate' },
-      { name: 'HTML/CSS', level: 'Advanced' },
+      { name: 'アクセシビリティ (WCAG)', level: 'Intermediate' },
     ],
   },
   {
-    category: 'Backend',
+    category: 'Backend & Infra',
     skills: [
-      { name: 'Go', level: 'Intermediate' },
-      { name: 'Node.js', level: 'Intermediate' },
-      { name: 'REST API', level: 'Advanced' },
-    ],
-  },
-  {
-    category: 'Database',
-    skills: [
-      { name: 'PostgreSQL', level: 'Intermediate' },
-      { name: 'MySQL', level: 'Intermediate' },
-      { name: 'MongoDB', level: 'Beginner' },
-    ],
-  },
-  {
-    category: 'Tools & Others',
-    skills: [
-      { name: 'Git', level: 'Advanced' },
-      { name: 'GitHub', level: 'Advanced' },
+      { name: 'Node.js (Hono / Express)', level: 'Intermediate' },
+      { name: 'REST / GraphQL API', level: 'Intermediate' },
+      { name: 'AWS (ECS / AppSync / DynamoDB)', level: 'Beginner' },
       { name: 'Docker', level: 'Intermediate' },
-      { name: 'Vercel', level: 'Intermediate' },
-      { name: 'VS Code', level: 'Advanced' },
+      { name: 'PostgreSQL / SQLite', level: 'Intermediate' },
+    ],
+  },
+  {
+    category: 'Testing & Quality',
+    skills: [
+      { name: 'Playwright', level: 'Intermediate' },
+      { name: 'Vitest', level: 'Intermediate' },
+      { name: 'コードレビュー', level: 'Advanced' },
+    ],
+  },
+  {
+    category: 'AI-Driven Development',
+    skills: [
+      { name: 'Claude Code / LLM エージェント', level: 'Advanced' },
+      { name: 'ブラウザ自動化 (Playwright CLI)', level: 'Advanced' },
+      { name: 'Python (データ分析・確率モデル)', level: 'Intermediate' },
     ],
   },
 ];

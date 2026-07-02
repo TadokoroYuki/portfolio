@@ -65,22 +65,27 @@ export default function AboutSection() {
               <h3 className="text-2xl font-bold mb-4 text-gray-900 dark:text-white">自己紹介</h3>
               <div className="space-y-4 text-gray-700 dark:text-gray-300 leading-relaxed">
                 <p>
-                  こんにちは！私は Web 開発に情熱を持つ
-                  <TextHighlight>フルスタックデベロッパー</TextHighlight>です。
-                  ユーザーにとって価値のあるプロダクトを作ることを最も大切にしています。
+                  こんにちは！ライブ配信プラットフォームの長期インターンで機能開発に携わる
+                  <TextHighlight>フロントエンドエンジニア</TextHighlight>です。
+                  「技術をユーザー価値に変換すること」を最も大切にしていて、
+                  課題発見からリリース後の検証までを一気通貫で考えるプロダクト志向の開発が持ち味です。
                 </p>
                 <p>
                   <TextHighlight variant="background">フロントエンド</TextHighlight>では{' '}
                   <TextHighlight>Next.js</TextHighlight>、<TextHighlight>React</TextHighlight>、
-                  <TextHighlight>TypeScript</TextHighlight> を使ったモダンな開発を得意としています。
-                  アクセシビリティ（WCAG 2.1 準拠）やパフォーマンス最適化にも注力しています。
-                  <TextHighlight variant="background">バックエンド</TextHighlight>では{' '}
-                  <TextHighlight>Ruby on Rails</TextHighlight> を使った API 開発の経験があります。
+                  <TextHighlight>TypeScript</TextHighlight>{' '}
+                  を使った開発を実務で行っており、課金機能やリアルタイム通信（Socket.IO / AWS
+                  AppSync）を含む機能を担当。アクセシビリティ（WCAG 2.1
+                  準拠）やパフォーマンス最適化にも注力しています。
+                  プログラミング教育サービスでの<TextHighlight>コードレビュー・メンタリング</TextHighlight>
+                  経験もあります。
                 </p>
                 <p>
-                  常に新しい技術をキャッチアップし、ベストプラクティスに沿ったコードを書くことを心がけています。
-                  チーム開発や <TextHighlight>OSS への貢献</TextHighlight>
-                  にも積極的に取り組んでいきたいと考えています。
+                  もう一つの武器は <TextHighlight>AI エージェントを活用した開発</TextHighlight>
+                  です。Claude Code などの LLM
+                  エージェントを日常的に使い倒し、実装・検証・自動化のサイクルを高速化しつつ、設計判断は自分で行うスタイルで開発しています。
+                  ハッカソンでの受賞を目指した挑戦や <TextHighlight>OSS への貢献</TextHighlight>
+                  にも継続的に取り組んでいます。
                 </p>
               </div>
             </div>

@@ -20,45 +20,34 @@ const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://your-portfolio.verc
 export const metadata: Metadata = {
   title: 'Portfolio | Yuki Tadokoro',
   description:
-    'Next.js と Go を使った Web 開発に情熱を持つフルスタックデベロッパー。モダンな技術で価値あるプロダクトを作ることを目指しています。',
+    'Next.js / TypeScript を軸にライブ配信プラットフォームの機能開発に携わるフロントエンドエンジニア。AI エージェントを活用した高速な開発とプロダクト志向が持ち味です。',
   keywords: [
     'portfolio',
-    'web developer',
+    'frontend engineer',
     'Next.js',
-    'Go',
+    'React',
     'TypeScript',
-    'full stack',
+    'AI-driven development',
     'フロントエンド',
-    'バックエンド',
+    'エンジニア',
   ],
   authors: [{ name: 'Yuki Tadokoro' }],
   creator: 'Yuki Tadokoro',
   metadataBase: new URL(siteUrl),
-  icons: {
-    icon: '/favicon.ico',
-    apple: '/favicon.ico',
-  },
   openGraph: {
     title: 'Portfolio | Yuki Tadokoro',
-    description: 'Next.js と Go を使った Web 開発に情熱を持つフルスタックデベロッパー',
+    description:
+      'Next.js / TypeScript を軸に開発するフロントエンドエンジニア。AI エージェント活用とプロダクト志向が持ち味。',
     url: siteUrl,
     siteName: 'Yuki Tadokoro Portfolio',
-    images: [
-      {
-        url: '/og-image.png',
-        width: 1200,
-        height: 630,
-        alt: 'Yuki Tadokoro - Full Stack Developer',
-      },
-    ],
     locale: 'ja_JP',
     type: 'website',
   },
   twitter: {
     card: 'summary_large_image',
     title: 'Portfolio | Yuki Tadokoro',
-    description: 'Next.js と Go を使った Web 開発に情熱を持つフルスタックデベロッパー',
-    images: ['/og-image.png'],
+    description:
+      'Next.js / TypeScript を軸に開発するフロントエンドエンジニア。AI エージェント活用とプロダクト志向が持ち味。',
   },
   robots: {
     index: true,
