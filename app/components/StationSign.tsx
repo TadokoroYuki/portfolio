@@ -1,7 +1,3 @@
-'use client';
-
-import { useEffect, useRef, useState } from 'react';
-
 export interface SignNeighbor {
   href: string;
   label: string;
@@ -24,17 +20,16 @@ interface StationSignProps {
   size?: 'hero' | 'section';
 }
 
-type RevealState = 'idle' | 'hidden' | 'shown';
-
 /**
  * JR-style station sign (駅名標): a white board with a thin frame,
  * the section name written large, a romanized/mono subtitle, arrows to
  * the neighboring sections, and the Sōbu Line yellow band at the bottom.
  *
- * The only entrance animation on the site lives here: an 8px rise-in,
- * once, when the sign scrolls into view. Signs that are already on
- * screen at load (and reduced-motion users) render without animation,
- * so server-rendered HTML stays visible without JavaScript.
+ * The only entrance animation on the site lives here: an 8px rise-in as
+ * the sign scrolls into view, implemented with a CSS scroll-driven
+ * animation (`.sign-reveal` in globals.css). Server component — no
+ * hydration cost; browsers without animation-timeline support and
+ * reduced-motion users simply see the sign static.
  */
 export default function StationSign({
   title,
@@ -45,38 +40,8 @@ export default function StationSign({
   as: Heading = 'h2',
   size = 'section',
 }: StationSignProps) {
-  const ref = useRef<HTMLDivElement>(null);
-  const [reveal, setReveal] = useState<RevealState>('idle');
-
-  useEffect(() => {
-    const el = ref.current;
-    if (!el) return;
-    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
-    if (el.getBoundingClientRect().top < window.innerHeight) return;
-
-    setReveal('hidden');
-    const observer = new IntersectionObserver(
-      ([entry]) => {
-        if (entry.isIntersecting) {
-          setReveal('shown');
-          observer.disconnect();
-        }
-      },
-      { threshold: 0.2 }
-    );
-    observer.observe(el);
-    return () => observer.disconnect();
-  }, []);
-
-  const revealClass =
-    reveal === 'hidden'
-      ? 'translate-y-2 opacity-0'
-      : reveal === 'shown'
-        ? 'translate-y-0 opacity-100 transition-all duration-500 ease-out'
-        : '';
-
   return (
-    <div ref={ref} className={`w-full ${revealClass}`}>
+    <div className="sign-reveal w-full">
       <div className="relative overflow-hidden rounded-md border border-rail bg-board dark:border-rail-dark dark:bg-board-dark">
         {code ? (
           <span

@@ -1,7 +1,3 @@
-'use client';
-
-import { useState } from 'react';
-import Image from 'next/image';
 import StationSign from './StationSign';
 import type { HeroDict } from '@/app/i18n/types';
 
@@ -10,8 +6,6 @@ interface HeroSectionProps {
 }
 
 export default function HeroSection({ dict }: HeroSectionProps) {
-  const [imageError, setImageError] = useState(false);
-
   return (
     <section
       id="home"
@@ -28,25 +22,15 @@ export default function HeroSection({ dict }: HeroSectionProps) {
           next={{ href: '#projects', label: 'projects' }}
         />
 
-        {/* Profile image — small, outside the sign */}
-        {imageError ? (
-          <div className="flex h-20 w-20 items-center justify-center rounded-full bg-sobu">
-            <span className="font-mono text-xl font-bold text-ink">YT</span>
-          </div>
-        ) : (
-          <div className="h-20 w-20 overflow-hidden rounded-full border border-rail dark:border-rail-dark">
-            <Image
-              src="/profile.jpg"
-              alt={dict.profileImageAlt}
-              width={80}
-              height={80}
-              sizes="80px"
-              className="h-full w-full object-cover"
-              priority
-              onError={() => setImageError(true)}
-            />
-          </div>
-        )}
+        {/* Monogram mark — swap for next/image + /profile.jpg when a real
+            photo is added to public/ */}
+        <div
+          className="flex h-20 w-20 items-center justify-center rounded-full bg-sobu"
+          role="img"
+          aria-label={dict.profileImageAlt}
+        >
+          <span className="font-mono text-xl font-bold text-ink">YT</span>
+        </div>
 
         {/* Introduction */}
         <p className="max-w-2xl text-center leading-relaxed text-steel dark:text-steel-dark">

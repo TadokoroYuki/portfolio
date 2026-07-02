@@ -128,3 +128,27 @@ body {
   padding-bottom: env(safe-area-inset-bottom);
   padding-left: env(safe-area-inset-left);
 }
+
+/* Station sign rise-in without JavaScript: CSS scroll-driven animation.
+   Falls back to a static (always visible) sign in unsupported browsers
+   and for reduced-motion users. */
+@media (prefers-reduced-motion: no-preference) {
+  @supports (animation-timeline: view()) {
+    .sign-reveal {
+      animation: sign-rise 1ms linear both;
+      animation-timeline: view();
+      animation-range: entry 0% entry 60%;
+    }
+  }
+}
+
+@keyframes sign-rise {
+  from {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
