@@ -38,26 +38,22 @@ export const en: Dictionary = {
     },
   },
   hero: {
-    name: 'Yuki Tadokoro',
-    titles: [
-      'Frontend Engineer',
-      'Next.js / TypeScript Developer',
-      'AI-Driven Developer',
-      'Product-Minded Engineer',
-    ],
+    sign: {
+      title: 'Tadokoro Yuki',
+      subtitle: 'たどころ ゆうき / Frontend Engineer',
+    },
     description: [
       'I build features for a live-streaming platform, working primarily with Next.js and TypeScript.',
       'I ship fast by leaning on AI agents, and I design products backwards from user value.',
     ],
     profileImageAlt: 'Portrait of Yuki Tadokoro',
-    viewProjects: 'View Projects',
-    contactMe: 'Get in Touch',
-    downloadResume: 'Download Resume',
+    githubCta: 'View GitHub',
   },
   about: {
-    heading: 'About Me',
-    subheading: 'Who I am',
-    introHeading: 'Introduction',
+    sign: {
+      title: 'About',
+      subtitle: 'じこしょうかい · 自己紹介',
+    },
     paragraphs: [
       "Hi! I'm a frontend engineer working on feature development at a live-streaming platform as a long-term intern. What I value most is turning technology into user value — I take a product-minded approach that spans the entire cycle, from discovering problems to validating outcomes after release.",
       'On the frontend I work professionally with Next.js, React, and TypeScript, building features that include payment flows and real-time communication (Socket.IO / AWS AppSync). I also put strong emphasis on accessibility (WCAG 2.1 compliance) and performance optimization, and I have code review and mentoring experience at a programming education service.',
@@ -114,8 +110,10 @@ export const en: Dictionary = {
     ],
   },
   skills: {
-    heading: 'Skills',
-    subheading: 'Tech stack and hands-on experience',
+    sign: {
+      title: 'Skills',
+      subtitle: 'すきる · 技術',
+    },
     categories: [
       {
         category: 'Frontend',
@@ -156,8 +154,10 @@ export const en: Dictionary = {
     ],
   },
   projects: {
-    heading: 'Projects',
-    subheading: 'Selected work and personal projects',
+    sign: {
+      title: 'Projects',
+      subtitle: 'せいさくぶつ · 制作物',
+    },
     codeLabel: 'Code',
     demoLabel: 'Demo',
     codeAria: 'Source code for {title} (GitHub)',
@@ -204,8 +204,10 @@ export const en: Dictionary = {
     ],
   },
   contact: {
-    heading: 'Contact',
-    subheading: 'Feel free to reach out',
+    sign: {
+      title: 'Contact',
+      subtitle: 'れんらくさき · 連絡先',
+    },
     links: [
       {
         name: 'GitHub',
@@ -219,6 +221,10 @@ export const en: Dictionary = {
       },
     ],
     message: ["Whether it's a project idea or a work inquiry,", "I'd love to hear from you."],
+  },
+  footer: {
+    endOfLine: '— End of the Line —',
+    copyright: '© 2026 Yuki Tadokoro',
   },
   a11y: {
     skipLink: 'Skip to main content',

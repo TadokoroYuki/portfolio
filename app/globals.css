@@ -3,29 +3,37 @@
 @tailwind utilities;
 
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
-  --toast-background: #333;
-  --toast-foreground: #fff;
+  --background: #f6f7f9;
+  --foreground: #16181d;
+  --toast-background: #16181d;
+  --toast-foreground: #f6f7f9;
   color-scheme: light dark;
 }
 
 @media (prefers-color-scheme: dark) {
   :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-    --toast-background: #1f2937;
-    --toast-foreground: #f3f4f6;
+    --background: #0f1319;
+    --foreground: #e8eaed;
+    --toast-background: #1a1f26;
+    --toast-foreground: #e8eaed;
   }
 }
 
 /* Theme-specific color-scheme */
 html.light {
   color-scheme: light;
+  --background: #f6f7f9;
+  --foreground: #16181d;
+  --toast-background: #16181d;
+  --toast-foreground: #f6f7f9;
 }
 
 html.dark {
   color-scheme: dark;
+  --background: #0f1319;
+  --foreground: #e8eaed;
+  --toast-background: #1a1f26;
+  --toast-foreground: #e8eaed;
 }
 
 body {
@@ -63,51 +71,15 @@ body {
   }
 }
 
-/* Focus visible styles for better keyboard navigation */
+/*
+ * Keyboard focus: Sōbu-yellow outline. The subtle ink halo keeps the
+ * indicator visible on light surfaces (yellow alone lacks contrast there);
+ * on dark surfaces the yellow itself carries the contrast.
+ */
 *:focus-visible {
-  outline: 2px solid #3b82f6;
+  outline: 2px solid #f6be00;
   outline-offset: 2px;
-}
-
-/* Floating gradient animation for hero background */
-@keyframes float-gradient {
-  0%,
-  100% {
-    transform: translate(0, 0) scale(1);
-  }
-  25% {
-    transform: translate(10%, 10%) scale(1.1);
-  }
-  50% {
-    transform: translate(-5%, 20%) scale(0.95);
-  }
-  75% {
-    transform: translate(-10%, 5%) scale(1.05);
-  }
-}
-
-@keyframes float-gradient-reverse {
-  0%,
-  100% {
-    transform: translate(0, 0) scale(1);
-  }
-  25% {
-    transform: translate(-10%, -10%) scale(0.95);
-  }
-  50% {
-    transform: translate(5%, -15%) scale(1.1);
-  }
-  75% {
-    transform: translate(10%, -5%) scale(1);
-  }
-}
-
-.animate-float-gradient {
-  animation: float-gradient 20s ease-in-out infinite;
-}
-
-.animate-float-gradient-reverse {
-  animation: float-gradient-reverse 25s ease-in-out infinite;
+  box-shadow: 0 0 0 5px rgba(22, 24, 29, 0.3);
 }
 
 /* Reduce motion for users who prefer it */
@@ -118,13 +90,6 @@ body {
     animation-duration: 0.01ms !important;
     animation-iteration-count: 1 !important;
     transition-duration: 0.01ms !important;
-  }
-}
-
-/* Custom cursor styles - hide default cursor on non-touch devices */
-@media (pointer: fine) and (prefers-reduced-motion: no-preference) {
-  * {
-    cursor: none !important;
   }
 }
 
@@ -139,7 +104,7 @@ html {
   }
 }
 
-/* Touch optimization (#134, #141) */
+/* Touch optimization (#134, #141): no tap flash, explicit :active state instead */
 a,
 button,
 [role='button'],
@@ -147,7 +112,13 @@ input,
 textarea,
 select {
   touch-action: manipulation;
-  -webkit-tap-highlight-color: rgba(59, 130, 246, 0.2);
+  -webkit-tap-highlight-color: transparent;
+}
+
+a:active,
+button:active,
+[role='button']:active {
+  opacity: 0.6;
 }
 
 /* Safe area insets for notched devices (#135) */

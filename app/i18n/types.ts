@@ -71,20 +71,25 @@ export interface NavDict {
   };
 }
 
+/**
+ * Text on a station-sign section header.
+ * `title` is the large text (hiragana in ja / English in en),
+ * `subtitle` is the smaller mono line underneath.
+ */
+export interface StationSignDict {
+  title: string;
+  subtitle: string;
+}
+
 export interface HeroDict {
-  name: string;
-  titles: string[];
+  sign: StationSignDict;
   description: string[];
   profileImageAlt: string;
-  viewProjects: string;
-  contactMe: string;
-  downloadResume: string;
+  githubCta: string;
 }
 
 export interface AboutDict {
-  heading: string;
-  subheading: string;
-  introHeading: string;
+  sign: StationSignDict;
   paragraphs: string[];
   timelineHeading: string;
   timeline: TimelineItem[];
@@ -95,14 +100,12 @@ export interface AboutDict {
 }
 
 export interface SkillsDict {
-  heading: string;
-  subheading: string;
+  sign: StationSignDict;
   categories: SkillCategory[];
 }
 
 export interface ProjectsDict {
-  heading: string;
-  subheading: string;
+  sign: StationSignDict;
   codeLabel: string;
   demoLabel: string;
   /** Aria label templates: `{title}` is replaced with the project title. */
@@ -112,10 +115,14 @@ export interface ProjectsDict {
 }
 
 export interface ContactDict {
-  heading: string;
-  subheading: string;
+  sign: StationSignDict;
   links: ContactLink[];
   message: string[];
+}
+
+export interface FooterDict {
+  endOfLine: string;
+  copyright: string;
 }
 
 export interface A11yDict {
@@ -131,5 +138,6 @@ export interface Dictionary {
   skills: SkillsDict;
   projects: ProjectsDict;
   contact: ContactDict;
+  footer: FooterDict;
   a11y: A11yDict;
 }

@@ -1,161 +1,74 @@
-'use client';
-
-import { useMemo } from 'react';
-import Image from 'next/image';
-import { motion, useReducedMotion, type Variants } from 'framer-motion';
-import { FaGithub } from 'react-icons/fa';
-import { HiOutlineExternalLink, HiOutlinePhotograph } from 'react-icons/hi';
+import StationSign from './StationSign';
 import type { ProjectsDict } from '@/app/i18n/types';
-
-const getContainerVariants = (prefersReducedMotion: boolean | null): Variants => ({
-  hidden: { opacity: 0 },
-  visible: {
-    opacity: 1,
-    transition: {
-      staggerChildren: prefersReducedMotion ? 0 : 0.15,
-    },
-  },
-});
-
-const getItemVariants = (prefersReducedMotion: boolean | null): Variants => ({
-  hidden: { opacity: 0, y: prefersReducedMotion ? 0 : 30 },
-  visible: {
-    opacity: 1,
-    y: 0,
-    transition: {
-      duration: prefersReducedMotion ? 0.01 : 0.5,
-      ease: 'easeOut' as const,
-    },
-  },
-});
 
 interface ProjectsSectionProps {
   dict: ProjectsDict;
 }
 
 export default function ProjectsSection({ dict }: ProjectsSectionProps) {
-  const prefersReducedMotion = useReducedMotion();
-
-  const containerVariants = useMemo(
-    () => getContainerVariants(prefersReducedMotion),
-    [prefersReducedMotion]
-  );
-
-  const itemVariants = useMemo(() => getItemVariants(prefersReducedMotion), [prefersReducedMotion]);
-
   return (
-    <section
-      id="projects"
-      className="min-h-screen flex items-center justify-center px-4 sm:px-6 lg:px-8 py-20 bg-gray-50 dark:bg-gray-900"
-    >
-      <div className="max-w-6xl mx-auto w-full">
-        <motion.div
-          variants={containerVariants}
-          initial="hidden"
-          whileInView="visible"
-          viewport={{ once: true, margin: '-100px' }}
-        >
-          {/* Section Header */}
-          <motion.div className="text-center mb-16" variants={itemVariants}>
-            <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold mb-4 text-balance">
-              {dict.heading}
-            </h2>
-            <p className="text-lg text-gray-600 dark:text-gray-400 max-w-2xl mx-auto">
-              {dict.subheading}
-            </p>
-          </motion.div>
+    <section id="projects" className="px-4 py-24 sm:px-6 sm:py-32 lg:px-8">
+      <div className="mx-auto w-full max-w-4xl">
+        <StationSign
+          code="YT-03"
+          title={dict.sign.title}
+          subtitle={dict.sign.subtitle}
+          prev={{ href: '#skills', label: 'skills' }}
+          next={{ href: '#contact', label: 'contact' }}
+        />
 
-          {/* Projects Grid */}
-          <div className="grid grid-cols-1 gap-8 max-w-2xl mx-auto">
-            {dict.items.map((project) => (
-              <motion.div
-                key={project.title}
-                className="bg-white dark:bg-gray-800 rounded-lg overflow-hidden shadow-lg"
-                variants={itemVariants}
-                whileHover={prefersReducedMotion ? {} : { scale: 1.02, y: -8 }}
-                transition={{ duration: 0.3 }}
-              >
-                {/* Project Image */}
-                <motion.div
-                  className="relative h-48 bg-gradient-to-br from-blue-500 to-purple-600 flex items-center justify-center overflow-hidden"
-                  whileHover={prefersReducedMotion ? {} : { scale: 1.05 }}
-                  transition={{ duration: 0.3 }}
-                >
-                  {project.image ? (
-                    <Image
-                      src={project.image}
-                      alt={project.title}
-                      fill
-                      sizes="(max-width: 768px) 100vw, 672px"
-                      className="object-cover"
-                      loading="lazy"
-                      placeholder="blur"
-                      blurDataURL="data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNjcyIiBoZWlnaHQ9IjE5MiIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48cmVjdCB3aWR0aD0iMTAwJSIgaGVpZ2h0PSIxMDAlIiBmaWxsPSIjZTVlN2ViIi8+PC9zdmc+"
-                    />
-                  ) : (
-                    <HiOutlinePhotograph className="w-16 h-16 text-white opacity-50" />
-                  )}
-                </motion.div>
+        {/* Ruled list instead of cards */}
+        <ul className="mt-16 border-t border-rail dark:border-rail-dark">
+          {dict.items.map((project) => (
+            <li
+              key={project.title}
+              className="-mx-3 border-b border-rail px-3 py-8 transition-colors hover:bg-board dark:border-rail-dark dark:hover:bg-board-dark"
+            >
+              <h3 className="text-lg font-bold text-ink dark:text-ink-dark">{project.title}</h3>
+              <p className="mt-2 leading-relaxed text-steel dark:text-steel-dark">
+                {project.description}
+              </p>
 
-                {/* Project Content */}
-                <div className="p-6">
-                  <h3 className="text-xl font-bold mb-2 text-gray-900 dark:text-white">
-                    {project.title}
-                  </h3>
-                  <p className="text-gray-600 dark:text-gray-400 mb-4 line-clamp-3">
-                    {project.description}
-                  </p>
+              <div className="mt-4 flex flex-wrap gap-2">
+                {project.technologies.map((tech) => (
+                  <span
+                    key={tech}
+                    className="rounded border border-rail px-2 py-0.5 font-mono text-xs text-steel dark:border-rail-dark dark:text-steel-dark"
+                  >
+                    {tech}
+                  </span>
+                ))}
+              </div>
 
-                  {/* Technologies */}
-                  <div className="flex flex-wrap gap-2 mb-4">
-                    {project.technologies.map((tech) => (
-                      <motion.span
-                        key={tech}
-                        className="text-xs px-3 py-1 rounded-full bg-blue-100 dark:bg-blue-900 text-blue-800 dark:text-blue-200"
-                        whileHover={prefersReducedMotion ? {} : { scale: 1.1 }}
-                        transition={{ duration: 0.15 }}
-                      >
-                        {tech}
-                      </motion.span>
-                    ))}
-                  </div>
-
-                  {/* Links */}
-                  <div className="flex gap-4">
-                    {project.githubUrl ? (
-                      <motion.a
-                        href={project.githubUrl}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        aria-label={dict.codeAria.replace('{title}', project.title)}
-                        className="flex items-center gap-2 text-gray-700 dark:text-gray-300 hover:text-blue-600 dark:hover:text-blue-400 transition-colors"
-                        whileHover={prefersReducedMotion ? {} : { x: 4 }}
-                        transition={{ duration: 0.15 }}
-                      >
-                        <FaGithub className="w-5 h-5" aria-hidden="true" />
-                        <span className="text-sm font-medium">{dict.codeLabel}</span>
-                      </motion.a>
-                    ) : null}
-                    {project.demoUrl ? (
-                      <motion.a
-                        href={project.demoUrl}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        aria-label={dict.demoAria.replace('{title}', project.title)}
-                        className="flex items-center gap-2 text-gray-700 dark:text-gray-300 hover:text-blue-600 dark:hover:text-blue-400 transition-colors"
-                        whileHover={prefersReducedMotion ? {} : { x: 4 }}
-                        transition={{ duration: 0.15 }}
-                      >
-                        <HiOutlineExternalLink className="w-5 h-5" aria-hidden="true" />
-                        <span className="text-sm font-medium">{dict.demoLabel}</span>
-                      </motion.a>
-                    ) : null}
-                  </div>
+              {project.githubUrl || project.demoUrl ? (
+                <div className="mt-4 flex gap-6 font-mono text-sm">
+                  {project.githubUrl ? (
+                    <a
+                      href={project.githubUrl}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      aria-label={dict.codeAria.replace('{title}', project.title)}
+                      className="text-ink underline decoration-sobu decoration-2 underline-offset-4 transition-colors hover:decoration-4 dark:text-ink-dark"
+                    >
+                      {dict.codeLabel} →
+                    </a>
+                  ) : null}
+                  {project.demoUrl ? (
+                    <a
+                      href={project.demoUrl}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      aria-label={dict.demoAria.replace('{title}', project.title)}
+                      className="text-ink underline decoration-sobu decoration-2 underline-offset-4 transition-colors hover:decoration-4 dark:text-ink-dark"
+                    >
+                      {dict.demoLabel} →
+                    </a>
+                  ) : null}
                 </div>
-              </motion.div>
-            ))}
-          </div>
-        </motion.div>
+              ) : null}
+            </li>
+          ))}
+        </ul>
       </div>
     </section>
   );

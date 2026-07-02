@@ -38,26 +38,22 @@ export const ja: Dictionary = {
     },
   },
   hero: {
-    name: 'Yuki Tadokoro',
-    titles: [
-      'Frontend Engineer',
-      'Next.js / TypeScript Developer',
-      'AI-Driven Developer',
-      'Product-Minded Engineer',
-    ],
+    sign: {
+      title: 'たどころ ゆうき',
+      subtitle: 'Tadokoro Yuki / Frontend Engineer',
+    },
     description: [
       'Next.js / TypeScript を軸に、ライブ配信プラットフォームの機能開発に携わるエンジニアです。',
       'AI エージェントを使い倒した高速な開発と、ユーザー価値から逆算したプロダクト作りが持ち味です。',
     ],
     profileImageAlt: 'Yuki Tadokoro のプロフィール写真',
-    viewProjects: 'プロジェクトを見る',
-    contactMe: 'お問い合わせ',
-    downloadResume: '履歴書をダウンロード',
+    githubCta: 'GitHub を見る',
   },
   about: {
-    heading: 'About Me',
-    subheading: '私について',
-    introHeading: '自己紹介',
+    sign: {
+      title: 'じこしょうかい',
+      subtitle: '自己紹介 · About',
+    },
     paragraphs: [
       'こんにちは！ライブ配信プラットフォームの長期インターンで機能開発に携わるフロントエンドエンジニアです。「技術をユーザー価値に変換すること」を最も大切にしていて、課題発見からリリース後の検証までを一気通貫で考えるプロダクト志向の開発が持ち味です。',
       'フロントエンドでは Next.js、React、TypeScript を使った開発を実務で行っており、課金機能やリアルタイム通信（Socket.IO / AWS AppSync）を含む機能を担当。アクセシビリティ（WCAG 2.1 準拠）やパフォーマンス最適化にも注力しています。プログラミング教育サービスでのコードレビュー・メンタリング経験もあります。',
@@ -114,8 +110,10 @@ export const ja: Dictionary = {
     ],
   },
   skills: {
-    heading: 'Skills',
-    subheading: '技術スタックと開発経験',
+    sign: {
+      title: 'すきる',
+      subtitle: '技術 · Skills',
+    },
     categories: [
       {
         category: 'Frontend',
@@ -156,8 +154,10 @@ export const ja: Dictionary = {
     ],
   },
   projects: {
-    heading: 'Projects',
-    subheading: 'これまで作成したプロジェクトや作品',
+    sign: {
+      title: 'せいさくぶつ',
+      subtitle: '制作物 · Projects',
+    },
     codeLabel: 'Code',
     demoLabel: 'Demo',
     codeAria: '{title}のソースコード（GitHub）',
@@ -204,8 +204,10 @@ export const ja: Dictionary = {
     ],
   },
   contact: {
-    heading: 'Contact',
-    subheading: 'お気軽にご連絡ください',
+    sign: {
+      title: 'れんらくさき',
+      subtitle: '連絡先 · Contact',
+    },
     links: [
       {
         name: 'GitHub',
@@ -219,6 +221,10 @@ export const ja: Dictionary = {
       },
     ],
     message: ['プロジェクトのご相談やお仕事のご依頼など、', 'お気軽にお問い合わせください。'],
+  },
+  footer: {
+    endOfLine: '― 終点 ―',
+    copyright: '© 2026 Yuki Tadokoro',
   },
   a11y: {
     skipLink: 'メインコンテンツへスキップ',

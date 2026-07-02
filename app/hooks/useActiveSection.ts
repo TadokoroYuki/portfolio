@@ -6,7 +6,8 @@ export function useActiveSection(sectionIds: string[]) {
   const [activeSection, setActiveSection] = useState<string>('');
 
   // Memoize sectionIds to prevent unnecessary effect re-runs
-  const memoizedIds = useMemo(() => sectionIds, [sectionIds.join(',')]);
+  const joinedIds = sectionIds.join(',');
+  const memoizedIds = useMemo(() => joinedIds.split(','), [joinedIds]);
 
   useEffect(() => {
     const observers: IntersectionObserver[] = [];

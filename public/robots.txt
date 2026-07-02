@@ -1,6 +1,9 @@
-# Allow all crawlers
+# *
 User-agent: *
 Allow: /
 
-# Sitemap (uncomment and update when deployed)
-# Sitemap: https://your-domain.com/sitemap.xml
+# Host
+Host: https://your-portfolio.vercel.app
+
+# Sitemaps
+Sitemap: https://your-portfolio.vercel.app/sitemap.xml

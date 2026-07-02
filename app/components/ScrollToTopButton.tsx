@@ -1,7 +1,7 @@
 'use client';
 
 import { useState, useEffect } from 'react';
-import { motion, AnimatePresence, useReducedMotion } from 'framer-motion';
+import { motion, AnimatePresence } from 'framer-motion';
 
 const ArrowUpIcon = (
   <svg className="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
@@ -20,7 +20,6 @@ interface ScrollToTopButtonProps {
 
 export default function ScrollToTopButton({ label }: ScrollToTopButtonProps) {
   const [isVisible, setIsVisible] = useState(false);
-  const prefersReducedMotion = useReducedMotion();
 
   useEffect(() => {
     const toggleVisibility = () => {
@@ -40,14 +39,13 @@ export default function ScrollToTopButton({ label }: ScrollToTopButtonProps) {
         <motion.button
           onClick={scrollToTop}
           aria-label={label}
-          className="fixed bottom-8 right-8 p-3 bg-gray-900 dark:bg-white
-                     text-white dark:text-gray-900 rounded-full shadow-lg
-                     hover:shadow-xl transition-shadow z-50"
-          initial={{ opacity: 0, scale: 0.8 }}
-          animate={{ opacity: 1, scale: 1 }}
-          exit={{ opacity: 0, scale: 0.8 }}
-          whileHover={prefersReducedMotion ? {} : { scale: 1.1 }}
-          whileTap={prefersReducedMotion ? {} : { scale: 0.9 }}
+          className="fixed bottom-8 right-8 z-50 rounded-md border border-rail bg-board p-3
+                     text-ink shadow-sm transition-colors hover:border-sobu
+                     dark:border-rail-dark dark:bg-board-dark dark:text-ink-dark dark:hover:border-sobu"
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          exit={{ opacity: 0 }}
+          transition={{ duration: 0.2 }}
         >
           {ArrowUpIcon}
         </motion.button>
