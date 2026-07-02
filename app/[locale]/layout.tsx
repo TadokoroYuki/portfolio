@@ -5,14 +5,18 @@ import '../globals.css';
 import SkipLink from '@/app/components/SkipLink';
 import Navigation from '@/app/components/Navigation';
 import ScrollToTopButton from '@/app/components/ScrollToTopButton';
-import ToastProvider from '@/app/components/ToastProvider';
 import ThemeProvider from '@/app/components/ThemeProvider';
 import { getDictionary, isLocale, locales } from '@/app/i18n';
 
+// preload:false is essential for Japanese fonts: next/font cannot subset
+// them, so preloading would fetch every unicode-range chunk (~2.7 MB)
+// up front. Without preload the browser lazily loads only the chunks
+// actually used on the page.
 const plexSansJP = IBM_Plex_Sans_JP({
   subsets: ['latin'],
   weight: ['400', '500', '700'],
   display: 'swap',
+  preload: false,
   variable: '--font-plex-sans-jp',
 });
 
@@ -123,7 +127,6 @@ export default async function LocaleLayout({ children, params }: LayoutProps) {
           </footer>
 
           <ScrollToTopButton label={dict.a11y.scrollToTop} />
-          <ToastProvider />
         </ThemeProvider>
       </body>
     </html>

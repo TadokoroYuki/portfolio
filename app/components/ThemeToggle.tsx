@@ -2,7 +2,7 @@
 
 import { useTheme } from 'next-themes';
 import { useEffect, useState } from 'react';
-import { FiSun, FiMoon } from 'react-icons/fi';
+import { SunIcon, MoonIcon } from './Icons';
 import type { NavDict } from '@/app/i18n/types';
 
 interface ThemeToggleProps {
@@ -36,7 +36,7 @@ export default function ThemeToggle({ labels }: ThemeToggleProps) {
       className={buttonClassName}
       aria-label={isDark ? labels.toLight : labels.toDark}
     >
-      {isDark ? <FiSun className="h-5 w-5" /> : <FiMoon className="h-5 w-5" />}
+      {isDark ? <SunIcon className="h-5 w-5" /> : <MoonIcon className="h-5 w-5" />}
     </button>
   );
 }

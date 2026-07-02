@@ -1,12 +1,11 @@
-import { FaGithub } from 'react-icons/fa';
-import { HiOutlineMail } from 'react-icons/hi';
 import StationSign from './StationSign';
+import { GitHubIcon, MailIcon } from './Icons';
 import type { ContactDict } from '@/app/i18n/types';
 
 /** Icons are kept out of the dictionary so it stays serializable. */
 const contactIcons: Record<string, React.ReactNode> = {
-  GitHub: <FaGithub className="h-5 w-5" aria-hidden="true" />,
-  Email: <HiOutlineMail className="h-5 w-5" aria-hidden="true" />,
+  GitHub: <GitHubIcon className="h-5 w-5" />,
+  Email: <MailIcon className="h-5 w-5" />,
 };
 
 interface ContactSectionProps {
