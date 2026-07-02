@@ -2,10 +2,15 @@ import type { HeroData } from './types';
 
 export const heroData: HeroData = {
   name: 'Yuki Tadokoro',
-  titles: ['Full Stack Developer', 'Next.js Engineer', 'Go Backend Developer', 'Web Developer'],
+  titles: [
+    'Frontend Engineer',
+    'Next.js / TypeScript Developer',
+    'AI-Driven Developer',
+    'Product-Minded Engineer',
+  ],
   description: [
-    'Next.js と Go を使った Web 開発に情熱を持っています。',
-    'モダンな技術で価値あるプロダクトを作ることを目指しています。',
+    'Next.js / TypeScript を軸に、ライブ配信プラットフォームの機能開発に携わるエンジニアです。',
+    'AI エージェントを使い倒した高速な開発と、ユーザー価値から逆算したプロダクト作りが持ち味です。',
   ],
   profileImage: '/profile.jpg',
 };
