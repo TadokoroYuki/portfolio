@@ -2,8 +2,15 @@
 
 import { useMemo } from 'react';
 import { motion, useReducedMotion, type Variants } from 'framer-motion';
-import { HiArrowRight } from 'react-icons/hi';
-import { contactLinks } from '@/app/data';
+import { HiArrowRight, HiOutlineMail } from 'react-icons/hi';
+import { FaGithub } from 'react-icons/fa';
+import type { ContactDict } from '@/app/i18n/types';
+
+/** Icons are kept out of the dictionary so it stays serializable. */
+const contactIcons: Record<string, React.ReactNode> = {
+  GitHub: <FaGithub className="w-8 h-8" />,
+  Email: <HiOutlineMail className="w-8 h-8" />,
+};
 
 const getContainerVariants = (prefersReducedMotion: boolean | null): Variants => ({
   hidden: { opacity: 0 },
@@ -27,7 +34,11 @@ const getItemVariants = (prefersReducedMotion: boolean | null): Variants => ({
   },
 });
 
-export default function ContactSection() {
+interface ContactSectionProps {
+  dict: ContactDict;
+}
+
+export default function ContactSection({ dict }: ContactSectionProps) {
   const prefersReducedMotion = useReducedMotion();
 
   const containerVariants = useMemo(
@@ -52,16 +63,16 @@ export default function ContactSection() {
           {/* Section Header */}
           <motion.div className="text-center mb-16" variants={itemVariants}>
             <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold mb-4 text-balance">
-              Contact
+              {dict.heading}
             </h2>
             <p className="text-lg text-gray-600 dark:text-gray-400 max-w-2xl mx-auto">
-              お気軽にご連絡ください
+              {dict.subheading}
             </p>
           </motion.div>
 
           {/* Contact Links Grid */}
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 max-w-2xl mx-auto">
-            {contactLinks.map((link) => {
+            {dict.links.map((link) => {
               const isExternal = !link.url.startsWith('mailto:');
               return (
                 <motion.a
@@ -80,7 +91,7 @@ export default function ContactSection() {
                       whileHover={prefersReducedMotion ? {} : { rotate: [0, -10, 10, 0] }}
                       transition={{ duration: 0.3 }}
                     >
-                      {link.icon}
+                      {contactIcons[link.name]}
                     </motion.div>
                     <div className="flex-1 min-w-0">
                       <p className="text-sm font-medium text-gray-500 dark:text-gray-400">
@@ -117,9 +128,9 @@ export default function ContactSection() {
           {/* Additional Message */}
           <motion.div className="mt-12 text-center" variants={itemVariants}>
             <p className="text-gray-600 dark:text-gray-400">
-              プロジェクトのご相談やお仕事のご依頼など、
+              {dict.message[0]}
               <br className="hidden sm:block" />
-              お気軽にお問い合わせください。
+              {dict.message[1]}
             </p>
           </motion.div>
         </motion.div>

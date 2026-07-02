@@ -4,7 +4,7 @@ import { useState, useMemo } from 'react';
 import Image from 'next/image';
 import dynamic from 'next/dynamic';
 import { motion, useReducedMotion, type Variants } from 'framer-motion';
-import { heroData } from '@/app/data';
+import type { HeroDict } from '@/app/i18n/types';
 
 const ParticleBackground = dynamic(() => import('./ParticleBackground'), {
   ssr: false,
@@ -14,7 +14,7 @@ const TypeAnimation = dynamic(
   () => import('react-type-animation').then((mod) => mod.TypeAnimation),
   {
     ssr: false,
-    loading: () => <span className="inline-block">{heroData.titles[0]}</span>,
+    loading: () => <span className="inline-block">&nbsp;</span>,
   }
 );
 
@@ -67,12 +67,16 @@ const getItemVariants = (prefersReducedMotion: boolean | null): Variants => ({
   },
 });
 
-export default function HeroSection() {
+interface HeroSectionProps {
+  dict: HeroDict;
+}
+
+export default function HeroSection({ dict }: HeroSectionProps) {
   const [imageError, setImageError] = useState(false);
   const prefersReducedMotion = useReducedMotion();
 
-  // Generate TypeAnimation sequence from heroData
-  const typeSequence = heroData.titles.flatMap((title) => [title, 2000]);
+  // Generate TypeAnimation sequence from the dictionary
+  const typeSequence = dict.titles.flatMap((title) => [title, 2000]);
 
   const containerVariants = useMemo(
     () => getContainerVariants(prefersReducedMotion),
@@ -118,8 +122,8 @@ export default function HeroSection() {
           ) : (
             <div className="w-32 h-32 sm:w-40 sm:h-40 rounded-full overflow-hidden shadow-xl ring-4 ring-white dark:ring-gray-800">
               <Image
-                src={heroData.profileImage}
-                alt={heroData.name}
+                src="/profile.jpg"
+                alt={dict.profileImageAlt}
                 width={160}
                 height={160}
                 sizes="(max-width: 640px) 128px, 160px"
@@ -138,7 +142,7 @@ export default function HeroSection() {
           className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold mb-6 bg-gradient-to-r from-gray-900 to-gray-600 dark:from-white dark:to-gray-400 bg-clip-text text-transparent text-balance"
           variants={itemVariants}
         >
-          {heroData.name}
+          {dict.name}
         </motion.h1>
 
         {/* Subtitle with Type Animation */}
@@ -160,9 +164,9 @@ export default function HeroSection() {
           className="text-base sm:text-lg md:text-xl text-gray-600 dark:text-gray-400 mb-12 max-w-2xl mx-auto leading-relaxed"
           variants={itemVariants}
         >
-          {heroData.description[0]}
+          {dict.description[0]}
           <br className="hidden sm:block" />
-          {heroData.description[1]}
+          {dict.description[1]}
         </motion.p>
 
         {/* CTA Buttons */}
@@ -179,7 +183,7 @@ export default function HeroSection() {
             whileHover={prefersReducedMotion ? {} : { scale: 1.02 }}
             whileTap={prefersReducedMotion ? {} : { scale: 0.98 }}
           >
-            プロジェクトを見る
+            {dict.viewProjects}
           </motion.button>
           <motion.button
             onClick={() => {
@@ -190,7 +194,7 @@ export default function HeroSection() {
             whileHover={prefersReducedMotion ? {} : { scale: 1.02 }}
             whileTap={prefersReducedMotion ? {} : { scale: 0.98 }}
           >
-            お問い合わせ
+            {dict.contactMe}
           </motion.button>
           <motion.a
             href="/resume.pdf"
@@ -200,7 +204,7 @@ export default function HeroSection() {
             whileTap={prefersReducedMotion ? {} : { scale: 0.98 }}
           >
             {DownloadIcon}
-            履歴書をダウンロード
+            {dict.downloadResume}
           </motion.a>
         </motion.div>
 

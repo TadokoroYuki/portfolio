@@ -1,26 +1,5 @@
-import HeroSection from './components/HeroSection';
-import AboutSection from './components/AboutSection';
-import SkillsSection from './components/SkillsSection';
-import ProjectsSection from './components/ProjectsSection';
-import ContactSection from './components/ContactSection';
+import { redirect } from 'next/navigation';
 
-export default function Home() {
-  return (
-    <main id="main-content" className="min-h-screen">
-      {/* Hero Section */}
-      <HeroSection />
-
-      {/* About Section */}
-      <AboutSection />
-
-      {/* Skills Section */}
-      <SkillsSection />
-
-      {/* Projects Section */}
-      <ProjectsSection />
-
-      {/* Contact Section */}
-      <ContactSection />
-    </main>
-  );
+export default function RootPage() {
+  redirect('/ja');
 }

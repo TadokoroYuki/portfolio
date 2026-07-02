@@ -2,7 +2,7 @@
 
 import { useMemo } from 'react';
 import { motion, useReducedMotion, type Variants } from 'framer-motion';
-import { skillCategories } from '@/app/data';
+import type { SkillsDict } from '@/app/i18n/types';
 
 const getContainerVariants = (prefersReducedMotion: boolean | null): Variants => ({
   hidden: { opacity: 0 },
@@ -26,7 +26,11 @@ const getItemVariants = (prefersReducedMotion: boolean | null): Variants => ({
   },
 });
 
-export default function SkillsSection() {
+interface SkillsSectionProps {
+  dict: SkillsDict;
+}
+
+export default function SkillsSection({ dict }: SkillsSectionProps) {
   const prefersReducedMotion = useReducedMotion();
 
   const containerVariants = useMemo(
@@ -50,15 +54,17 @@ export default function SkillsSection() {
         >
           {/* Section Header */}
           <motion.div className="text-center mb-16" variants={itemVariants}>
-            <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold mb-4 text-balance">Skills</h2>
+            <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold mb-4 text-balance">
+              {dict.heading}
+            </h2>
             <p className="text-lg text-gray-600 dark:text-gray-400 max-w-2xl mx-auto">
-              技術スタックと開発経験
+              {dict.subheading}
             </p>
           </motion.div>
 
           {/* Skills Grid */}
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-            {skillCategories.map((category) => (
+            {dict.categories.map((category) => (
               <motion.div
                 key={category.category}
                 className="bg-white dark:bg-gray-800 rounded-lg p-6 shadow-lg"

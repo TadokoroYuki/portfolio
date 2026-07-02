@@ -5,7 +5,7 @@ import Image from 'next/image';
 import { motion, useReducedMotion, type Variants } from 'framer-motion';
 import { FaGithub } from 'react-icons/fa';
 import { HiOutlineExternalLink, HiOutlinePhotograph } from 'react-icons/hi';
-import { projects } from '@/app/data';
+import type { ProjectsDict } from '@/app/i18n/types';
 
 const getContainerVariants = (prefersReducedMotion: boolean | null): Variants => ({
   hidden: { opacity: 0 },
@@ -29,7 +29,11 @@ const getItemVariants = (prefersReducedMotion: boolean | null): Variants => ({
   },
 });
 
-export default function ProjectsSection() {
+interface ProjectsSectionProps {
+  dict: ProjectsDict;
+}
+
+export default function ProjectsSection({ dict }: ProjectsSectionProps) {
   const prefersReducedMotion = useReducedMotion();
 
   const containerVariants = useMemo(
@@ -54,16 +58,16 @@ export default function ProjectsSection() {
           {/* Section Header */}
           <motion.div className="text-center mb-16" variants={itemVariants}>
             <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold mb-4 text-balance">
-              Projects
+              {dict.heading}
             </h2>
             <p className="text-lg text-gray-600 dark:text-gray-400 max-w-2xl mx-auto">
-              これまで作成したプロジェクトや作品
+              {dict.subheading}
             </p>
           </motion.div>
 
           {/* Projects Grid */}
           <div className="grid grid-cols-1 gap-8 max-w-2xl mx-auto">
-            {projects.map((project) => (
+            {dict.items.map((project) => (
               <motion.div
                 key={project.title}
                 className="bg-white dark:bg-gray-800 rounded-lg overflow-hidden shadow-lg"
@@ -123,13 +127,13 @@ export default function ProjectsSection() {
                         href={project.githubUrl}
                         target="_blank"
                         rel="noopener noreferrer"
-                        aria-label={`${project.title}のソースコード（GitHub）`}
+                        aria-label={dict.codeAria.replace('{title}', project.title)}
                         className="flex items-center gap-2 text-gray-700 dark:text-gray-300 hover:text-blue-600 dark:hover:text-blue-400 transition-colors"
                         whileHover={prefersReducedMotion ? {} : { x: 4 }}
                         transition={{ duration: 0.15 }}
                       >
                         <FaGithub className="w-5 h-5" aria-hidden="true" />
-                        <span className="text-sm font-medium">Code</span>
+                        <span className="text-sm font-medium">{dict.codeLabel}</span>
                       </motion.a>
                     ) : null}
                     {project.demoUrl ? (
@@ -137,13 +141,13 @@ export default function ProjectsSection() {
                         href={project.demoUrl}
                         target="_blank"
                         rel="noopener noreferrer"
-                        aria-label={`${project.title}のデモを見る`}
+                        aria-label={dict.demoAria.replace('{title}', project.title)}
                         className="flex items-center gap-2 text-gray-700 dark:text-gray-300 hover:text-blue-600 dark:hover:text-blue-400 transition-colors"
                         whileHover={prefersReducedMotion ? {} : { x: 4 }}
                         transition={{ duration: 0.15 }}
                       >
                         <HiOutlineExternalLink className="w-5 h-5" aria-hidden="true" />
-                        <span className="text-sm font-medium">Demo</span>
+                        <span className="text-sm font-medium">{dict.demoLabel}</span>
                       </motion.a>
                     ) : null}
                   </div>

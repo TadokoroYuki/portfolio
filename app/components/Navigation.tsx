@@ -1,8 +1,12 @@
 'use client';
 
 import { useState, useEffect, useMemo } from 'react';
+import Link from 'next/link';
+import { usePathname } from 'next/navigation';
 import ThemeToggle from './ThemeToggle';
 import { useActiveSection } from '@/app/hooks/useActiveSection';
+import type { Locale, NavDict } from '@/app/i18n/types';
+import { locales } from '@/app/i18n/types';
 
 const HamburgerIcon = (
   <svg className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
@@ -21,20 +25,17 @@ const CloseIcon = (
   </svg>
 );
 
-export default function Navigation() {
+interface NavigationProps {
+  locale: Locale;
+  dict: NavDict;
+}
+
+export default function Navigation({ locale, dict }: NavigationProps) {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const pathname = usePathname();
 
-  const navItems = useMemo(
-    () => [
-      { id: 'home', label: 'Home' },
-      { id: 'about', label: 'About' },
-      { id: 'skills', label: 'Skills' },
-      { id: 'projects', label: 'Projects' },
-      { id: 'contact', label: 'Contact' },
-    ],
-    []
-  );
+  const navItems = dict.items;
 
   const sectionIds = useMemo(() => navItems.map((item) => item.id), [navItems]);
   const activeSection = useActiveSection(sectionIds);
@@ -65,10 +66,41 @@ export default function Navigation() {
     setIsMobileMenuOpen(false);
   };
 
+  /** Build the same path under another locale (e.g. /ja → /en). */
+  const localeHref = (target: Locale) => {
+    const rest = pathname.replace(/^\/(ja|en)(?=\/|$)/, '');
+    return `/${target}${rest}`;
+  };
+
+  const languageSwitcher = (
+    <div className="flex items-center gap-1 text-sm" role="group" aria-label={dict.languageLabel}>
+      {locales.map((target, index) => (
+        <span key={target} className="flex items-center gap-1">
+          {index > 0 && (
+            <span className="text-gray-400 dark:text-gray-600" aria-hidden="true">
+              /
+            </span>
+          )}
+          <Link
+            href={localeHref(target)}
+            aria-current={target === locale ? 'true' : undefined}
+            className={`px-1 py-0.5 uppercase transition-colors ${
+              target === locale
+                ? 'font-bold text-gray-900 dark:text-white'
+                : 'text-gray-500 dark:text-gray-400 hover:text-gray-900 dark:hover:text-white'
+            }`}
+          >
+            {target}
+          </Link>
+        </span>
+      ))}
+    </div>
+  );
+
   return (
     <nav
       role="navigation"
-      aria-label="メインナビゲーション"
+      aria-label={dict.ariaLabel}
       className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
         isScrolled ? 'bg-white/90 dark:bg-gray-900/90 backdrop-blur-sm shadow-md' : 'bg-transparent'
       }`}
@@ -80,7 +112,7 @@ export default function Navigation() {
             href="#home"
             className="text-xl font-bold text-gray-900 dark:text-white hover:text-gray-600 dark:hover:text-gray-300 transition-colors"
           >
-            Portfolio
+            {dict.logo}
           </a>
 
           {/* Desktop Menu */}
@@ -98,16 +130,18 @@ export default function Navigation() {
                 {item.label}
               </a>
             ))}
-            <ThemeToggle />
+            {languageSwitcher}
+            <ThemeToggle labels={dict.themeToggle} />
           </div>
 
           {/* Mobile Menu Button and Theme Toggle */}
           <div className="flex items-center md:hidden">
-            <ThemeToggle />
+            {languageSwitcher}
+            <ThemeToggle labels={dict.themeToggle} />
             <button
               onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
               className="p-2 rounded-md text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors"
-              aria-label="Toggle mobile menu"
+              aria-label={dict.toggleMenu}
             >
               {isMobileMenuOpen ? CloseIcon : HamburgerIcon}
             </button>

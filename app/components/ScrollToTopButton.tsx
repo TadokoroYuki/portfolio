@@ -14,7 +14,11 @@ const ArrowUpIcon = (
   </svg>
 );
 
-export default function ScrollToTopButton() {
+interface ScrollToTopButtonProps {
+  label: string;
+}
+
+export default function ScrollToTopButton({ label }: ScrollToTopButtonProps) {
   const [isVisible, setIsVisible] = useState(false);
   const prefersReducedMotion = useReducedMotion();
 
@@ -35,7 +39,7 @@ export default function ScrollToTopButton() {
       {isVisible && (
         <motion.button
           onClick={scrollToTop}
-          aria-label="ページトップへ戻る"
+          aria-label={label}
           className="fixed bottom-8 right-8 p-3 bg-gray-900 dark:bg-white
                      text-white dark:text-gray-900 rounded-full shadow-lg
                      hover:shadow-xl transition-shadow z-50"

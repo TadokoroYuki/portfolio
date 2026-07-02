@@ -2,8 +2,7 @@
 
 import { useMemo } from 'react';
 import { motion, useReducedMotion, type Variants } from 'framer-motion';
-import TextHighlight from './TextHighlight';
-import { timelineItems, interests } from '@/app/data';
+import type { AboutDict } from '@/app/i18n/types';
 
 const getContainerVariants = (prefersReducedMotion: boolean | null): Variants => ({
   hidden: { opacity: 0 },
@@ -39,7 +38,11 @@ const getSlideInVariants = (prefersReducedMotion: boolean | null): Variants => (
   },
 });
 
-export default function AboutSection() {
+interface AboutSectionProps {
+  dict: AboutDict;
+}
+
+export default function AboutSection({ dict }: AboutSectionProps) {
   const prefersReducedMotion = useReducedMotion();
 
   const containerVariants = useMemo(
@@ -69,39 +72,23 @@ export default function AboutSection() {
           {/* Section Header */}
           <motion.div className="text-center mb-16" variants={itemVariants}>
             <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold mb-4 text-balance">
-              About Me
+              {dict.heading}
             </h2>
-            <p className="text-lg text-gray-600 dark:text-gray-400 max-w-2xl mx-auto">私について</p>
+            <p className="text-lg text-gray-600 dark:text-gray-400 max-w-2xl mx-auto">
+              {dict.subheading}
+            </p>
           </motion.div>
 
           {/* Introduction */}
           <motion.div className="mb-16" variants={itemVariants}>
             <div className="bg-white dark:bg-gray-800 rounded-lg p-8 shadow-lg">
-              <h3 className="text-2xl font-bold mb-4 text-gray-900 dark:text-white">自己紹介</h3>
+              <h3 className="text-2xl font-bold mb-4 text-gray-900 dark:text-white">
+                {dict.introHeading}
+              </h3>
               <div className="space-y-4 text-gray-700 dark:text-gray-300 leading-relaxed">
-                <p>
-                  こんにちは！ライブ配信プラットフォームの長期インターンで機能開発に携わる
-                  <TextHighlight>フロントエンドエンジニア</TextHighlight>です。
-                  「技術をユーザー価値に変換すること」を最も大切にしていて、
-                  課題発見からリリース後の検証までを一気通貫で考えるプロダクト志向の開発が持ち味です。
-                </p>
-                <p>
-                  <TextHighlight variant="background">フロントエンド</TextHighlight>では{' '}
-                  <TextHighlight>Next.js</TextHighlight>、<TextHighlight>React</TextHighlight>、
-                  <TextHighlight>TypeScript</TextHighlight>{' '}
-                  を使った開発を実務で行っており、課金機能やリアルタイム通信（Socket.IO / AWS
-                  AppSync）を含む機能を担当。アクセシビリティ（WCAG 2.1
-                  準拠）やパフォーマンス最適化にも注力しています。
-                  プログラミング教育サービスでの<TextHighlight>コードレビュー・メンタリング</TextHighlight>
-                  経験もあります。
-                </p>
-                <p>
-                  もう一つの武器は <TextHighlight>AI エージェントを活用した開発</TextHighlight>
-                  です。Claude Code などの LLM
-                  エージェントを日常的に使い倒し、実装・検証・自動化のサイクルを高速化しつつ、設計判断は自分で行うスタイルで開発しています。
-                  ハッカソンでの受賞を目指した挑戦や <TextHighlight>OSS への貢献</TextHighlight>
-                  にも継続的に取り組んでいます。
-                </p>
+                {dict.paragraphs.map((paragraph) => (
+                  <p key={paragraph.slice(0, 24)}>{paragraph}</p>
+                ))}
               </div>
             </div>
           </motion.div>
@@ -112,7 +99,7 @@ export default function AboutSection() {
               className="text-2xl font-bold mb-8 text-center text-gray-900 dark:text-white"
               variants={itemVariants}
             >
-              経歴
+              {dict.timelineHeading}
             </motion.h3>
             <div className="relative">
               {/* Timeline Line */}
@@ -120,7 +107,7 @@ export default function AboutSection() {
 
               {/* Timeline Items */}
               <div className="space-y-8">
-                {timelineItems.map((item, index) => (
+                {dict.timeline.map((item, index) => (
                   <motion.div
                     key={index}
                     className="relative pl-0 sm:pl-20"
@@ -147,7 +134,7 @@ export default function AboutSection() {
                               : 'bg-purple-100 dark:bg-purple-900 text-purple-800 dark:text-purple-200'
                           }`}
                         >
-                          {item.type === 'work' ? '職歴' : '学習'}
+                          {item.type === 'work' ? dict.badgeWork : dict.badgeEducation}
                         </span>
                       </div>
                       <h4 className="text-lg font-bold text-gray-900 dark:text-white mb-2">
@@ -167,15 +154,15 @@ export default function AboutSection() {
               className="text-2xl font-bold mb-8 text-center text-gray-900 dark:text-white"
               variants={itemVariants}
             >
-              興味のある分野
+              {dict.interestsHeading}
             </motion.h3>
             <motion.div
               className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4"
               variants={containerVariants}
             >
-              {interests.map((interest, index) => (
+              {dict.interests.map((interest) => (
                 <motion.div
-                  key={index}
+                  key={interest}
                   className="bg-white dark:bg-gray-800 rounded-lg p-4 text-center shadow-md"
                   variants={itemVariants}
                   whileHover={prefersReducedMotion ? {} : { scale: 1.03, y: -4 }}
