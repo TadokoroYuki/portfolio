@@ -24,8 +24,15 @@ export default {
         board: { DEFAULT: '#FFFFFF', dark: '#1A1F26' }, // station sign board
       },
       fontFamily: {
-        sans: ['var(--font-plex-sans-jp)', 'system-ui', 'sans-serif'],
-        mono: ['var(--font-plex-mono)', 'ui-monospace', 'SFMono-Regular', 'monospace'],
+        sans: [
+          'system-ui',
+          '-apple-system',
+          'BlinkMacSystemFont',
+          'Segoe UI',
+          'Noto Sans JP',
+          'sans-serif',
+        ],
+        mono: ['SFMono-Regular', 'Menlo', 'Monaco', 'Consolas', 'monospace'],
       },
     },
   },

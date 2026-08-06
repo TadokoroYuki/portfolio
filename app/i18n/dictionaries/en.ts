@@ -21,12 +21,12 @@ export const en: Dictionary = {
   },
   nav: {
     ariaLabel: 'Main navigation',
-    logo: 'Portfolio',
+    logo: 'YT / Portfolio',
     items: [
       { id: 'home', label: 'Home' },
+      { id: 'projects', label: 'Work' },
       { id: 'about', label: 'About' },
       { id: 'skills', label: 'Skills' },
-      { id: 'projects', label: 'Projects' },
       { id: 'contact', label: 'Contact' },
     ],
     toggleMenu: 'Toggle menu',
@@ -38,28 +38,68 @@ export const en: Dictionary = {
     },
   },
   hero: {
-    sign: {
-      title: 'Tadokoro Yuki',
-      subtitle: 'たどころ ゆうき / Frontend Engineer',
-    },
+    eyebrow: 'TOKYO · FRONTEND / PRODUCT ENGINEER',
+    headline: ['Build it.', 'Test it.', 'Ship it.'],
+    role: 'Yuki Tadokoro — Frontend Engineer',
     description: [
-      'I build features for a live-streaming platform, working primarily with Next.js and TypeScript.',
-      'I ship fast by leaning on AI agents, and I design products backwards from user value.',
+      'I build live-streaming product features with Next.js and TypeScript, including payment flows and real-time interfaces.',
+      'I am at my best when I can investigate a problem, shape the solution, and carry it through implementation and verification.',
     ],
-    profileImageAlt: 'Portrait of Yuki Tadokoro',
-    githubCta: 'View GitHub',
+    primaryCta: 'View selected work',
+    secondaryCta: 'GitHub',
+    proofLabel: 'Evidence, not adjectives',
+    proofs: [
+      { value: 'Production', label: 'Live-streaming product development' },
+      { value: 'Merged', label: 'Patch to a public OSS project' },
+      { value: 'Deployed', label: 'Team-built app shipped to AWS' },
+    ],
+    routeLabel: 'DEVELOPMENT ROUTE',
+    routeSteps: [
+      {
+        code: '01',
+        title: 'Find the real problem',
+        description: 'Study the context and narrow down what is worth solving.',
+      },
+      {
+        code: '02',
+        title: 'Make it work',
+        description: 'Connect the interface, data, and systems the solution needs.',
+      },
+      {
+        code: '03',
+        title: 'Verify and ship',
+        description: 'Test, run QA, and carry the work through to a usable release.',
+      },
+    ],
   },
   about: {
     sign: {
       title: 'About',
       subtitle: 'じこしょうかい · 自己紹介',
     },
+    lead: 'I care about what the technology changes for the person using it.',
     paragraphs: [
-      "Hi! I'm a frontend engineer working on feature development at a live-streaming platform as a long-term intern. What I value most is turning technology into user value — I take a product-minded approach that spans the entire cycle, from discovering problems to validating outcomes after release.",
-      'On the frontend I work professionally with Next.js, React, and TypeScript, building features that include payment flows and real-time communication (Socket.IO / AWS AppSync). I also put strong emphasis on accessibility (WCAG 2.1 compliance) and performance optimization, and I have code review and mentoring experience at a programming education service.',
-      'My other strength is AI-agent-driven development. I use LLM agents such as Claude Code every day to accelerate the implement–verify–automate cycle, while keeping design decisions firmly in my own hands. I also keep challenging myself at hackathons and contributing to open source.',
+      'I work on a live-streaming product as a long-term frontend engineering intern. My work includes payment features, real-time interfaces, and retention-oriented features built with Next.js and TypeScript, along with QA and code review.',
+      'I do not leave unknowns unresolved. I inspect the actual code and data, then turn what I learn into a working change. AI agents are part of my daily workflow, while product and engineering decisions remain my responsibility.',
+    ],
+    principlesHeading: 'How I work',
+    principles: [
+      {
+        title: 'Replace guesses with evidence',
+        description:
+          'I check the specification, code, and usage context before choosing a direction.',
+      },
+      {
+        title: 'Build small, verify early',
+        description: 'I make the idea tangible, then improve it through tests and feedback.',
+      },
+      {
+        title: 'Leave the team stronger',
+        description: 'I aim for reviewable changes and records the next person can follow.',
+      },
     ],
     timelineHeading: 'Experience',
+    timelineMoreLabel: 'View the full timeline',
     timeline: [
       {
         year: '2026 - Present',
@@ -114,6 +154,12 @@ export const en: Dictionary = {
       title: 'Skills',
       subtitle: 'すきる · 技術',
     },
+    intro: 'Grouped by where I use each technology, rather than presenting a wall of tool names.',
+    levelLabels: {
+      Advanced: 'Core',
+      Intermediate: 'Working',
+      Beginner: 'Learning',
+    },
     categories: [
       {
         category: 'Frontend',
@@ -158,6 +204,11 @@ export const en: Dictionary = {
       title: 'Projects',
       subtitle: 'せいさくぶつ · 制作物',
     },
+    intro:
+      'Selected professional, team, and personal work, organized around the problem and my scope.',
+    featuredLabel: 'SELECTED WORK',
+    moreLabel: 'View more projects and contributions',
+    privateLabel: 'Professional · details private',
     codeLabel: 'Code',
     demoLabel: 'Demo',
     codeAria: 'Source code for {title} (GitHub)',
@@ -165,41 +216,64 @@ export const en: Dictionary = {
     items: [
       {
         title: 'Live-Streaming Platform Feature Development (Professional)',
+        category: 'PROFESSIONAL',
+        year: '2026 — NOW',
         description:
           "Frontend development as a long-term intern at a startup's streaming service. Implemented the request menu — a revenue-driving payment feature — from DB schema to real-time UI, along with a My List feature and dark mode support. Gained production experience with real-time communication via Socket.IO / AWS AppSync and a team workflow built on Linear and GitHub PR reviews.",
+        outcome: 'Shipped payment, real-time UI, and retention-oriented features',
         technologies: ['Next.js', 'TypeScript', 'Socket.IO', 'AWS AppSync', 'DynamoDB'],
+        featured: true,
+        private: true,
       },
       {
         title: 'konbini-navi',
+        category: 'TEAM PROJECT',
+        year: '2026',
         description:
           'A web app that tracks convenience store purchases and makes recommendations. Built with a team at Progate Hackathon 2026 and deployed to production on AWS (Tokyo region). Owned the project end to end, from planning through deployment and operations design.',
+        outcome: 'Carried the project from planning to production on AWS',
         technologies: ['Next.js', 'TypeScript', 'AWS'],
+        featured: true,
+        githubUrl: 'https://github.com/TadokoroYuki/konbini-navi',
       },
       {
         title: 'Expectation Watcher',
+        category: 'PERSONAL PROJECT',
+        year: '2026',
         description:
           'A personal dashboard that collects payout pools and carryovers for publicly operated racing from official open data, and watches for conditions where the expected value turns positive. Implemented scrapers for multiple sources with different character encodings, an expected-value calculation engine, time-series snapshots in SQLite, and a test suite.',
+        outcome: 'Built the full path from official data ingestion to tested EV alerts',
         technologies: ['Next.js', 'TypeScript', 'SQLite', 'Cheerio', 'Vitest'],
+        featured: true,
       },
       {
         title: 'Race Quant Models',
+        category: 'RESEARCH',
+        year: '2026',
         description:
           'A collection of probabilistic models in Python that predict finishing-order probabilities for publicly operated racing. Implemented softmax regression, probability calibration via temperature scaling, and Sinkhorn normalization, evaluated with log loss, Brier score, and ECE — all the way through to expected-value backtesting against the odds.',
+        outcome: 'Connected probability modeling, calibration, and EV backtesting',
         technologies: ['Python', 'Machine learning', 'Probabilistic modeling'],
       },
       {
         title: 'Open Source Contributions',
+        category: 'OPEN SOURCE',
+        year: '2026',
         description:
-          'Authored a merged patch for the Obsidian Git plugin (8k+ stars) fixing binary file writes on mobile. Identified a bug in OSS I use daily and took it all the way from diagnosis to fix, tests, and pull request.',
+          'Authored a merged patch for the Obsidian Git plugin fixing binary file writes on mobile. Identified a bug in OSS I use daily and took it all the way from diagnosis to fix, tests, and pull request.',
+        outcome: 'Patch accepted and merged into a public OSS project',
         technologies: ['TypeScript', 'Obsidian Plugin', 'Git'],
         githubUrl: 'https://github.com/Vinzent03/obsidian-git/pull/1090',
       },
       {
         title: 'Portfolio Website',
+        category: 'THIS SITE',
+        year: '2026',
         description:
           'This site. File-based routing with the App Router, responsive design, dark mode, accessibility (WCAG 2.1 compliance), and SEO optimization — built with a strong focus on performance and UX.',
+        outcome: 'Continuously improving localization, accessibility, and performance',
         technologies: ['Next.js 15', 'TypeScript', 'Tailwind CSS', 'Vercel'],
-        githubUrl: 'https://github.com/TadokoroYuki/portofolio',
+        githubUrl: 'https://github.com/TadokoroYuki/portfolio',
       },
     ],
   },
@@ -208,6 +282,9 @@ export const en: Dictionary = {
       title: 'Contact',
       subtitle: 'れんらくさき · 連絡先',
     },
+    eyebrow: 'NEXT STOP',
+    headline: "If there's something we can build together, let's talk.",
+    responseNote: 'Early-stage questions and informal conversations are welcome.',
     links: [
       {
         name: 'GitHub',
@@ -220,7 +297,10 @@ export const en: Dictionary = {
         label: 'tdkryk@icloud.com',
       },
     ],
-    message: ["Whether it's a project idea or a work inquiry,", "I'd love to hear from you."],
+    message: [
+      'For frontend development, product improvement, or AI-assisted engineering workflows,',
+      'reach out on GitHub or by email.',
+    ],
   },
   footer: {
     endOfLine: '— End of the Line —',

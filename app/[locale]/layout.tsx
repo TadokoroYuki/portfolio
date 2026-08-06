@@ -1,5 +1,4 @@
 import type { Metadata, Viewport } from 'next';
-import { IBM_Plex_Sans_JP, IBM_Plex_Mono } from 'next/font/google';
 import { notFound } from 'next/navigation';
 import '../globals.css';
 import SkipLink from '@/app/components/SkipLink';
@@ -8,26 +7,10 @@ import ScrollToTopButton from '@/app/components/ScrollToTopButton';
 import ThemeProvider from '@/app/components/ThemeProvider';
 import { getDictionary, isLocale, locales } from '@/app/i18n';
 
-// preload:false is essential for Japanese fonts: next/font cannot subset
-// them, so preloading would fetch every unicode-range chunk (~2.7 MB)
-// up front. Without preload the browser lazily loads only the chunks
-// actually used on the page.
-const plexSansJP = IBM_Plex_Sans_JP({
-  subsets: ['latin'],
-  weight: ['400', '500', '700'],
-  display: 'swap',
-  preload: false,
-  variable: '--font-plex-sans-jp',
-});
-
-const plexMono = IBM_Plex_Mono({
-  subsets: ['latin'],
-  weight: ['400', '500'],
-  display: 'swap',
-  variable: '--font-plex-mono',
-});
-
-const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://your-portfolio.vercel.app';
+const siteUrl = (process.env.NEXT_PUBLIC_SITE_URL || 'https://tdkryk-portfolio.vercel.app').replace(
+  /\/$/,
+  ''
+);
 
 type LayoutProps = {
   children: React.ReactNode;
@@ -99,11 +82,7 @@ export default async function LocaleLayout({ children, params }: LayoutProps) {
   const dict = getDictionary(locale);
 
   return (
-    <html
-      lang={locale}
-      className={`${plexSansJP.variable} ${plexMono.variable}`}
-      suppressHydrationWarning
-    >
+    <html lang={locale} data-scroll-behavior="smooth" suppressHydrationWarning>
       <body className="font-sans">
         <ThemeProvider>
           <SkipLink label={dict.a11y.skipLink} />

@@ -20,14 +20,14 @@ export default async function Home({ params }: PageProps) {
       {/* Hero Section */}
       <HeroSection dict={dict.hero} />
 
+      {/* Put proof before biography: visitors can evaluate the work first. */}
+      <ProjectsSection dict={dict.projects} />
+
       {/* About Section */}
       <AboutSection dict={dict.about} />
 
       {/* Skills Section */}
       <SkillsSection dict={dict.skills} />
-
-      {/* Projects Section */}
-      <ProjectsSection dict={dict.projects} />
 
       {/* Contact Section */}
       <ContactSection dict={dict.contact} />

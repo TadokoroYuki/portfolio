@@ -3,7 +3,7 @@ User-agent: *
 Allow: /
 
 # Host
-Host: https://your-portfolio.vercel.app
+Host: https://tdkryk-portfolio.vercel.app
 
 # Sitemaps
-Sitemap: https://your-portfolio.vercel.app/sitemap.xml
+Sitemap: https://tdkryk-portfolio.vercel.app/sitemap.xml

@@ -1,6 +1,12 @@
+const siteUrl = (
+  process.env.SITE_URL ||
+  process.env.NEXT_PUBLIC_SITE_URL ||
+  'https://tdkryk-portfolio.vercel.app'
+).replace(/\/$/, '');
+
 /** @type {import('next-sitemap').IConfig} */
 module.exports = {
-  siteUrl: process.env.SITE_URL || 'https://your-portfolio.vercel.app',
+  siteUrl,
   generateRobotsTxt: true,
   sitemapSize: 7000,
   changefreq: 'monthly',

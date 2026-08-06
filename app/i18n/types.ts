@@ -27,8 +27,13 @@ export interface SkillCategory {
 
 export interface Project {
   title: string;
+  category: string;
+  year: string;
   description: string;
+  outcome: string;
   technologies: string[];
+  featured?: boolean;
+  private?: boolean;
   githubUrl?: string;
   demoUrl?: string;
   image?: string;
@@ -82,16 +87,26 @@ export interface StationSignDict {
 }
 
 export interface HeroDict {
-  sign: StationSignDict;
+  eyebrow: string;
+  headline: string[];
+  role: string;
   description: string[];
-  profileImageAlt: string;
-  githubCta: string;
+  primaryCta: string;
+  secondaryCta: string;
+  proofLabel: string;
+  proofs: { value: string; label: string }[];
+  routeLabel: string;
+  routeSteps: { code: string; title: string; description: string }[];
 }
 
 export interface AboutDict {
   sign: StationSignDict;
+  lead: string;
   paragraphs: string[];
+  principlesHeading: string;
+  principles: { title: string; description: string }[];
   timelineHeading: string;
+  timelineMoreLabel: string;
   timeline: TimelineItem[];
   badgeWork: string;
   badgeEducation: string;
@@ -101,11 +116,17 @@ export interface AboutDict {
 
 export interface SkillsDict {
   sign: StationSignDict;
+  intro: string;
+  levelLabels: Record<SkillLevel, string>;
   categories: SkillCategory[];
 }
 
 export interface ProjectsDict {
   sign: StationSignDict;
+  intro: string;
+  featuredLabel: string;
+  moreLabel: string;
+  privateLabel: string;
   codeLabel: string;
   demoLabel: string;
   /** Aria label templates: `{title}` is replaced with the project title. */
@@ -116,6 +137,9 @@ export interface ProjectsDict {
 
 export interface ContactDict {
   sign: StationSignDict;
+  eyebrow: string;
+  headline: string;
+  responseNote: string;
   links: ContactLink[];
   message: string[];
 }

@@ -21,12 +21,12 @@ export const ja: Dictionary = {
   },
   nav: {
     ariaLabel: 'メインナビゲーション',
-    logo: 'Portfolio',
+    logo: 'YT / Portfolio',
     items: [
       { id: 'home', label: 'Home' },
+      { id: 'projects', label: 'Work' },
       { id: 'about', label: 'About' },
       { id: 'skills', label: 'Skills' },
-      { id: 'projects', label: 'Projects' },
       { id: 'contact', label: 'Contact' },
     ],
     toggleMenu: 'メニューを開閉',
@@ -38,28 +38,67 @@ export const ja: Dictionary = {
     },
   },
   hero: {
-    sign: {
-      title: 'たどころ ゆうき',
-      subtitle: 'Tadokoro Yuki / Frontend Engineer',
-    },
+    eyebrow: 'TOKYO · FRONTEND / PRODUCT ENGINEER',
+    headline: ['つくって、試して、', '届ける。'],
+    role: '田所 佑樹 — Frontend Engineer',
     description: [
-      'Next.js / TypeScript を軸に、ライブ配信プラットフォームの機能開発に携わるエンジニアです。',
-      'AI エージェントを使い倒した高速な開発と、ユーザー価値から逆算したプロダクト作りが持ち味です。',
+      'Next.js / TypeScript を軸に、課金・リアルタイム通信を含むライブ配信サービスの機能開発に取り組んでいます。',
+      '課題を調べ、設計し、実装と検証まで進めることが得意です。',
     ],
-    profileImageAlt: 'Yuki Tadokoro のプロフィール写真',
-    githubCta: 'GitHub を見る',
+    primaryCta: '実績を見る',
+    secondaryCta: 'GitHub',
+    proofLabel: '実績で見る',
+    proofs: [
+      { value: '実務', label: 'ライブ配信サービスの機能開発' },
+      { value: 'Merged', label: '公開 OSS への修正 PR' },
+      { value: 'Production', label: 'チーム開発アプリを AWS へ' },
+    ],
+    routeLabel: 'DEVELOPMENT ROUTE',
+    routeSteps: [
+      {
+        code: '01',
+        title: '課題をつかむ',
+        description: '利用状況と背景を調べ、解くべき問題を絞る。',
+      },
+      {
+        code: '02',
+        title: '動く形にする',
+        description: 'UI からデータ設計まで、必要な範囲をつなぐ。',
+      },
+      {
+        code: '03',
+        title: '検証して届ける',
+        description: 'テストと QA を通し、使われる状態まで進める。',
+      },
+    ],
   },
   about: {
     sign: {
       title: 'じこしょうかい',
       subtitle: '自己紹介 · About',
     },
+    lead: '技術の話だけで終わらず、使う人に届くところまで考えます。',
     paragraphs: [
-      'こんにちは！ライブ配信プラットフォームの長期インターンで機能開発に携わるフロントエンドエンジニアです。「技術をユーザー価値に変換すること」を最も大切にしていて、課題発見からリリース後の検証までを一気通貫で考えるプロダクト志向の開発が持ち味です。',
-      'フロントエンドでは Next.js、React、TypeScript を使った開発を実務で行っており、課金機能やリアルタイム通信（Socket.IO / AWS AppSync）を含む機能を担当。アクセシビリティ（WCAG 2.1 準拠）やパフォーマンス最適化にも注力しています。プログラミング教育サービスでのコードレビュー・メンタリング経験もあります。',
-      'もう一つの武器は AI エージェントを活用した開発です。Claude Code などの LLM エージェントを日常的に使い倒し、実装・検証・自動化のサイクルを高速化しつつ、設計判断は自分で行うスタイルで開発しています。ハッカソンでの受賞を目指した挑戦や OSS への貢献にも継続的に取り組んでいます。',
+      'ライブ配信サービスの長期インターンで、Next.js / TypeScript を使った機能開発をしています。課金機能やリアルタイム UI、継続利用につながる機能を担当し、QA やコードレビューにも参加しています。',
+      '分からないことを放置せず、実際のコードやデータを調べて形にするのが得意です。AI エージェントも日常的に使いますが、何を作るか、どう確かめるかは自分で判断します。',
+    ],
+    principlesHeading: '開発で大切にしていること',
+    principles: [
+      {
+        title: '分からないまま進めない',
+        description: '仕様、コード、利用状況を確認し、推測と事実を分けて考えます。',
+      },
+      {
+        title: '小さく作って確かめる',
+        description: '動くものを早めに出し、テストとフィードバックで精度を上げます。',
+      },
+      {
+        title: 'チームに残る形にする',
+        description: 'レビューしやすい変更と、次の人が追える記録を意識します。',
+      },
     ],
     timelineHeading: '経歴',
+    timelineMoreLabel: 'これまでの経歴をすべて見る',
     timeline: [
       {
         year: '2026 - 現在',
@@ -114,6 +153,12 @@ export const ja: Dictionary = {
       title: 'すきる',
       subtitle: '技術 · Skills',
     },
+    intro: '技術名の多さではなく、どの場面で使ってきたかが分かるように整理しています。',
+    levelLabels: {
+      Advanced: '主力',
+      Intermediate: '実務・制作',
+      Beginner: '学習中',
+    },
     categories: [
       {
         category: 'Frontend',
@@ -158,6 +203,10 @@ export const ja: Dictionary = {
       title: 'せいさくぶつ',
       subtitle: '制作物 · Projects',
     },
+    intro: '実務、チーム開発、個人研究から、課題と担当範囲が伝わるものを先にまとめました。',
+    featuredLabel: 'SELECTED WORK',
+    moreLabel: 'その他の制作・取り組みを見る',
+    privateLabel: '実務・詳細非公開',
     codeLabel: 'Code',
     demoLabel: 'Demo',
     codeAria: '{title}のソースコード（GitHub）',
@@ -165,41 +214,64 @@ export const ja: Dictionary = {
     items: [
       {
         title: 'ライブ配信プラットフォームの機能開発（実務）',
+        category: 'PROFESSIONAL',
+        year: '2026 — NOW',
         description:
           'スタートアップの配信サービスで長期インターンとしてフロントエンド開発を担当。課金導線となるリクエストメニュー機能（DB スキーマ〜リアルタイム UI）、マイリスト機能、ダークモード対応などを実装。Socket.IO / AWS AppSync によるリアルタイム通信、Linear + GitHub PR レビューのチーム開発フローを実務で経験。',
+        outcome: '課金導線・リアルタイム UI・継続利用機能を実装',
         technologies: ['Next.js', 'TypeScript', 'Socket.IO', 'AWS AppSync', 'DynamoDB'],
+        featured: true,
+        private: true,
       },
       {
         title: 'konbini-navi',
+        category: 'TEAM PROJECT',
+        year: '2026',
         description:
           'コンビニでの購買記録とレコメンドを行う Web アプリ。ハッカソン（Progate Hackathon 2026）でチーム開発し、AWS 東京リージョンに本番デプロイまで実施。企画からデプロイ・運用設計まで一気通貫で担当。',
+        outcome: '企画から AWS 本番デプロイまで担当',
         technologies: ['Next.js', 'TypeScript', 'AWS'],
+        featured: true,
+        githubUrl: 'https://github.com/TadokoroYuki/konbini-navi',
       },
       {
         title: 'Expectation Watcher',
+        category: 'PERSONAL PROJECT',
+        year: '2026',
         description:
           '公営競技の払戻プールとキャリーオーバーを公式公開データから収集し、期待値がプラスになる条件を監視する個人開発ダッシュボード。文字コードの異なる複数ソースのスクレイパー、期待値計算エンジン、SQLite による時系列スナップショット、テストスイートを実装。',
+        outcome: '公式データ収集から期待値判定・テストまで一貫実装',
         technologies: ['Next.js', 'TypeScript', 'SQLite', 'Cheerio', 'Vitest'],
+        featured: true,
       },
       {
         title: 'Race Quant Models',
+        category: 'RESEARCH',
+        year: '2026',
         description:
           '公営競技の着順確率を予測する Python 製の確率モデル群。softmax 回帰・温度スケーリングによる確率キャリブレーション・Sinkhorn 正規化を実装し、log loss / Brier score / ECE で評価。オッズと組み合わせた期待値バックテストまでを一貫して構築。',
+        outcome: '予測だけでなく確率評価と期待値検証まで構築',
         technologies: ['Python', '機械学習', '確率モデリング'],
       },
       {
         title: 'OSS コントリビューション',
+        category: 'OPEN SOURCE',
+        year: '2026',
         description:
-          'Obsidian の Git プラグイン（Star 8k+）にモバイル環境でのバイナリファイル書き込みを修正するパッチを送りマージされた。自分が日常的に使う OSS の不具合を特定し、修正・テスト・PR まで完結。',
+          'Obsidian の Git プラグインに、モバイル環境でのバイナリファイル書き込みを修正するパッチを送りマージされた。自分が日常的に使う OSS の不具合を特定し、修正・テスト・PR まで完結。',
+        outcome: '公開 OSS に修正 PR がマージ',
         technologies: ['TypeScript', 'Obsidian Plugin', 'Git'],
         githubUrl: 'https://github.com/Vinzent03/obsidian-git/pull/1090',
       },
       {
         title: 'Portfolio Website',
+        category: 'THIS SITE',
+        year: '2026',
         description:
           'このサイト。App Router によるファイルベースルーティング、レスポンシブデザイン、ダークモード対応、アクセシビリティ対応（WCAG 2.1 準拠）、SEO 最適化を実装。パフォーマンスと UX を重視した設計。',
+        outcome: '多言語・アクセシビリティ・表示速度を継続改善',
         technologies: ['Next.js 15', 'TypeScript', 'Tailwind CSS', 'Vercel'],
-        githubUrl: 'https://github.com/TadokoroYuki/portofolio',
+        githubUrl: 'https://github.com/TadokoroYuki/portfolio',
       },
     ],
   },
@@ -208,6 +280,9 @@ export const ja: Dictionary = {
       title: 'れんらくさき',
       subtitle: '連絡先 · Contact',
     },
+    eyebrow: 'NEXT STOP',
+    headline: '一緒につくれることがあれば、話しましょう。',
+    responseNote: '相談ベースのご連絡でも大丈夫です。',
     links: [
       {
         name: 'GitHub',
@@ -220,7 +295,10 @@ export const ja: Dictionary = {
         label: 'tdkryk@icloud.com',
       },
     ],
-    message: ['プロジェクトのご相談やお仕事のご依頼など、', 'お気軽にお問い合わせください。'],
+    message: [
+      'フロントエンド開発、プロダクト改善、AI を使った開発フローについて、',
+      'まずは GitHub やメールから気軽にご連絡ください。',
+    ],
   },
   footer: {
     endOfLine: '― 終点 ―',

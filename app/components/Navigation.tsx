@@ -111,7 +111,7 @@ export default function Navigation({ locale, dict }: NavigationProps) {
           : 'bg-transparent'
       }`}
     >
-      <div className="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8">
+      <div className="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
         <div className="flex h-16 items-center justify-between">
           {/* Logo */}
           <a
@@ -128,11 +128,15 @@ export default function Navigation({ locale, dict }: NavigationProps) {
               <a
                 key={item.id}
                 href={`#${item.id}`}
-                className={`border-b-2 pb-0.5 font-medium transition-colors ${
-                  activeSection === item.id
-                    ? 'border-sobu text-ink dark:text-ink-dark'
-                    : 'border-transparent text-steel hover:text-ink dark:text-steel-dark dark:hover:text-ink-dark'
-                }`}
+                className={
+                  item.id === 'contact'
+                    ? 'rounded-lg bg-sobu px-3 py-2 font-bold text-ink transition-transform hover:-translate-y-0.5'
+                    : `border-b-2 pb-0.5 font-medium transition-colors ${
+                        activeSection === item.id
+                          ? 'border-sobu text-ink dark:text-ink-dark'
+                          : 'border-transparent text-steel hover:text-ink dark:text-steel-dark dark:hover:text-ink-dark'
+                      }`
+                }
               >
                 {item.label}
               </a>
@@ -149,6 +153,8 @@ export default function Navigation({ locale, dict }: NavigationProps) {
               onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
               className="rounded-md p-2 text-steel transition-colors hover:bg-rail/50 hover:text-ink dark:text-steel-dark dark:hover:bg-board-dark dark:hover:text-ink-dark"
               aria-label={dict.toggleMenu}
+              aria-expanded={isMobileMenuOpen}
+              aria-controls="mobile-navigation"
             >
               {isMobileMenuOpen ? CloseIcon : HamburgerIcon}
             </button>
@@ -158,18 +164,25 @@ export default function Navigation({ locale, dict }: NavigationProps) {
 
       {/* Mobile Menu (#136: overscroll-behavior contain) */}
       {isMobileMenuOpen && (
-        <div className="overscroll-contain border-t border-rail bg-paper dark:border-rail-dark dark:bg-paper-dark md:hidden">
+        <div
+          id="mobile-navigation"
+          className="overscroll-contain border-t border-rail bg-paper dark:border-rail-dark dark:bg-paper-dark md:hidden"
+        >
           <div className="space-y-1 px-2 pb-3 pt-2">
             {navItems.map((item) => (
               <a
                 key={item.id}
                 href={`#${item.id}`}
                 onClick={handleMobileMenuClick}
-                className={`block w-full rounded-md px-3 py-2 text-left text-base font-medium transition-colors ${
-                  activeSection === item.id
-                    ? 'bg-board text-ink dark:bg-board-dark dark:text-ink-dark'
-                    : 'text-steel hover:bg-board hover:text-ink dark:text-steel-dark dark:hover:bg-board-dark dark:hover:text-ink-dark'
-                }`}
+                className={
+                  item.id === 'contact'
+                    ? 'mt-2 block w-full rounded-md bg-sobu px-3 py-3 text-left text-base font-bold text-ink'
+                    : `block w-full rounded-md px-3 py-2 text-left text-base font-medium transition-colors ${
+                        activeSection === item.id
+                          ? 'bg-board text-ink dark:bg-board-dark dark:text-ink-dark'
+                          : 'text-steel hover:bg-board hover:text-ink dark:text-steel-dark dark:hover:bg-board-dark dark:hover:text-ink-dark'
+                      }`
+                }
               >
                 {item.label}
               </a>
