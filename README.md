@@ -105,11 +105,9 @@ npm run start
 
 ### Update Personal Information
 
-1. **Hero Section**: Edit `app/components/HeroSection.tsx`
-2. **About Section**: Edit `app/components/AboutSection.tsx`
-3. **Skills**: Update skill list in `app/components/SkillsSection.tsx`
-4. **Projects**: Add your projects in `app/components/ProjectsSection.tsx`
-5. **Contact**: Update social links in `app/components/ContactSection.tsx`
+1. **Hero, About, Projects, and Contact**: Edit both locale dictionaries, `app/i18n/dictionaries/ja.ts` and `app/i18n/dictionaries/en.ts`.
+2. **Skill Map**: Keep evidence URLs and assessment states in `app/data/skill-map.ts`. Edit topic labels and explanations in both locale dictionaries. Only use `publicWork` for attributable public evidence and update the date when the map changes.
+3. **Roadmap**: The map links to the original roadmap.sh API Design track. It does not mirror account progress, republish roadmap content, or certify proficiency. Leave internal tasks, links, and time estimates out of the public map.
 
 ### Add Images
 
@@ -138,7 +136,6 @@ For detailed instructions, see the [Deployment Guide](./docs/DEPLOYMENT_GUIDE.md
 - 🔧 Add Go backend for contact form
 - 📝 Add blog functionality with Go API
 - 📊 Add analytics integration
-- 🌐 Multi-language support
 
 ## Contributing
 

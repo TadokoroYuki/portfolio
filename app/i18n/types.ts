@@ -1,3 +1,5 @@
+import type { ApiDesignSkill } from '@/app/data/skill-map';
+
 /**
  * i18n type definitions.
  *
@@ -12,18 +14,6 @@ export const locales = ['ja', 'en'] as const;
 export type Locale = (typeof locales)[number];
 
 // --- Content types (moved from app/data/types.ts) ---
-
-export type SkillLevel = 'Advanced' | 'Intermediate' | 'Beginner';
-
-export interface Skill {
-  name: string;
-  level?: SkillLevel;
-}
-
-export interface SkillCategory {
-  category: string;
-  skills: Skill[];
-}
 
 export interface Project {
   title: string;
@@ -93,6 +83,7 @@ export interface HeroDict {
   description: string[];
   primaryCta: string;
   secondaryCta: string;
+  skillMapCta: string;
   proofLabel: string;
   proofs: { value: string; label: string }[];
   routeLabel: string;
@@ -103,6 +94,12 @@ export interface AboutDict {
   sign: StationSignDict;
   lead: string;
   paragraphs: string[];
+  focus: {
+    updatedOn: string;
+    heading: string;
+    items: { title: string; description: string }[];
+    skillMapLink: string;
+  };
   principlesHeading: string;
   principles: { title: string; description: string }[];
   timelineHeading: string;
@@ -117,8 +114,19 @@ export interface AboutDict {
 export interface SkillsDict {
   sign: StationSignDict;
   intro: string;
-  levelLabels: Record<SkillLevel, string>;
-  categories: SkillCategory[];
+  updatedLabel: string;
+  trackTitle: string;
+  roadmapLabel: string;
+  statusLabels: Record<ApiDesignSkill['status'], string>;
+  topics: {
+    [Id in ApiDesignSkill['id']]: { title: string; description: string } & (Extract<
+      ApiDesignSkill,
+      { id: Id }
+    >['status'] extends 'publicWork'
+      ? { proofLabel: string }
+      : { proofLabel?: never });
+  };
+  readingNote: string;
 }
 
 export interface ProjectsDict {

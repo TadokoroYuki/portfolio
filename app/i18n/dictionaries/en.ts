@@ -26,7 +26,7 @@ export const en: Dictionary = {
       { id: 'home', label: 'Home' },
       { id: 'projects', label: 'Work' },
       { id: 'about', label: 'About' },
-      { id: 'skills', label: 'Skills' },
+      { id: 'skills', label: 'Skill Map' },
       { id: 'contact', label: 'Contact' },
     ],
     toggleMenu: 'Toggle menu',
@@ -47,6 +47,7 @@ export const en: Dictionary = {
     ],
     primaryCta: 'View selected work',
     secondaryCta: 'GitHub',
+    skillMapCta: 'View Skill Map',
     proofLabel: 'Evidence, not adjectives',
     proofs: [
       { value: 'Production', label: 'Live-streaming product development' },
@@ -79,9 +80,25 @@ export const en: Dictionary = {
     },
     lead: 'I care about what the technology changes for the person using it.',
     paragraphs: [
-      'I work on a live-streaming product as a long-term frontend engineering intern. My work includes payment features, real-time interfaces, and retention-oriented features built with Next.js and TypeScript, along with QA and code review.',
+      'I’m a freelance web engineer building a live-streaming product with Next.js and TypeScript. I work across the UI and API, and take part in QA and code review.',
       'I do not leave unknowns unresolved. I inspect the actual code and data, then turn what I learn into a working change. AI agents are part of my daily workflow, while product and engineering decisions remain my responsibility.',
     ],
+    focus: {
+      updatedOn: '2026-11-25',
+      heading: 'What I’m working on now',
+      items: [
+        {
+          title: 'Making API design knowledge visible',
+          description:
+            'I’m mapping what I can explain and connecting it to code and tests I can share.',
+        },
+        {
+          title: 'Reading the open source I use',
+          description: 'I read how familiar tools work and explore small changes where I can help.',
+        },
+      ],
+      skillMapLink: 'See the Skill Map',
+    },
     principlesHeading: 'How I work',
     principles: [
       {
@@ -103,7 +120,7 @@ export const en: Dictionary = {
     timeline: [
       {
         year: '2026 - Present',
-        title: 'Frontend Engineer, Live-Streaming Platform (Long-Term Internship)',
+        title: 'Web Engineer, Live-Streaming Platform',
         description:
           'Feature development with Next.js and TypeScript: implemented payment features (request menu), My List, and dark mode support, while also taking part in QA and code review. Hands-on production experience with real-time communication (Socket.IO / AppSync).',
         type: 'work',
@@ -133,7 +150,7 @@ export const en: Dictionary = {
         year: '2021',
         title: 'Enrolled at Tokyo Denki University',
         description:
-          'Majoring in information systems at the School of System Design and Technology, studying software engineering, networks, and data engineering.',
+          'Studied information systems, including software engineering, networks, and data engineering.',
         type: 'education',
       },
     ],
@@ -151,53 +168,44 @@ export const en: Dictionary = {
   },
   skills: {
     sign: {
-      title: 'Skills',
-      subtitle: 'すきる · 技術',
+      title: 'Skill Map',
+      subtitle: 'すきる · スキルマップ',
     },
-    intro: 'Grouped by where I use each technology, rather than presenting a wall of tool names.',
-    levelLabels: {
-      Advanced: 'Core',
-      Intermediate: 'Working',
-      Beginner: 'Learning',
+    updatedLabel: 'Updated',
+    trackTitle: 'API Design',
+    intro:
+      'I use the roadmap.sh API Design track to choose what to study, then record what I can explain or show in public work. This is a starting set of four topics.',
+    roadmapLabel: 'API Design roadmap',
+    statusLabels: {
+      publicWork: 'Public work available',
+      nextCheck: 'Next check',
+      notAssessed: 'Not assessed',
     },
-    categories: [
-      {
-        category: 'Frontend',
-        skills: [
-          { name: 'Next.js', level: 'Advanced' },
-          { name: 'React', level: 'Advanced' },
-          { name: 'TypeScript', level: 'Advanced' },
-          { name: 'Tailwind CSS', level: 'Intermediate' },
-          { name: 'Accessibility (WCAG)', level: 'Intermediate' },
-        ],
+    topics: {
+      documentingApis: {
+        title: 'API and architecture documentation',
+        description:
+          'I updated the konbini-navi architecture and setup guides to match the code, including Swagger UI and curl verification steps.',
+        proofLabel: 'Merged PR #135',
       },
-      {
-        category: 'Backend & Infra',
-        skills: [
-          { name: 'Node.js (Hono / Express)', level: 'Intermediate' },
-          { name: 'REST / GraphQL API', level: 'Intermediate' },
-          { name: 'AWS (ECS / AppSync / DynamoDB)', level: 'Beginner' },
-          { name: 'Docker', level: 'Intermediate' },
-          { name: 'PostgreSQL / SQLite', level: 'Intermediate' },
-        ],
+      requestValidation: {
+        title: 'Request validation and boundaries',
+        description:
+          'Next I want to show, with a public example and tests, how validation at the HTTP boundary keeps invalid path or query input out of the use case.',
       },
-      {
-        category: 'Testing & Quality',
-        skills: [
-          { name: 'Playwright', level: 'Intermediate' },
-          { name: 'Vitest', level: 'Intermediate' },
-          { name: 'Code review', level: 'Advanced' },
-        ],
+      httpContracts: {
+        title: 'HTTP status codes and errors',
+        description:
+          'Check whether I can explain an API contract that distinguishes invalid input from a resource that does not exist.',
       },
-      {
-        category: 'AI-Driven Development',
-        skills: [
-          { name: 'Claude Code / LLM agents', level: 'Advanced' },
-          { name: 'Browser automation (Playwright CLI)', level: 'Advanced' },
-          { name: 'Python (data analysis / probabilistic models)', level: 'Intermediate' },
-        ],
+      pagination: {
+        title: 'Pagination',
+        description:
+          'Check whether I can explain offset and cursor pagination using an example with a changing, ordered list.',
       },
-    ],
+    },
+    readingNote:
+      '“Public work available” links to evidence for the topic. This is not roadmap.sh completion or third-party certification; “not assessed” does not mean “no knowledge.”',
   },
   projects: {
     sign: {
@@ -219,7 +227,7 @@ export const en: Dictionary = {
         category: 'PROFESSIONAL',
         year: '2026 — NOW',
         description:
-          "Frontend development as a long-term intern at a startup's streaming service. Implemented the request menu — a revenue-driving payment feature — from DB schema to real-time UI, along with a My List feature and dark mode support. Gained production experience with real-time communication via Socket.IO / AWS AppSync and a team workflow built on Linear and GitHub PR reviews.",
+          'Feature development for a live-streaming service, including payments, real-time interfaces, and features for returning users. I work across UI and API changes and take part in QA and code review.',
         outcome: 'Shipped payment, real-time UI, and retention-oriented features',
         technologies: ['Next.js', 'TypeScript', 'Socket.IO', 'AWS AppSync', 'DynamoDB'],
         featured: true,
@@ -230,9 +238,9 @@ export const en: Dictionary = {
         category: 'TEAM PROJECT',
         year: '2026',
         description:
-          'A web app that tracks convenience store purchases and makes recommendations. Built with a team at Progate Hackathon 2026 and deployed to production on AWS (Tokyo region). Owned the project end to end, from planning through deployment and operations design.',
-        outcome: 'Carried the project from planning to production on AWS',
-        technologies: ['Next.js', 'TypeScript', 'AWS'],
+          'A team-built app for tracking convenience-store purchases and making recommendations. The user-facing app uses Expo, the admin app uses Next.js, and the backend uses Go and PostgreSQL. I documented the architecture and fixed the Expo Web build for AWS Amplify.',
+        outcome: 'Documented the architecture and fixed the Expo Web build',
+        technologies: ['Expo', 'Next.js (admin)', 'Go', 'PostgreSQL', 'AWS'],
         featured: true,
         githubUrl: 'https://github.com/TadokoroYuki/konbini-navi',
       },
@@ -270,7 +278,7 @@ export const en: Dictionary = {
         category: 'THIS SITE',
         year: '2026',
         description:
-          'This site. File-based routing with the App Router, responsive design, dark mode, accessibility (WCAG 2.1 compliance), and SEO optimization — built with a strong focus on performance and UX.',
+          'This site. File-based routing with the App Router, responsive design, dark mode, keyboard-friendly accessibility, and SEO optimization — built with a strong focus on performance and UX.',
         outcome: 'Continuously improving localization, accessibility, and performance',
         technologies: ['Next.js 15', 'TypeScript', 'Tailwind CSS', 'Vercel'],
         githubUrl: 'https://github.com/TadokoroYuki/portfolio',

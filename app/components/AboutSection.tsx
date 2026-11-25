@@ -57,6 +57,40 @@ export default function AboutSection({ dict }: AboutSectionProps) {
           </div>
         </div>
 
+        <section
+          id="now"
+          aria-labelledby="now-heading"
+          className="mt-14 rounded-2xl border border-rail bg-board p-6 dark:border-rail-dark dark:bg-board-dark sm:p-8"
+        >
+          <div className="flex flex-wrap items-baseline justify-between gap-2">
+            <h3 id="now-heading" className="text-xl font-bold text-ink dark:text-ink-dark">
+              {dict.focus.heading}
+            </h3>
+            <time
+              dateTime={dict.focus.updatedOn}
+              className="font-mono text-xs tabular-nums text-steel dark:text-steel-dark"
+            >
+              {dict.focus.updatedOn}
+            </time>
+          </div>
+          <ul className="mt-5 grid gap-5 sm:grid-cols-2">
+            {dict.focus.items.map((item) => (
+              <li key={item.title} className="border-l-2 border-sobu pl-4">
+                <h4 className="font-semibold text-ink dark:text-ink-dark">{item.title}</h4>
+                <p className="mt-1 text-sm leading-relaxed text-steel dark:text-steel-dark">
+                  {item.description}
+                </p>
+              </li>
+            ))}
+          </ul>
+          <a
+            href="#skills"
+            className="mt-4 inline-flex min-h-11 items-center gap-2 rounded-md text-sm font-medium text-ink underline decoration-sobu decoration-2 underline-offset-4 dark:text-ink-dark"
+          >
+            {dict.focus.skillMapLink} <span aria-hidden="true">↓</span>
+          </a>
+        </section>
+
         <div className="mt-20">
           <h3 className="font-mono text-xs font-bold tracking-[0.18em] text-steel dark:text-steel-dark">
             {dict.principlesHeading}

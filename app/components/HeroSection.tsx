@@ -55,7 +55,7 @@ export default function HeroSection({ dict }: HeroSectionProps) {
               ))}
             </div>
 
-            <div className="mt-9 flex flex-col gap-3 sm:flex-row">
+            <div className="mt-9 flex flex-col gap-3 sm:flex-row sm:flex-wrap">
               <a href="#projects" className="button-primary">
                 {dict.primaryCta}
                 <span aria-hidden="true">↓</span>
@@ -68,6 +68,10 @@ export default function HeroSection({ dict }: HeroSectionProps) {
               >
                 {dict.secondaryCta}
                 <span aria-hidden="true">↗</span>
+              </a>
+              <a href="#skills" className="button-secondary">
+                {dict.skillMapCta}
+                <span aria-hidden="true">↓</span>
               </a>
             </div>
           </div>

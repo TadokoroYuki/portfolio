@@ -26,7 +26,7 @@ export const ja: Dictionary = {
       { id: 'home', label: 'Home' },
       { id: 'projects', label: 'Work' },
       { id: 'about', label: 'About' },
-      { id: 'skills', label: 'Skills' },
+      { id: 'skills', label: 'スキルマップ' },
       { id: 'contact', label: 'Contact' },
     ],
     toggleMenu: 'メニューを開閉',
@@ -47,6 +47,7 @@ export const ja: Dictionary = {
     ],
     primaryCta: '実績を見る',
     secondaryCta: 'GitHub',
+    skillMapCta: 'スキルマップを見る',
     proofLabel: '実績で見る',
     proofs: [
       { value: '実務', label: 'ライブ配信サービスの機能開発' },
@@ -79,9 +80,24 @@ export const ja: Dictionary = {
     },
     lead: '技術の話だけで終わらず、使う人に届くところまで考えます。',
     paragraphs: [
-      'ライブ配信サービスの長期インターンで、Next.js / TypeScript を使った機能開発をしています。課金機能やリアルタイム UI、継続利用につながる機能を担当し、QA やコードレビューにも参加しています。',
+      'フリーランスのWebエンジニアとして、Next.js / TypeScript を使ったライブ配信サービスの開発に携わっています。UIからAPIまで、機能開発とQA・コードレビューに取り組んでいます。',
       '分からないことを放置せず、実際のコードやデータを調べて形にするのが得意です。AI エージェントも日常的に使いますが、何を作るか、どう確かめるかは自分で判断します。',
     ],
+    focus: {
+      updatedOn: '2026-11-25',
+      heading: 'いま取り組んでいること',
+      items: [
+        {
+          title: 'API 設計の理解を見える形に',
+          description: 'どこまで説明できるかを整理し、公開できるコードやテストにつなげています。',
+        },
+        {
+          title: '使っている OSS を読む',
+          description: '身近な道具の実装を読み、改善できるところがあれば、小さい変更から試します。',
+        },
+      ],
+      skillMapLink: '現在地をスキルマップで見る',
+    },
     principlesHeading: '開発で大切にしていること',
     principles: [
       {
@@ -102,7 +118,7 @@ export const ja: Dictionary = {
     timeline: [
       {
         year: '2026 - 現在',
-        title: 'ライブ配信プラットフォーム フロントエンドエンジニア（長期インターン）',
+        title: 'ライブ配信サービスのWebエンジニア',
         description:
           'Next.js / TypeScript による機能開発を担当。課金機能（リクエストメニュー）、マイリスト、ダークモード対応などを実装し、QA・コードレビューにも参加。リアルタイム通信（Socket.IO / AppSync）を実務で経験。',
         type: 'work',
@@ -151,52 +167,43 @@ export const ja: Dictionary = {
   skills: {
     sign: {
       title: 'すきる',
-      subtitle: '技術 · Skills',
+      subtitle: 'スキルマップ · Skill Map',
     },
-    intro: '技術名の多さではなく、どの場面で使ってきたかが分かるように整理しています。',
-    levelLabels: {
-      Advanced: '主力',
-      Intermediate: '実務・制作',
-      Beginner: '学習中',
+    updatedLabel: '更新',
+    trackTitle: 'API設計',
+    intro:
+      'roadmap.sh の API Design を分野選びの基準に、自分が何を説明できるか、どの実装を公開できるかを記録します。まずはこの4項目から。',
+    roadmapLabel: 'API Design ロードマップ',
+    statusLabels: {
+      publicWork: '公開実績あり',
+      nextCheck: '次に確かめる',
+      notAssessed: '未評価',
     },
-    categories: [
-      {
-        category: 'Frontend',
-        skills: [
-          { name: 'Next.js', level: 'Advanced' },
-          { name: 'React', level: 'Advanced' },
-          { name: 'TypeScript', level: 'Advanced' },
-          { name: 'Tailwind CSS', level: 'Intermediate' },
-          { name: 'アクセシビリティ (WCAG)', level: 'Intermediate' },
-        ],
+    topics: {
+      documentingApis: {
+        title: 'APIと構成のドキュメント',
+        description:
+          'konbini-navi の構成図と起動手順を実装に合わせて更新し、Swagger UI や curl での確認手順を整理しました。',
+        proofLabel: 'マージ済みの PR #135',
       },
-      {
-        category: 'Backend & Infra',
-        skills: [
-          { name: 'Node.js (Hono / Express)', level: 'Intermediate' },
-          { name: 'REST / GraphQL API', level: 'Intermediate' },
-          { name: 'AWS (ECS / AppSync / DynamoDB)', level: 'Beginner' },
-          { name: 'Docker', level: 'Intermediate' },
-          { name: 'PostgreSQL / SQLite', level: 'Intermediate' },
-        ],
+      requestValidation: {
+        title: '入力検証と責務の分離',
+        description:
+          '次は、パス・クエリの検証を入口で行い、不正な入力をユースケースに渡さないことを公開できる例とテストで示します。',
       },
-      {
-        category: 'Testing & Quality',
-        skills: [
-          { name: 'Playwright', level: 'Intermediate' },
-          { name: 'Vitest', level: 'Intermediate' },
-          { name: 'コードレビュー', level: 'Advanced' },
-        ],
+      httpContracts: {
+        title: 'HTTPステータスとエラー設計',
+        description:
+          '入力の形式不正と対象データが存在しない場合を区別し、レスポンスの契約を説明できるか確認します。',
       },
-      {
-        category: 'AI-Driven Development',
-        skills: [
-          { name: 'Claude Code / LLM エージェント', level: 'Advanced' },
-          { name: 'ブラウザ自動化 (Playwright CLI)', level: 'Advanced' },
-          { name: 'Python (データ分析・確率モデル)', level: 'Intermediate' },
-        ],
+      pagination: {
+        title: 'ページネーション',
+        description:
+          'オフセット方式とカーソル方式の違いを、一覧の更新や並び順を含む例で説明できるか確認します。',
       },
-    ],
+    },
+    readingNote:
+      '「公開実績あり」は、その項目の根拠を読めるという意味です。roadmap.sh の修了率や第三者による認定ではなく、「未評価」は理解していないという意味でもありません。',
   },
   projects: {
     sign: {
@@ -217,7 +224,7 @@ export const ja: Dictionary = {
         category: 'PROFESSIONAL',
         year: '2026 — NOW',
         description:
-          'スタートアップの配信サービスで長期インターンとしてフロントエンド開発を担当。課金導線となるリクエストメニュー機能（DB スキーマ〜リアルタイム UI）、マイリスト機能、ダークモード対応などを実装。Socket.IO / AWS AppSync によるリアルタイム通信、Linear + GitHub PR レビューのチーム開発フローを実務で経験。',
+          'ライブ配信サービスで課金導線やリアルタイム UI、継続利用につながる機能の開発を担当。UIからAPIまで手を入れ、QAとコードレビューにも参加しています。',
         outcome: '課金導線・リアルタイム UI・継続利用機能を実装',
         technologies: ['Next.js', 'TypeScript', 'Socket.IO', 'AWS AppSync', 'DynamoDB'],
         featured: true,
@@ -228,9 +235,9 @@ export const ja: Dictionary = {
         category: 'TEAM PROJECT',
         year: '2026',
         description:
-          'コンビニでの購買記録とレコメンドを行う Web アプリ。ハッカソン（Progate Hackathon 2026）でチーム開発し、AWS 東京リージョンに本番デプロイまで実施。企画からデプロイ・運用設計まで一気通貫で担当。',
-        outcome: '企画から AWS 本番デプロイまで担当',
-        technologies: ['Next.js', 'TypeScript', 'AWS'],
+          'コンビニでの購買記録とレコメンドを行うチーム開発アプリ。利用者向けは Expo、管理画面は Next.js、バックエンドは Go / PostgreSQL。構成のドキュメント整備と、AWS Amplify 向けの Expo Web ビルド修正を担当しました。',
+        outcome: 'アーキテクチャの文書化と Expo Web のビルド修正を担当',
+        technologies: ['Expo', 'Next.js（管理画面）', 'Go', 'PostgreSQL', 'AWS'],
         featured: true,
         githubUrl: 'https://github.com/TadokoroYuki/konbini-navi',
       },
@@ -268,7 +275,7 @@ export const ja: Dictionary = {
         category: 'THIS SITE',
         year: '2026',
         description:
-          'このサイト。App Router によるファイルベースルーティング、レスポンシブデザイン、ダークモード対応、アクセシビリティ対応（WCAG 2.1 準拠）、SEO 最適化を実装。パフォーマンスと UX を重視した設計。',
+          'このサイト。App Router によるファイルベースルーティング、レスポンシブデザイン、ダークモード対応、キーボード操作を考慮したアクセシビリティ対応、SEO 最適化を実装。パフォーマンスと UX を重視した設計。',
         outcome: '多言語・アクセシビリティ・表示速度を継続改善',
         technologies: ['Next.js 15', 'TypeScript', 'Tailwind CSS', 'Vercel'],
         githubUrl: 'https://github.com/TadokoroYuki/portfolio',
